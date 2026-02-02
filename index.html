@@ -14,19 +14,40 @@
         .header-row { display: contents; }
         .header-cell { background: #1f2937; color: white; padding: 12px 8px; text-align: center; font-weight: 600; font-size: 13px; border-radius: 6px 6px 0 0; }
         .header-cell .impact { font-size: 10px; font-weight: normal; opacity: 0.8; margin-top: 4px; }
-        .status-label { background: #374151; color: white; padding: 10px 8px; font-weight: 600; font-size: 12px; display: flex; align-items: center; justify-content: center; border-radius: 6px 0 0 6px; writing-mode: horizontal-tb; }
+        .status-label { background: #374151; color: white; padding: 10px 8px; font-weight: 600; font-size: 12px; display: flex; align-items: center; justify-content: center; border-radius: 6px 0 0 6px; }
         .cell { padding: 8px; min-height: 80px; border-radius: 4px; }
-        .project { background: white; border-radius: 6px; padding: 8px; margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 11px; border-left: 3px solid; }
-        .project:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .project { 
+            background: white; border-radius: 6px; padding: 8px; margin-bottom: 6px; 
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 11px; border-left: 3px solid;
+            position: relative; cursor: pointer; transition: all 0.2s;
+        }
+        .project:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); }
         .project-id { font-weight: 600; color: #6b7280; font-size: 9px; }
         .project-name { color: #111827; margin-top: 2px; line-height: 1.3; }
         .project-impact { font-size: 9px; color: #059669; margin-top: 4px; font-weight: 500; }
         .count-badge { background: #e5e7eb; color: #374151; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+        
+        /* Tooltip styles */
+        .tooltip {
+            visibility: hidden; opacity: 0;
+            position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+            background: #1f2937; color: white; padding: 6px 10px; border-radius: 6px;
+            font-size: 11px; white-space: nowrap; z-index: 100;
+            transition: opacity 0.2s, visibility 0.2s;
+            margin-bottom: 5px;
+        }
+        .tooltip::after {
+            content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+            border: 5px solid transparent; border-top-color: #1f2937;
+        }
+        .project:hover .tooltip { visibility: visible; opacity: 1; }
+        .tooltip-label { color: #9ca3af; font-size: 9px; }
+        .tooltip-name { font-weight: 500; }
     </style>
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Domains ordered by impact (left=highest) | Status ordered by stage (top=earliest)</p>
+    <p class="subtitle">Domains ordered by impact (left=highest) | Hover over projects to see PIC</p>
     
     <div class="legend">
 <div class="legend-item"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($225,836, 26 projects)</div>
@@ -51,51 +72,61 @@
 <div class="status-label">To Start <span class="count-badge" style="margin-left:5px">38</span></div>
 <div class="cell" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Angeline Chong</span></div>
                 <div class="project-id">SGLLM45</div>
                 <div class="project-name">Seller Voucher Selection QC for Games</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Pearlyn Teomw</span></div>
                 <div class="project-id">SGLLM67</div>
                 <div class="project-name">Post Scrapping on Instagram</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">TBC</span></div>
                 <div class="project-id">SGLLM83</div>
                 <div class="project-name">Crawl data tool</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Angeline Chong, Yueyue Zhang</span></div>
                 <div class="project-id">SGLLM84</div>
                 <div class="project-name">Push Notification Generation bot</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Julian Chan</span></div>
                 <div class="project-id">SGLLM85</div>
                 <div class="project-name">Mall Levers Daily Update bot</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chelsea Chuasy, Calista Chiakt</span></div>
                 <div class="project-id">SGLLM86</div>
                 <div class="project-name">Weekly PN Insights Report</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Jinle Tan, Husna Alkhatib</span></div>
                 <div class="project-id">SGLLM87</div>
                 <div class="project-name">Corporate Voucher CS Bot</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Fuqi Chia</span></div>
                 <div class="project-id">SGLLM88</div>
                 <div class="project-name">VIP EP Assistant - QC on EP & SSV nominations</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Fuqi Chia</span></div>
                 <div class="project-id">SGLLM89</div>
                 <div class="project-name">VIP CS Bot</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Not assigned</span></div>
                 <div class="project-id">SGLLM90</div>
                 <div class="project-name">MariBank CS Bot</div>
                 
@@ -103,46 +134,55 @@
 </div>
 <div class="cell" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Aisyah Yusof, Giaing Yap</span></div>
                 <div class="project-id">SGLLM11</div>
                 <div class="project-name">3PL Feedback Form Automation</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Giaing Yap</span></div>
                 <div class="project-id">SGLLM12</div>
                 <div class="project-name">Shopbot Non-deflected QA Assistant</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Jc Chong, Tanushri J</span></div>
                 <div class="project-id">SGLLM14</div>
                 <div class="project-name">RR Wrong Judgement QA assistnat</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chrishantan P</span></div>
                 <div class="project-id">SGLLM15</div>
                 <div class="project-name">Chatbot DSAT QA Assistant</div>
                 <div class="project-impact">$6,600/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chrishantan P</span></div>
                 <div class="project-id">SGLLM17</div>
                 <div class="project-name">SME case investigation</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Siqi Lin</span></div>
                 <div class="project-id">SGLLM30</div>
                 <div class="project-name">NPS consolidation assistant</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Siqi Lin</span></div>
                 <div class="project-id">SGLLM31</div>
                 <div class="project-name">Fraud case investigation assistant</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Weilin Ho</span></div>
                 <div class="project-id">SGLLM47</div>
                 <div class="project-name">Off Platform Redirection</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Syakila Latib</span></div>
                 <div class="project-id">SGLLM48</div>
                 <div class="project-name">Listing review - Quality reviews</div>
                 
@@ -150,26 +190,31 @@
 </div>
 <div class="cell" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mabel Chenyt</span></div>
                 <div class="project-id">SGLLM07</div>
                 <div class="project-name">Driver bot system</div>
                 
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Clarence Theng</span></div>
                 <div class="project-id">SGLLM50</div>
                 <div class="project-name">Driver Headcount & Manpower Planning AI</div>
                 
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mika Lin</span></div>
                 <div class="project-id">SGLLM76</div>
                 <div class="project-name">NSS commercial invoice validation & processin</div>
                 
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Not assigned</span></div>
                 <div class="project-id">SGLLM77</div>
                 <div class="project-name">Driver Performance Anomaly Monitoring</div>
                 
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mika Lin</span></div>
                 <div class="project-id">SGLLM78</div>
                 <div class="project-name">Transfer slip extraction & validation</div>
                 
@@ -177,31 +222,37 @@
 </div>
 <div class="cell" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong, Weionn Ling</span></div>
                 <div class="project-id">SGLLM18</div>
                 <div class="project-name">Chatbot assistant for FBS sellers</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Alan Leehw, Celia Ong</span></div>
                 <div class="project-id">SGLLM23</div>
                 <div class="project-name">Listing Review and Rating tool</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong, Weionn Ling</span></div>
                 <div class="project-id">SGLLM24</div>
                 <div class="project-name">Seller Performance Insights Generator</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong</span></div>
                 <div class="project-id">SGLLM25</div>
                 <div class="project-name">RM Navigator</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong</span></div>
                 <div class="project-id">SGLLM26</div>
                 <div class="project-name">RM KPI Assistant</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong, Weionn Ling</span></div>
                 <div class="project-id">SGLLM29</div>
                 <div class="project-name">Homepage Banner QC</div>
                 
@@ -209,21 +260,25 @@
 </div>
 <div class="cell" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#6366f1">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Kwangxiong</span></div>
                 <div class="project-id">SGLLM55</div>
                 <div class="project-name">PTE training bot</div>
                 
             </div>
 <div class="project" style="border-left-color:#6366f1">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Kwangxiong</span></div>
                 <div class="project-id">SGLLM56</div>
                 <div class="project-name">RR reason classifier</div>
                 
             </div>
 <div class="project" style="border-left-color:#6366f1">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Kwangxiong</span></div>
                 <div class="project-id">SGLLM57</div>
                 <div class="project-name">Individualised performance feedback provider</div>
                 
             </div>
 <div class="project" style="border-left-color:#6366f1">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Kwangxiong</span></div>
                 <div class="project-id">SGLLM58</div>
                 <div class="project-name">WH stock analyser (black stock preventer)
 
@@ -231,11 +286,13 @@
                 
             </div>
 <div class="project" style="border-left-color:#6366f1">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Kwangxiong</span></div>
                 <div class="project-id">SGLLM59</div>
                 <div class="project-name">Campaign detailed AAR analyst</div>
                 
             </div>
 <div class="project" style="border-left-color:#6366f1">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Kwangxiong</span></div>
                 <div class="project-id">SGLLM60</div>
                 <div class="project-name">Relayout optimiser</div>
                 
@@ -245,11 +302,13 @@
 </div>
 <div class="cell" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#14b8a6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Not assigned</span></div>
                 <div class="project-id">SGLLM53</div>
                 <div class="project-name">SeaTalk JIRA ticket creator</div>
                 
             </div>
 <div class="project" style="border-left-color:#14b8a6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Not assigned</span></div>
                 <div class="project-id">SGLLM54</div>
                 <div class="project-name">Internal BI Knowledge Base for Data Discovery</div>
                 
@@ -258,26 +317,31 @@
 <div class="status-label">POC <span class="count-badge" style="margin-left:5px">11</span></div>
 <div class="cell" style="background:#fef3c7">
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Curie Angjy</span></div>
                 <div class="project-id">SGLLM40</div>
                 <div class="project-name">EP Assistant - QC on EP & SSV nominations</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Julian Chan</span></div>
                 <div class="project-id">SGLLM42</div>
                 <div class="project-name">Thematic Ideation Generator</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Alvin Teoyk</span></div>
                 <div class="project-id">SGLLM46</div>
                 <div class="project-name">Automated Email Template for Shopee Video</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Julian Chan</span></div>
                 <div class="project-id">SGLLM65</div>
                 <div class="project-name">Brand Activation Submission Reminder Assistan</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chelsea Chuasy, Calista Chiakt</span></div>
                 <div class="project-id">SGLLM69</div>
                 <div class="project-name">PN Approval Bot</div>
                 
@@ -285,16 +349,19 @@
 </div>
 <div class="cell" style="background:#fef3c7">
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Alan Leehw, Joel Lee</span></div>
                 <div class="project-id">SGLLM71</div>
                 <div class="project-name">BCRS - Beverage Container Recycling Scheme</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Giaing Yap, Joel Lee, Aisyah Yusof</span></div>
                 <div class="project-id">SGLLM79</div>
                 <div class="project-name">Counterfeit Whitelist Appeal Review</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Justin Cheng</span></div>
                 <div class="project-id">SGLLM80</div>
                 <div class="project-name">Logistics Stuck Report Distributor & Summariz</div>
                 
@@ -302,11 +369,13 @@
 </div>
 <div class="cell" style="background:#fef3c7">
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Clarence Theng</span></div>
                 <div class="project-id">SGLLM08</div>
                 <div class="project-name">Driver Route assignment recommendation</div>
                 <div class="project-impact">$16,200/yr</div>
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mabel Chenyt</span></div>
                 <div class="project-id">SGLLM63</div>
                 <div class="project-name">Driver Performance Anomaly Monitoring</div>
                 
@@ -316,6 +385,7 @@
 </div>
 <div class="cell" style="background:#fef3c7">
 <div class="project" style="border-left-color:#6366f1">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Jonathan Gohah, Eanxiang Teoh</span></div>
                 <div class="project-id">SGLLM70</div>
                 <div class="project-name">WH Backlog and Part-timer allocation bot</div>
                 <div class="project-impact">$13,260/yr</div>
@@ -328,21 +398,25 @@
 <div class="status-label">Design & Build <span class="count-badge" style="margin-left:5px">13</span></div>
 <div class="cell" style="background:#dbeafe">
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chianyee Ng</span></div>
                 <div class="project-id">SGLLM37</div>
                 <div class="project-name">Voucher Usage Monitoring Agent</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chianyee Ng</span></div>
                 <div class="project-id">SGLLM38</div>
                 <div class="project-name">Voucher Budget Monitoring Agent</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Alvin Teoyk</span></div>
                 <div class="project-id">SGLLM41</div>
                 <div class="project-name">Real Time Tracker for Shopee Video </div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Ian Kweekh, Kayla Angsq</span></div>
                 <div class="project-id">SGLLM82</div>
                 <div class="project-name">Livestream Matching (Match Creator to Brand d</div>
                 
@@ -350,11 +424,13 @@
 </div>
 <div class="cell" style="background:#dbeafe">
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Giaing Yap</span></div>
                 <div class="project-id">SGLLM04</div>
                 <div class="project-name">Shopbot DSAT QA Assistant</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Weionn Ling, Chrishantan P</span></div>
                 <div class="project-id">SGLLM34</div>
                 <div class="project-name">Voice Call Analyst</div>
                 
@@ -362,16 +438,19 @@
 </div>
 <div class="cell" style="background:#dbeafe">
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Clarence Theng</span></div>
                 <div class="project-id">SGLLM52</div>
                 <div class="project-name">Address Mismatch Detection AI</div>
                 
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mika Lin</span></div>
                 <div class="project-id">SGLLM73</div>
                 <div class="project-name">Parcel Recovery - Faded/No AWB Matching</div>
                 
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mabel Chenyt</span></div>
                 <div class="project-id">SGLLM74</div>
                 <div class="project-name">Pick up Vehicle Load Audit AI</div>
                 
@@ -379,21 +458,25 @@
 </div>
 <div class="cell" style="background:#dbeafe">
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong</span></div>
                 <div class="project-id">SGLLM20</div>
                 <div class="project-name">Chatbot assistant for MS related topics</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong, Huanenn Chu</span></div>
                 <div class="project-id">SGLLM21</div>
                 <div class="project-name">Chatbot assistant for ads related topics</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong, Sili Terh</span></div>
                 <div class="project-id">SGLLM28</div>
                 <div class="project-name">Item Link Finder Bot</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Alan Leehw, Celia Ong</span></div>
                 <div class="project-id">SGLLM72</div>
                 <div class="project-name">Invoice matching for payment to suppliers</div>
                 
@@ -408,11 +491,13 @@
 <div class="status-label">Parallel Run <span class="count-badge" style="margin-left:5px">5</span></div>
 <div class="cell" style="background:#d1fae5">
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Curie Angjy</span></div>
                 <div class="project-id">SGLLM39</div>
                 <div class="project-name">EP Assistant - Reminder on EP & SSV nominatio</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Pearlyn Teomw</span></div>
                 <div class="project-id">SGLLM68</div>
                 <div class="project-name">Affiliate CS Bot</div>
                 
@@ -422,6 +507,7 @@
 </div>
 <div class="cell" style="background:#d1fae5">
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mika Lin</span></div>
                 <div class="project-id">SGLLM09</div>
                 <div class="project-name">NSS API Bot Support</div>
                 
@@ -429,6 +515,7 @@
 </div>
 <div class="cell" style="background:#d1fae5">
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Weionn Ling</span></div>
                 <div class="project-id">SGLLM27</div>
                 <div class="project-name">Item Matching Validation Bot</div>
                 
@@ -440,6 +527,7 @@
 </div>
 <div class="cell" style="background:#d1fae5">
 <div class="project" style="border-left-color:#14b8a6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Weionn Ling</span></div>
                 <div class="project-id">SGLLM03</div>
                 <div class="project-name">Data Suite Assistant</div>
                 
@@ -448,16 +536,19 @@
 <div class="status-label">Live <span class="count-badge" style="margin-left:5px">17</span></div>
 <div class="cell" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Calista Chiakt</span></div>
                 <div class="project-id">SGLLM36</div>
                 <div class="project-name">PN Reminder Assistant</div>
                 <div class="project-impact">$6,250/yr</div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Calista Chiakt</span></div>
                 <div class="project-id">SGLLM43</div>
                 <div class="project-name">EDM Reminder Assistant</div>
                 <div class="project-impact">$6,250/yr</div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Szeinn Tan</span></div>
                 <div class="project-id">SGLLM64</div>
                 <div class="project-name">LS Brand Matching & Anchor Brand Match</div>
                 <div class="project-impact">$213,336/yr</div>
@@ -465,31 +556,37 @@
 </div>
 <div class="cell" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Siqi Lin</span></div>
                 <div class="project-id">SGLLM02</div>
                 <div class="project-name">Counterfeit Listing Check (CLC)</div>
                 <div class="project-impact">$23,500/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chrishantan P</span></div>
                 <div class="project-id">SGLLM05</div>
                 <div class="project-name">Chatbot performance analysis</div>
                 <div class="project-impact">$9,300/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Huishan Kang, Chrishantan P</span></div>
                 <div class="project-id">SGLLM10</div>
                 <div class="project-name">CS QA Assistant</div>
                 <div class="project-impact">$72,000/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Aaron Ling San Lye</span></div>
                 <div class="project-id">SGLLM32</div>
                 <div class="project-name">Market Research Analyst</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Aaron Ling San Lye Damien Heng</span></div>
                 <div class="project-id">SGLLM33</div>
                 <div class="project-name">ProdBot Chatbot</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chrishantan P</span></div>
                 <div class="project-id">SGLLM61</div>
                 <div class="project-name">Google Map Review Classifier</div>
                 <div class="project-impact">$4,797/yr</div>
@@ -497,21 +594,25 @@
 </div>
 <div class="cell" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Joe Zhoufz</span></div>
                 <div class="project-id">SGLLM01</div>
                 <div class="project-name">POD Validator (e-POD/Auto-QC)</div>
                 <div class="project-impact">$27,700/yr</div>
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Mika Lin</span></div>
                 <div class="project-id">SGLLM06</div>
                 <div class="project-name">Agency bot system</div>
                 <div class="project-impact">$16,200/yr</div>
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Yupeng Ng</span></div>
                 <div class="project-id">SGLLM35</div>
                 <div class="project-name">SPX Parcel Analysis</div>
                 <div class="project-impact">$24,000/yr</div>
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Clarence Theng</span></div>
                 <div class="project-id">SGLLM75</div>
                 <div class="project-name">HSE Report Seatalk Bot</div>
                 
@@ -519,16 +620,19 @@
 </div>
 <div class="cell" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong</span></div>
                 <div class="project-id">SGLLM19</div>
                 <div class="project-name">RM assistant</div>
                 <div class="project-impact">$17,169/yr</div>
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Celia Ong</span></div>
                 <div class="project-id">SGLLM22</div>
                 <div class="project-name">Keyword reservation filtering tool</div>
                 
             </div>
 <div class="project" style="border-left-color:#10b981">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Jonathan Gohah</span></div>
                 <div class="project-id">SGLLM62</div>
                 <div class="project-name">Lazada Image Scraper</div>
                 <div class="project-impact">$21,000/yr</div>
@@ -538,6 +642,7 @@
 </div>
 <div class="cell" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#ec4899">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Stefanie Ohqr, Damien Hengyh</span></div>
                 <div class="project-id">SGLLM81</div>
                 <div class="project-name">SG BPM Feature Req Follow Up Bot (MP)</div>
                 <div class="project-impact">$360/yr</div>
@@ -548,11 +653,13 @@
 <div class="status-label">Cancelled <span class="count-badge" style="margin-left:5px">6</span></div>
 <div class="cell" style="background:#fecaca">
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Trisstan Dodwell</span></div>
                 <div class="project-id">SGLLM44</div>
                 <div class="project-name">FBS Voucher Planning Assistant</div>
                 
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Szeinn Tan</span></div>
                 <div class="project-id">SGLLM66</div>
                 <div class="project-name">Live Marketing Assets </div>
                 
@@ -560,11 +667,13 @@
 </div>
 <div class="cell" style="background:#fecaca">
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Jc Chong, Tanushri J</span></div>
                 <div class="project-id">SGLLM13</div>
                 <div class="project-name">RR judgement assistant</div>
                 
             </div>
 <div class="project" style="border-left-color:#3b82f6">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Chrishantan P</span></div>
                 <div class="project-id">SGLLM16</div>
                 <div class="project-name">Chatbot Non-deflected QA Assistant</div>
                 
@@ -572,11 +681,13 @@
 </div>
 <div class="cell" style="background:#fecaca">
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Clarence Theng</span></div>
                 <div class="project-id">SGLLM49</div>
                 <div class="project-name">Dynamic Locker Capacity Planning</div>
                 
             </div>
 <div class="project" style="border-left-color:#f97316">
+                <div class="tooltip"><span class="tooltip-label">PIC:</span> <span class="tooltip-name">Clarence Theng</span></div>
                 <div class="project-id">SGLLM51</div>
                 <div class="project-name">Agency penalty appeal automation</div>
                 
