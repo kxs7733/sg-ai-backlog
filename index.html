@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SG AI Projects Backlog</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 20px; background: #f9fafb; }
+        h1 { text-align: center; margin-bottom: 10px; color: #111827; }
+        .subtitle { text-align: center; color: #6b7280; margin-bottom: 20px; }
+        .legend { display: flex; justify-content: center; gap: 20px; margin-bottom: 20px; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 5px; font-size: 12px; }
+        .legend-color { width: 12px; height: 12px; border-radius: 2px; }
+        .board { display: grid; gap: 10px; overflow-x: auto; }
+        .header-row { display: contents; }
+        .header-cell { background: #1f2937; color: white; padding: 12px 8px; text-align: center; font-weight: 600; font-size: 13px; border-radius: 6px 6px 0 0; }
+        .header-cell .impact { font-size: 10px; font-weight: normal; opacity: 0.8; margin-top: 4px; }
+        .status-label { background: #374151; color: white; padding: 10px 8px; font-weight: 600; font-size: 12px; display: flex; align-items: center; justify-content: center; border-radius: 6px 0 0 6px; writing-mode: horizontal-tb; }
+        .cell { padding: 8px; min-height: 80px; border-radius: 4px; }
+        .project { background: white; border-radius: 6px; padding: 8px; margin-bottom: 6px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 11px; border-left: 3px solid; }
+        .project:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.15); }
+        .project-id { font-weight: 600; color: #6b7280; font-size: 9px; }
+        .project-name { color: #111827; margin-top: 2px; line-height: 1.3; }
+        .project-impact { font-size: 9px; color: #059669; margin-top: 4px; font-weight: 500; }
+        .count-badge { background: #e5e7eb; color: #374151; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <h1>SG AI Projects Backlog</h1>
+    <p class="subtitle">Domains ordered by impact (left=highest) | Status ordered by stage (top=earliest)</p>
+    
+    <div class="legend">
+<div class="legend-item"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($225,836, 26 projects)</div>
+<div class="legend-item"><div class="legend-color" style="background:#3b82f6"></div>OPS ($116,197, 22 projects)</div>
+<div class="legend-item"><div class="legend-color" style="background:#f97316"></div>SPX ($84,100, 17 projects)</div>
+<div class="legend-item"><div class="legend-color" style="background:#10b981"></div>BD ($38,169, 14 projects)</div>
+<div class="legend-item"><div class="legend-color" style="background:#6366f1"></div>WH ($13,260, 7 projects)</div>
+<div class="legend-item"><div class="legend-color" style="background:#ec4899"></div>Product ($360, 1 projects)</div>
+<div class="legend-item"><div class="legend-color" style="background:#14b8a6"></div>BI ($0, 3 projects)</div>
+</div>
+<div class="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
+<div class="header-row">
+<div class="header-cell">Status</div>
+<div class="header-cell">MKT<div class="impact">$225,836/yr</div></div>
+<div class="header-cell">OPS<div class="impact">$116,197/yr</div></div>
+<div class="header-cell">SPX<div class="impact">$84,100/yr</div></div>
+<div class="header-cell">BD<div class="impact">$38,169/yr</div></div>
+<div class="header-cell">WH<div class="impact">$13,260/yr</div></div>
+<div class="header-cell">Product<div class="impact">$360/yr</div></div>
+<div class="header-cell">BI<div class="impact">$0/yr</div></div>
+</div>
+<div class="status-label">To Start <span class="count-badge" style="margin-left:5px">38</span></div>
+<div class="cell" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM45</div>
+                <div class="project-name">Seller Voucher Selection QC for Games</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM67</div>
+                <div class="project-name">Post Scrapping on Instagram</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM83</div>
+                <div class="project-name">Crawl data tool</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM84</div>
+                <div class="project-name">Push Notification Generation bot</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM85</div>
+                <div class="project-name">Mall Levers Daily Update bot</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM86</div>
+                <div class="project-name">Weekly PN Insights Report</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM87</div>
+                <div class="project-name">Corporate Voucher CS Bot</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM88</div>
+                <div class="project-name">VIP EP Assistant - QC on EP & SSV nominations</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM89</div>
+                <div class="project-name">VIP CS Bot</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM90</div>
+                <div class="project-name">MariBank CS Bot</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM11</div>
+                <div class="project-name">3PL Feedback Form Automation</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM12</div>
+                <div class="project-name">Shopbot Non-deflected QA Assistant</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM14</div>
+                <div class="project-name">RR Wrong Judgement QA assistnat</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM15</div>
+                <div class="project-name">Chatbot DSAT QA Assistant</div>
+                <div class="project-impact">$6,600/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM17</div>
+                <div class="project-name">SME case investigation</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM30</div>
+                <div class="project-name">NPS consolidation assistant</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM31</div>
+                <div class="project-name">Fraud case investigation assistant</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM47</div>
+                <div class="project-name">Off Platform Redirection</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM48</div>
+                <div class="project-name">Listing review - Quality reviews</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM07</div>
+                <div class="project-name">Driver bot system</div>
+                
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM50</div>
+                <div class="project-name">Driver Headcount & Manpower Planning AI</div>
+                
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM76</div>
+                <div class="project-name">NSS commercial invoice validation & processin</div>
+                
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM77</div>
+                <div class="project-name">Driver Performance Anomaly Monitoring</div>
+                
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM78</div>
+                <div class="project-name">Transfer slip extraction & validation</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM18</div>
+                <div class="project-name">Chatbot assistant for FBS sellers</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM23</div>
+                <div class="project-name">Listing Review and Rating tool</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM24</div>
+                <div class="project-name">Seller Performance Insights Generator</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM25</div>
+                <div class="project-name">RM Navigator</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM26</div>
+                <div class="project-name">RM KPI Assistant</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM29</div>
+                <div class="project-name">Homepage Banner QC</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM55</div>
+                <div class="project-name">PTE training bot</div>
+                
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM56</div>
+                <div class="project-name">RR reason classifier</div>
+                
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM57</div>
+                <div class="project-name">Individualised performance feedback provider</div>
+                
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM58</div>
+                <div class="project-name">WH stock analyser (black stock preventer)
+
+- </div>
+                
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM59</div>
+                <div class="project-name">Campaign detailed AAR analyst</div>
+                
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM60</div>
+                <div class="project-name">Relayout optimiser</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#f3f4f6">
+</div>
+<div class="cell" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#14b8a6">
+                <div class="project-id">SGLLM53</div>
+                <div class="project-name">SeaTalk JIRA ticket creator</div>
+                
+            </div>
+<div class="project" style="border-left-color:#14b8a6">
+                <div class="project-id">SGLLM54</div>
+                <div class="project-name">Internal BI Knowledge Base for Data Discovery</div>
+                
+            </div>
+</div>
+<div class="status-label">POC <span class="count-badge" style="margin-left:5px">11</span></div>
+<div class="cell" style="background:#fef3c7">
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM40</div>
+                <div class="project-name">EP Assistant - QC on EP & SSV nominations</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM42</div>
+                <div class="project-name">Thematic Ideation Generator</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM46</div>
+                <div class="project-name">Automated Email Template for Shopee Video</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM65</div>
+                <div class="project-name">Brand Activation Submission Reminder Assistan</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM69</div>
+                <div class="project-name">PN Approval Bot</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#fef3c7">
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM71</div>
+                <div class="project-name">BCRS - Beverage Container Recycling Scheme</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM79</div>
+                <div class="project-name">Counterfeit Whitelist Appeal Review</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM80</div>
+                <div class="project-name">Logistics Stuck Report Distributor & Summariz</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#fef3c7">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM08</div>
+                <div class="project-name">Driver Route assignment recommendation</div>
+                <div class="project-impact">$16,200/yr</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM63</div>
+                <div class="project-name">Driver Performance Anomaly Monitoring</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#fef3c7">
+</div>
+<div class="cell" style="background:#fef3c7">
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM70</div>
+                <div class="project-name">WH Backlog and Part-timer allocation bot</div>
+                <div class="project-impact">$13,260/yr</div>
+            </div>
+</div>
+<div class="cell" style="background:#fef3c7">
+</div>
+<div class="cell" style="background:#fef3c7">
+</div>
+<div class="status-label">Design & Build <span class="count-badge" style="margin-left:5px">13</span></div>
+<div class="cell" style="background:#dbeafe">
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM37</div>
+                <div class="project-name">Voucher Usage Monitoring Agent</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM38</div>
+                <div class="project-name">Voucher Budget Monitoring Agent</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM41</div>
+                <div class="project-name">Real Time Tracker for Shopee Video </div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM82</div>
+                <div class="project-name">Livestream Matching (Match Creator to Brand d</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#dbeafe">
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM04</div>
+                <div class="project-name">Shopbot DSAT QA Assistant</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM34</div>
+                <div class="project-name">Voice Call Analyst</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#dbeafe">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM52</div>
+                <div class="project-name">Address Mismatch Detection AI</div>
+                
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM73</div>
+                <div class="project-name">Parcel Recovery - Faded/No AWB Matching</div>
+                
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM74</div>
+                <div class="project-name">Pick up Vehicle Load Audit AI</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#dbeafe">
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM20</div>
+                <div class="project-name">Chatbot assistant for MS related topics</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM21</div>
+                <div class="project-name">Chatbot assistant for ads related topics</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM28</div>
+                <div class="project-name">Item Link Finder Bot</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM72</div>
+                <div class="project-name">Invoice matching for payment to suppliers</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#dbeafe">
+</div>
+<div class="cell" style="background:#dbeafe">
+</div>
+<div class="cell" style="background:#dbeafe">
+</div>
+<div class="status-label">Parallel Run <span class="count-badge" style="margin-left:5px">5</span></div>
+<div class="cell" style="background:#d1fae5">
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM39</div>
+                <div class="project-name">EP Assistant - Reminder on EP & SSV nominatio</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM68</div>
+                <div class="project-name">Affiliate CS Bot</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#d1fae5">
+</div>
+<div class="cell" style="background:#d1fae5">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM09</div>
+                <div class="project-name">NSS API Bot Support</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#d1fae5">
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM27</div>
+                <div class="project-name">Item Matching Validation Bot</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#d1fae5">
+</div>
+<div class="cell" style="background:#d1fae5">
+</div>
+<div class="cell" style="background:#d1fae5">
+<div class="project" style="border-left-color:#14b8a6">
+                <div class="project-id">SGLLM03</div>
+                <div class="project-name">Data Suite Assistant</div>
+                
+            </div>
+</div>
+<div class="status-label">Live <span class="count-badge" style="margin-left:5px">17</span></div>
+<div class="cell" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM36</div>
+                <div class="project-name">PN Reminder Assistant</div>
+                <div class="project-impact">$6,250/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM43</div>
+                <div class="project-name">EDM Reminder Assistant</div>
+                <div class="project-impact">$6,250/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM64</div>
+                <div class="project-name">LS Brand Matching & Anchor Brand Match</div>
+                <div class="project-impact">$213,336/yr</div>
+            </div>
+</div>
+<div class="cell" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM02</div>
+                <div class="project-name">Counterfeit Listing Check (CLC)</div>
+                <div class="project-impact">$23,500/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM05</div>
+                <div class="project-name">Chatbot performance analysis</div>
+                <div class="project-impact">$9,300/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM10</div>
+                <div class="project-name">CS QA Assistant</div>
+                <div class="project-impact">$72,000/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM32</div>
+                <div class="project-name">Market Research Analyst</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM33</div>
+                <div class="project-name">ProdBot Chatbot</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM61</div>
+                <div class="project-name">Google Map Review Classifier</div>
+                <div class="project-impact">$4,797/yr</div>
+            </div>
+</div>
+<div class="cell" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM01</div>
+                <div class="project-name">POD Validator (e-POD/Auto-QC)</div>
+                <div class="project-impact">$27,700/yr</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM06</div>
+                <div class="project-name">Agency bot system</div>
+                <div class="project-impact">$16,200/yr</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM35</div>
+                <div class="project-name">SPX Parcel Analysis</div>
+                <div class="project-impact">$24,000/yr</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM75</div>
+                <div class="project-name">HSE Report Seatalk Bot</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM19</div>
+                <div class="project-name">RM assistant</div>
+                <div class="project-impact">$17,169/yr</div>
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM22</div>
+                <div class="project-name">Keyword reservation filtering tool</div>
+                
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM62</div>
+                <div class="project-name">Lazada Image Scraper</div>
+                <div class="project-impact">$21,000/yr</div>
+            </div>
+</div>
+<div class="cell" style="background:#bbf7d0">
+</div>
+<div class="cell" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#ec4899">
+                <div class="project-id">SGLLM81</div>
+                <div class="project-name">SG BPM Feature Req Follow Up Bot (MP)</div>
+                <div class="project-impact">$360/yr</div>
+            </div>
+</div>
+<div class="cell" style="background:#bbf7d0">
+</div>
+<div class="status-label">Cancelled <span class="count-badge" style="margin-left:5px">6</span></div>
+<div class="cell" style="background:#fecaca">
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM44</div>
+                <div class="project-name">FBS Voucher Planning Assistant</div>
+                
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM66</div>
+                <div class="project-name">Live Marketing Assets </div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#fecaca">
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM13</div>
+                <div class="project-name">RR judgement assistant</div>
+                
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM16</div>
+                <div class="project-name">Chatbot Non-deflected QA Assistant</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#fecaca">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM49</div>
+                <div class="project-name">Dynamic Locker Capacity Planning</div>
+                
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM51</div>
+                <div class="project-name">Agency penalty appeal automation</div>
+                
+            </div>
+</div>
+<div class="cell" style="background:#fecaca">
+</div>
+<div class="cell" style="background:#fecaca">
+</div>
+<div class="cell" style="background:#fecaca">
+</div>
+<div class="cell" style="background:#fecaca">
+</div>
+</div>
+</body>
+</html>
