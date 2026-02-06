@@ -25,7 +25,20 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 11px; border-left: 3px solid;
             transition: all 0.2s;
         }
-        .project:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); }
+        .project:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); z-index: 100; }
+        .project[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 0; top: 100%;
+            background: #1f2937; color: white;
+            padding: 8px 10px; border-radius: 6px;
+            font-size: 11px; line-height: 1.4;
+            max-width: 280px; width: max-content;
+            z-index: 1000; margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            white-space: pre-wrap;
+        }
+        .project { position: relative; }
         .project-id { font-weight: 600; color: #6b7280; font-size: 9px; }
         .project-name { color: #111827; margin-top: 2px; line-height: 1.3; }
         .project-pic { font-size: 9px; color: #3b82f6; margin-top: 4px; font-weight: 500; }
@@ -88,160 +101,160 @@
 </div>
 <div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">31</span></div>
 <div class="cell" data-domain="MKT" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#8b5cf6" title="AI to assist in reviewing voucher nominations and approve based on set critieria.">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI to assist in reviewing voucher nominations and approve based on set critieria.">
                 <div class="project-id">SGLLM45</div>
                 <div class="project-name">Seller Voucher Selection QC for Games</div>
                 <div class="project-pic">Angeline Chong</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="Competitive intel triangulated through multiple sources. BPO has to do recurring manual checks on VC discount and quantity by channel and type with specific personalization">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Competitive intel triangulated through multiple sources. BPO has to do recurring manual checks on VC discount and quantity by channel and type with specific personalization">
                 <div class="project-id">SGLLM83</div>
                 <div class="project-name">Crawl data tool</div>
                 <div class="project-pic">Tbc</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="Generate effective PNs based on events running daily, by order of priority set by MKT PICs. This would allow faster allocation & mass creation of PNs instead of individually, saving hours. e.g. > PIC inputs of all game dates, event & rewards > AI allocates based on what event is running on that day > AI generates PN based on game, event & reward input">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Generate effective PNs based on events running daily, by order of priority set by MKT PICs. This would allow faster allocation & mass creation of PNs instead of individually, saving hours. e.g. > PIC inputs of all game dates, event & rewards > AI allocates based on what event is running on that day ">
                 <div class="project-id">SGLLM84</div>
                 <div class="project-name">Push Notification Generation bot</div>
                 <div class="project-pic">Angeline Chong, Yueyue Zhang</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="Phase 1: A bot that provides update on key metrics based on Mall Lever Tracker to Seatalk Group. This would give us daily updates on the overally performance (RR) of key Mall pillars and initiatives.  Phase 2: The bot would be able to recommend solutions/ next course of action when certain key metrics are performing below expectation.  Future phase: The bot would be able to do &quot;closing&quot; after each month. Provide a monthly report, with key insights and areas for improvement.">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Phase 1: A bot that provides update on key metrics based on Mall Lever Tracker to Seatalk Group. This would give us daily updates on the overally performance (RR) of key Mall pillars and initiatives.  Phase 2: The bot would be able to recommend solutions/ next course of action when certain key metri">
                 <div class="project-id">SGLLM85</div>
                 <div class="project-name">Mall Levers Daily Update bot</div>
                 <div class="project-pic">Julian Chan</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="Generate weekly insights on PN performance to share with MKT PICs - WoW performance by PN Types - Top posts by PN Types">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Generate weekly insights on PN performance to share with MKT PICs - WoW performance by PN Types - Top posts by PN Types">
                 <div class="project-id">SGLLM86</div>
                 <div class="project-name">Weekly PN Insights Report</div>
                 <div class="project-pic">Chelsea Chuasy, Calista Chiakt</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="To direct the correct SOPs to CS based on enquiry category.">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="To direct the correct SOPs to CS based on enquiry category.">
                 <div class="project-id">SGLLM87</div>
                 <div class="project-name">Corporate Voucher CS Bot</div>
                 <div class="project-pic">Jinle Tan, Husna Alkhatib</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="AI assistant to manage EP/SSV nominations based on defined criteria, including: (i) validating pricing accuracy and mechanics, (ii) tracking nomination status, (iii) assessing the quality of nominated EPs, and (iv) flagging conflicts with concurrent FD or DD campaigns.">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI assistant to manage EP/SSV nominations based on defined criteria, including: (i) validating pricing accuracy and mechanics, (ii) tracking nomination status, (iii) assessing the quality of nominated EPs, and (iv) flagging conflicts with concurrent FD or DD campaigns.">
                 <div class="project-id">SGLLM88</div>
                 <div class="project-name">VIP EP Assistant - QC on EP & SSV nominations</div>
                 <div class="project-pic">Fuqi Chia</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="Help CS agents to follow SOP and identify next steps for basic queries - eg:  - What are the things to check when user is unable to checkout with MSA/MCC - Pull out voucher T&Cs for quick reference">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Help CS agents to follow SOP and identify next steps for basic queries - eg:  - What are the things to check when user is unable to checkout with MSA/MCC - Pull out voucher T&Cs for quick reference">
                 <div class="project-id">SGLLM90</div>
                 <div class="project-name">MariBank CS Bot</div>
                 <div class="project-pic">Not assigned</div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#3b82f6" title="Agent to replicate manual workflow and decide to accept/reject seller's complain on 3PL switch request">
-                <div class="project-id">SGLLM11</div>
-                <div class="project-name">3PL Feedback Form Automation</div>
-                <div class="project-pic">Aisyah Yusof, Giaing Yap</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" title="Agent to vet through Shopbot conversation and determine the issue for non deflections">
-                <div class="project-id">SGLLM12</div>
-                <div class="project-name">Shopbot Non-deflected QA Assistant</div>
-                <div class="project-pic">Giaing Yap</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" title="Bot to be QA human wrong judgement result">
-                <div class="project-id">SGLLM14</div>
-                <div class="project-name">RR Wrong Judgement QA assistnat</div>
-                <div class="project-pic">Jc Chong, Tanushri J</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" title="Agent to vet through Chatbot conversation and determine the issue for bad CSAT">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Agent to vet through Chatbot conversation and determine the issue for bad CSAT">
                 <div class="project-id">SGLLM15</div>
                 <div class="project-name">Chatbot DSAT QA Assistant</div>
                 <div class="project-pic">Chrishantan P</div>
                 <div class="project-impact">$6,600/yr</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Alert team on new SME received Identify potential SME based on users utterance & keywords  To be able to prompt and read across multiple platforms (DMS, CSIH, BDC) to derive quick information of user history and engagement with shopee to derive a recommended direction of assessment (to review)(">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Agent to replicate manual workflow and decide to accept/reject seller's complain on 3PL switch request">
+                <div class="project-id">SGLLM11</div>
+                <div class="project-name">3PL Feedback Form Automation</div>
+                <div class="project-pic">Aisyah Yusof, Giaing Yap</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Agent to vet through Shopbot conversation and determine the issue for non deflections">
+                <div class="project-id">SGLLM12</div>
+                <div class="project-name">Shopbot Non-deflected QA Assistant</div>
+                <div class="project-pic">Giaing Yap</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Bot to be QA human wrong judgement result">
+                <div class="project-id">SGLLM14</div>
+                <div class="project-name">RR Wrong Judgement QA assistnat</div>
+                <div class="project-pic">Jc Chong, Tanushri J</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Alert team on new SME received Identify potential SME based on users utterance & keywords  To be able to prompt and read across multiple platforms (DMS, CSIH, BDC) to derive quick information of user history and engagement with shopee to derive a recommended direction of assessment (to review)(">
                 <div class="project-id">SGLLM17</div>
                 <div class="project-name">SME case investigation</div>
                 <div class="project-pic">Chrishantan P</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Using LLM to better consolidate and synthesize buyer/seller feedback to NPS - improve efficiency (to review)">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Using LLM to better consolidate and synthesize buyer/seller feedback to NPS - improve efficiency (to review)">
                 <div class="project-id">SGLLM30</div>
                 <div class="project-name">NPS consolidation assistant</div>
                 <div class="project-pic">Siqi Lin</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="use LLM to produce diverse fraudulent customer journeys or seller patterns, then use them to augment and identify fraud cases (to review)">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="use LLM to produce diverse fraudulent customer journeys or seller patterns, then use them to augment and identify fraud cases (to review)">
                 <div class="project-id">SGLLM31</div>
                 <div class="project-name">Fraud case investigation assistant</div>
                 <div class="project-pic">Siqi Lin</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Detect shop images / text / chats that sellers use to redirect buyers to transact off the platform">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Detect shop images / text / chats that sellers use to redirect buyers to transact off the platform">
                 <div class="project-id">SGLLM47</div>
                 <div class="project-name">Off Platform Redirection</div>
                 <div class="project-pic">Weilin Ho</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Detect rating reviews with buyer complains of product quality/misrepresented listings and flag for QC/takedown">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Detect rating reviews with buyer complains of product quality/misrepresented listings and flag for QC/takedown">
                 <div class="project-id">SGLLM48</div>
                 <div class="project-name">Listing review - Quality reviews</div>
                 <div class="project-pic">Syakila Latib</div>
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#6366f1" title="A bot that analyses a list of Return Refund (RR) cases every month and triage them into different root causes (e.g. WH fault, SPX fault, etc), then find pattern and insights into what is causing RR, e.g. a particular SKU or type of SKU, and suggest fixes">
-                <div class="project-id">SGLLM56</div>
-                <div class="project-name">RR reason classifier</div>
-                <div class="project-pic">Kwangxiong</div>
-                <div class="project-impact">$1,240/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6366f1" title="A bot that analyzes each WH operator's performance on the day before, and provide some feedback vs their usual performance. This shortens feedback cycle to operators.  Context:  - Our incentive for each operator is calculated at monthly level. Usually feedback cycle is too long. - A daily feedback generator can take into account the productivity of the operator on D-1 vs the L30 day average and feedback to him his performance with some breakdown and explanation  - e.g. your D-1 productivity is 35 items/hour (-25% from last 30 days average of 45 items/hours)         - reason is because productivity between 2-3 pm is 30% slower than usual">
+<div class="project" style="border-left-color:#6366f1" data-tooltip="A bot that analyzes each WH operator's performance on the day before, and provide some feedback vs their usual performance. This shortens feedback cycle to operators.  Context:  - Our incentive for each operator is calculated at monthly level. Usually feedback cycle is too long. - A daily feedback g">
                 <div class="project-id">SGLLM57</div>
                 <div class="project-name">Individualised performance feedback provider</div>
                 <div class="project-pic">Kwangxiong</div>
                 <div class="project-impact">$64,000/yr</div>
             </div>
-<div class="project" style="border-left-color:#6366f1" title="A bot that does a AAR of campaign at very granular level.  Some ideas: - Look into every item / SKU which missed SLA because OOS, and see where there are opportunities to plug the biggest gaps (e.g. through better pre-plenishments)">
-                <div class="project-id">SGLLM59</div>
-                <div class="project-name">Campaign detailed AAR analyst</div>
-                <div class="project-pic">Kwangxiong</div>
-                <div class="project-impact">$1,600/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6366f1" title="A bot does a daily sweep of every SKU's location to check if they are in the right place based on their hotness, and suggest opportunities to improve layout. Barring other contraints, every SKU's distance to OB station should be inversely proportional to their hotness. This bot will look at all these variables and suggest the top 10 location swaps that can make the biggest difference to the picking distance reduction.">
+<div class="project" style="border-left-color:#6366f1" data-tooltip="A bot does a daily sweep of every SKU's location to check if they are in the right place based on their hotness, and suggest opportunities to improve layout. Barring other contraints, every SKU's distance to OB station should be inversely proportional to their hotness. This bot will look at all thes">
                 <div class="project-id">SGLLM60</div>
                 <div class="project-name">Relayout optimiser</div>
                 <div class="project-pic">Kwangxiong</div>
                 <div class="project-impact">$58,000/yr</div>
             </div>
+<div class="project" style="border-left-color:#6366f1" data-tooltip="A bot that does a AAR of campaign at very granular level.  Some ideas: - Look into every item / SKU which missed SLA because OOS, and see where there are opportunities to plug the biggest gaps (e.g. through better pre-plenishments)">
+                <div class="project-id">SGLLM59</div>
+                <div class="project-name">Campaign detailed AAR analyst</div>
+                <div class="project-pic">Kwangxiong</div>
+                <div class="project-impact">$1,600/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6366f1" data-tooltip="A bot that analyses a list of Return Refund (RR) cases every month and triage them into different root causes (e.g. WH fault, SPX fault, etc), then find pattern and insights into what is causing RR, e.g. a particular SKU or type of SKU, and suggest fixes">
+                <div class="project-id">SGLLM56</div>
+                <div class="project-name">RR reason classifier</div>
+                <div class="project-pic">Kwangxiong</div>
+                <div class="project-impact">$1,240/yr</div>
+            </div>
 </div>
 <div class="cell" data-domain="SPX" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#f97316" title="Flag out and recommend rescue for routes whom driver’s delivery progress is slow">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Flag out and recommend rescue for routes whom driver’s delivery progress is slow">
                 <div class="project-id">SGLLM50</div>
                 <div class="project-name">Driver Headcount & Manpower Planning AI</div>
                 <div class="project-pic">Clarence Theng</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Allow NSS commercial invoice validation and processing">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Allow NSS commercial invoice validation and processing">
                 <div class="project-id">SGLLM76</div>
                 <div class="project-name">NSS commercial invoice validation & processing</div>
                 <div class="project-pic">Mika Lin</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Track driver's daily performance based on metrics (working hours, productivity etc.)">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Track driver's daily performance based on metrics (working hours, productivity etc.)">
                 <div class="project-id">SGLLM77</div>
                 <div class="project-name">Driver Performance Anomaly Monitoring</div>
                 <div class="project-pic">Not assigned</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Match NSS invoice with actual to be collected amount for payment status tracking">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Match NSS invoice with actual to be collected amount for payment status tracking">
                 <div class="project-id">SGLLM78</div>
                 <div class="project-name">Transfer slip extraction & validation</div>
                 <div class="project-pic">Mika Lin</div>
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#10b981" title="Knowledge management and info retrieval tool">
+<div class="project" style="border-left-color:#10b981" data-tooltip="Knowledge management and info retrieval tool">
                 <div class="project-id">SGLLM18</div>
                 <div class="project-name">Chatbot assistant for FBS sellers</div>
                 <div class="project-pic">Celia Ong, Weionn Ling</div>
             </div>
-<div class="project" style="border-left-color:#10b981" title="AI engine that compiles seller info, performance metrics, and generates priority scores. Outlines which programmes the sellers are on (CCB, FBS , Livestream Xtra) Creates standard extracts of data for Monthly/Quarterly business reviews w. sellers">
+<div class="project" style="border-left-color:#10b981" data-tooltip="AI engine that compiles seller info, performance metrics, and generates priority scores. Outlines which programmes the sellers are on (CCB, FBS , Livestream Xtra) Creates standard extracts of data for Monthly/Quarterly business reviews w. sellers">
                 <div class="project-id">SGLLM24</div>
                 <div class="project-name">Seller Performance Insights Generator</div>
                 <div class="project-pic">Celia Ong, Weionn Ling</div>
             </div>
-<div class="project" style="border-left-color:#10b981" title="Digital Coach for RMs, to help RMs understand Shopee processes, tasks and timelines based on  > RM Training material (RM refresher videos, latest SOP documents in KMS)">
+<div class="project" style="border-left-color:#10b981" data-tooltip="Digital Coach for RMs, to help RMs understand Shopee processes, tasks and timelines based on  > RM Training material (RM refresher videos, latest SOP documents in KMS)">
                 <div class="project-id">SGLLM25</div>
                 <div class="project-name">RM Navigator</div>
                 <div class="project-pic">Celia Ong</div>
             </div>
-<div class="project" style="border-left-color:#10b981" title="A bot to help QC Mkt Homepage Banners">
+<div class="project" style="border-left-color:#10b981" data-tooltip="A bot to help QC Mkt Homepage Banners">
                 <div class="project-id">SGLLM29</div>
                 <div class="project-name">Homepage Banner QC</div>
                 <div class="project-pic">Celia Ong, Weionn Ling</div>
@@ -250,12 +263,12 @@
 <div class="cell" data-domain="Product" data-status="to-start" style="background:#f3f4f6">
 </div>
 <div class="cell" data-domain="BI" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#14b8a6" title="Assist BI teams and stakeholders to create JIRA tickets through Seatalk (also including other features: update, extract information).">
+<div class="project" style="border-left-color:#14b8a6" data-tooltip="Assist BI teams and stakeholders to create JIRA tickets through Seatalk (also including other features: update, extract information).">
                 <div class="project-id">SGLLM53</div>
                 <div class="project-name">SeaTalk JIRA ticket creator</div>
                 <div class="project-pic">Not assigned</div>
             </div>
-<div class="project" style="border-left-color:#14b8a6" title="Directory of data tables and trackers / reports / dashboards that users can search through easily">
+<div class="project" style="border-left-color:#14b8a6" data-tooltip="Directory of data tables and trackers / reports / dashboards that users can search through easily">
                 <div class="project-id">SGLLM54</div>
                 <div class="project-name">Internal BI Knowledge Base for Data Discovery</div>
                 <div class="project-pic">Not assigned</div>
@@ -263,61 +276,61 @@
 </div>
 <div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">13</span></div>
 <div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#8b5cf6" title="AI Assistant to help manage and QC EP/SSV nominations: (i) check pricing accuracy & mechanics, (ii) track status of nominations, (iii) evaluate quality of nominated EPs, (iv) flagging of conflicting FD or DD campaigns running concurrently">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI Assistant to help manage and QC EP/SSV nominations: (i) check pricing accuracy & mechanics, (ii) track status of nominations, (iii) evaluate quality of nominated EPs, (iv) flagging of conflicting FD or DD campaigns running concurrently">
                 <div class="project-id">SGLLM40</div>
                 <div class="project-name">EP Assistant - QC on EP & SSV nominations</div>
                 <div class="project-pic">Curie Angjy</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="AI to generate multiple campaign titles, taglines, and collection names aligned with objectives and seasonality. (i) Adapt tone (fun, premium, urgent) and avoids repetition across campaigns. (ii) Suggest engaging titles using trending keywords, past campaigns, and consumer search data. (iii) Support drafting key messaging for other communications (in-app banners, PN, EDM, etc.).">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI to generate multiple campaign titles, taglines, and collection names aligned with objectives and seasonality. (i) Adapt tone (fun, premium, urgent) and avoids repetition across campaigns. (ii) Suggest engaging titles using trending keywords, past campaigns, and consumer search data. (iii) Support">
                 <div class="project-id">SGLLM42</div>
                 <div class="project-name">Thematic Ideation Generator</div>
                 <div class="project-pic">Julian Chan</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="AI to send template email to KOLs that did not hit video KPIs">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI to send template email to KOLs that did not hit video KPIs">
                 <div class="project-id">SGLLM46</div>
                 <div class="project-name">Automated Email Template for Shopee Video</div>
                 <div class="project-pic">Alvin Teoyk</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="To send activation form for brands to submit to RMs (BD) through SeaTalk, then to periodically check that submission has been made. To remind RMs trhough seatalk if submission has not been made yet. - Agent check on upcoming BAU Activations/campaigns based on Mall Tracker - Agent to send out the activation form to RMs for upcoming BAU activations/campaigns - The message is to include Campaign Name, Due Date (D-17 WD from Livedate) - The message is to be sent out to RMs (BD) D-20 WD from live date. - Agent to periodically check the Response sheet if the brand response have been submitted.  Quite Similar in principle to PN Reminder Assistant">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="To send activation form for brands to submit to RMs (BD) through SeaTalk, then to periodically check that submission has been made. To remind RMs trhough seatalk if submission has not been made yet. - Agent check on upcoming BAU Activations/campaigns based on Mall Tracker - Agent to send out the act">
                 <div class="project-id">SGLLM65</div>
                 <div class="project-name">Brand Activation Submission Reminder Assistant</div>
                 <div class="project-pic">Julian Chan</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="PN Approvals are currently manual and done through Seatalk.   Bot will help to approve PNs based on our current booking volume (data stored on google sheet) by:  - Day - Send base per day - Monthly PN Limit">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="PN Approvals are currently manual and done through Seatalk.   Bot will help to approve PNs based on our current booking volume (data stored on google sheet) by:  - Day - Send base per day - Monthly PN Limit">
                 <div class="project-id">SGLLM69</div>
                 <div class="project-name">PN Approval Bot</div>
                 <div class="project-pic">Chelsea Chuasy, Calista Chiakt</div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#3b82f6" title="BCRS is a gov program to incentivize buyers to recycle beverage containers for $0.10.  Program requires sellers to increase prices by X, and this increase in price will be commission exempt.   Bot will go through all listings within specified sub categories to identify 1) if listing meets criteria to be considered under BCRS 2) number of units of containers per sku (e.g. # of cans)">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="BCRS is a gov program to incentivize buyers to recycle beverage containers for $0.10.  Program requires sellers to increase prices by X, and this increase in price will be commission exempt.   Bot will go through all listings within specified sub categories to identify 1) if listing meets criteria t">
                 <div class="project-id">SGLLM71</div>
                 <div class="project-name">BCRS - Beverage Container Recycling Scheme</div>
                 <div class="project-pic">Alan Leehw, Joel Lee</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Rule based Bot that helps on validating Seller's appeal on listings due to counterfeit reasoning by - checking seller's uploaded proofs i.e: invoices, LOA">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Rule based Bot that helps on validating Seller's appeal on listings due to counterfeit reasoning by - checking seller's uploaded proofs i.e: invoices, LOA">
                 <div class="project-id">SGLLM79</div>
                 <div class="project-name">Counterfeit Whitelist Appeal Review</div>
                 <div class="project-pic">Giaing Yap, Joel Lee</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Provides a summary of ageing stuck orders that are immediate actionables. Orders ageing >=7 days must be attended to and cleared by EOD.  Additional needs being considered: 1. Instead of a hardcoded time trigger, bot checks report readiness at certain intervals, and will only output message if report is ready.  2. Bot will stay silent and not output anything (not even a dummy blank message) otherwise 3. If report is still not ready by specified cut off time, bot will prompt users to manually check the report">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Provides a summary of ageing stuck orders that are immediate actionables. Orders ageing >=7 days must be attended to and cleared by EOD.  Additional needs being considered: 1. Instead of a hardcoded time trigger, bot checks report readiness at certain intervals, and will only output message if repor">
                 <div class="project-id">SGLLM80</div>
                 <div class="project-name">Logistics Stuck Report Distributor & Summarizer</div>
                 <div class="project-pic">Justin Cheng</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Rule based Bot that helps on validating user submitted text review & ratings. Bot output will be the outcome of the flagged review assessment and mass update files for review hide & coins retrieval">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Rule based Bot that helps on validating user submitted text review & ratings. Bot output will be the outcome of the flagged review assessment and mass update files for review hide & coins retrieval">
                 <div class="project-id">SGLLM92</div>
                 <div class="project-name">Spam Text Review Rating</div>
                 <div class="project-pic">Giaing Yap, Aisyah Yusof</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Rule based Bot that helps on validating user submitted image & video review & ratings. Bot output will be the outcome of the flagged review assessment and mass update files for review hide & coins retrieval">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Rule based Bot that helps on validating user submitted image & video review & ratings. Bot output will be the outcome of the flagged review assessment and mass update files for review hide & coins retrieval">
                 <div class="project-id">SGLLM93</div>
                 <div class="project-name">Spam Image & Video Review Rating</div>
                 <div class="project-pic">Giaing Yap, Aisyah Yusof</div>
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#6366f1" title="This bot  1) automates the daily extraction and distribution of warehouse backlog data to SeaTalk, saving 30 minutes of manual reporting time by supervisor  2) provides module-specific insights and forecasted loads, allowing Team Leads to accurately determine the exact number of part-time employees (PTEs) needed.">
+<div class="project" style="border-left-color:#6366f1" data-tooltip="This bot  1) automates the daily extraction and distribution of warehouse backlog data to SeaTalk, saving 30 minutes of manual reporting time by supervisor  2) provides module-specific insights and forecasted loads, allowing Team Leads to accurately determine the exact number of part-time employees ">
                 <div class="project-id">SGLLM70</div>
                 <div class="project-name">WH Backlog and Part-timer allocation bot</div>
                 <div class="project-pic">Jonathan Gohah, Eanxiang Teoh</div>
@@ -325,13 +338,13 @@
             </div>
 </div>
 <div class="cell" data-domain="SPX" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#f97316" title="To suggest fleet supervisors on driver replacement when driver absent to minimize human judgement and error">
+<div class="project" style="border-left-color:#f97316" data-tooltip="To suggest fleet supervisors on driver replacement when driver absent to minimize human judgement and error">
                 <div class="project-id">SGLLM08</div>
                 <div class="project-name">Driver Route assignment recommendation</div>
                 <div class="project-pic">Clarence Theng</div>
                 <div class="project-impact">$16,200/yr</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="To help better check on driver's productivity using (1) parcels/hr (2) idling time">
+<div class="project" style="border-left-color:#f97316" data-tooltip="To help better check on driver's productivity using (1) parcels/hr (2) idling time">
                 <div class="project-id">SGLLM63</div>
                 <div class="project-name">Driver Performance Anomaly Monitoring</div>
                 <div class="project-pic">Mabel Chenyt</div>
@@ -345,39 +358,39 @@
 </div>
 <div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">15</span></div>
 <div class="cell" data-domain="MKT" data-status="design-and-build" style="background:#dbeafe">
-<div class="project" style="border-left-color:#8b5cf6" title="Alert users that vouchers are fully used / close to fully used to  (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Alert users that vouchers are fully used / close to fully used to  (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly">
                 <div class="project-id">SGLLM37</div>
                 <div class="project-name">Voucher Usage Monitoring Agent</div>
                 <div class="project-pic">Chianyee Ng</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="Alert users that vouchers budget is running faster than expected to (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Alert users that vouchers budget is running faster than expected to (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly">
                 <div class="project-id">SGLLM38</div>
                 <div class="project-name">Voucher Budget Monitoring Agent</div>
                 <div class="project-pic">Chianyee Ng</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="AI to help generate real-time Video data at an affiliate level in terms of content generation (number of video posts) and conversion (ADO & ADG) with WoW and MoM views, and transform into key summary reports">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI to help generate real-time Video data at an affiliate level in terms of content generation (number of video posts) and conversion (ADO & ADG) with WoW and MoM views, and transform into key summary reports">
                 <div class="project-id">SGLLM41</div>
                 <div class="project-name">Real Time Tracker for Shopee Video </div>
                 <div class="project-pic">Alvin Teoyk</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="An automated scheduling system that enables talent managers to efficiently view, select, and confirm livestream time slots for creators.">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="An automated scheduling system that enables talent managers to efficiently view, select, and confirm livestream time slots for creators.">
                 <div class="project-id">SGLLM82</div>
                 <div class="project-name">Livestream Matching (Match Creator to Brand directly via schedule)</div>
                 <div class="project-pic">Ian Kweekh, Kayla Angsq</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="1. Help CS agents to answer basic L1 question for VIP - example: VIP sign up time, VIP coins to be earned, Coins to be reinstated for partial cancellation 2. Update bot to answer  3. Shorten SLA + improves manpower efficiency">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="1. Help CS agents to answer basic L1 question for VIP - example: VIP sign up time, VIP coins to be earned, Coins to be reinstated for partial cancellation 2. Update bot to answer  3. Shorten SLA + improves manpower efficiency">
                 <div class="project-id">SGLLM89</div>
                 <div class="project-name">VIP CS Bot</div>
                 <div class="project-pic">Fuqi Chia</div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="design-and-build" style="background:#dbeafe">
-<div class="project" style="border-left-color:#3b82f6" title="Agent to vet through Shopbot conversation and determine the issue for bad CSAT">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Agent to vet through Shopbot conversation and determine the issue for bad CSAT">
                 <div class="project-id">SGLLM04</div>
                 <div class="project-name">Shopbot DSAT QA Assistant</div>
                 <div class="project-pic">Giaing Yap</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="The AI Assistant will help to transform a raw call/chat transcript into: 1) a polished transcript with clear speaker labels, 2) a CS QA summary (short, audit-ready), 3) a structured JSON record (for CRM/analytics ingestion), and 4) a CS QA Evaluation Sheet (scored, coaching-ready).">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="The AI Assistant will help to transform a raw call/chat transcript into: 1) a polished transcript with clear speaker labels, 2) a CS QA summary (short, audit-ready), 3) a structured JSON record (for CRM/analytics ingestion), and 4) a CS QA Evaluation Sheet (scored, coaching-ready).">
                 <div class="project-id">SGLLM34</div>
                 <div class="project-name">Voice Call Analyst</div>
                 <div class="project-pic">Weionn Ling, Chrishantan P</div>
@@ -386,44 +399,44 @@
 <div class="cell" data-domain="WH" data-status="design-and-build" style="background:#dbeafe">
 </div>
 <div class="cell" data-domain="SPX" data-status="design-and-build" style="background:#dbeafe">
-<div class="project" style="border-left-color:#f97316" title="Detect Text Address that do not match with postal code">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Detect Text Address that do not match with postal code">
                 <div class="project-id">SGLLM52</div>
                 <div class="project-name">Address Mismatch Detection AI</div>
                 <div class="project-pic">Clarence Theng</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Provide a faded and non-AWB stuck order recovery product solution to support Ops to search the potential matched order effectively: - Faded-AWB matching: use partial AWB info for search - Non-AWB matching: upload product image for search Upon finding the match, the system leverages exception handling capability to streamline the next-step of recovery.">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Provide a faded and non-AWB stuck order recovery product solution to support Ops to search the potential matched order effectively: - Faded-AWB matching: use partial AWB info for search - Non-AWB matching: upload product image for search Upon finding the match, the system leverages exception handlin">
                 <div class="project-id">SGLLM73</div>
                 <div class="project-name">Parcel Recovery - Faded/No AWB Matching</div>
                 <div class="project-pic">Mika Lin</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Using Model to judge on pick up vehicle's loading situation">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Using Model to judge on pick up vehicle's loading situation">
                 <div class="project-id">SGLLM74</div>
                 <div class="project-name">Pick up Vehicle Load Audit AI</div>
                 <div class="project-pic">Mabel Chenyt</div>
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="design-and-build" style="background:#dbeafe">
-<div class="project" style="border-left-color:#10b981" title="Knowledge Management & Information Retrieval tool">
+<div class="project" style="border-left-color:#10b981" data-tooltip="Knowledge Management & Information Retrieval tool">
                 <div class="project-id">SGLLM20</div>
                 <div class="project-name">Chatbot assistant for MS related topics</div>
                 <div class="project-pic">Celia Ong</div>
             </div>
-<div class="project" style="border-left-color:#10b981" title="AI-Assisted Listing Review & Rating; Frontend Content Optimization and Low-Rating Diagnostics">
+<div class="project" style="border-left-color:#10b981" data-tooltip="AI-Assisted Listing Review & Rating; Frontend Content Optimization and Low-Rating Diagnostics">
                 <div class="project-id">SGLLM23</div>
                 <div class="project-name">Listing Review and Rating tool</div>
                 <div class="project-pic">Alan Leehw, Celia Ong</div>
             </div>
-<div class="project" style="border-left-color:#10b981" title="Tailored reminders for each RM on KPI progress and tasks to prioritize">
+<div class="project" style="border-left-color:#10b981" data-tooltip="Tailored reminders for each RM on KPI progress and tasks to prioritize">
                 <div class="project-id">SGLLM26</div>
                 <div class="project-name">RM KPI Assistant</div>
                 <div class="project-pic">Celia Ong</div>
             </div>
-<div class="project" style="border-left-color:#10b981" title="A bot that is able to find the closest match of the same item from the same shop">
+<div class="project" style="border-left-color:#10b981" data-tooltip="A bot that is able to find the closest match of the same item from the same shop">
                 <div class="project-id">SGLLM28</div>
                 <div class="project-name">Item Link Finder Bot</div>
                 <div class="project-pic">Sili Terh, Celia Ong</div>
             </div>
-<div class="project" style="border-left-color:#10b981" title="Invoice Matching AI agent to execute tri-factor matching and verification of suppliers' invoices, POs and DOs, subsequently prompting Finance to process payments / prompting further investigation for unverified invoices. Solution will be step by step approach, i.e. test whether quality of invoices are ok, analyse total amount of invoice vs historical, etc.">
+<div class="project" style="border-left-color:#10b981" data-tooltip="Invoice Matching AI agent to execute tri-factor matching and verification of suppliers' invoices, POs and DOs, subsequently prompting Finance to process payments / prompting further investigation for unverified invoices. Solution will be step by step approach, i.e. test whether quality of invoices a">
                 <div class="project-id">SGLLM72</div>
                 <div class="project-name">Invoice matching for payment to suppliers</div>
                 <div class="project-pic">Alan Leehw, Celia Ong</div>
@@ -435,12 +448,12 @@
 </div>
 <div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">5</span></div>
 <div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#8b5cf6" title="EP Assistant to help remind and bump RMs on EP & SSV Nominations">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="EP Assistant to help remind and bump RMs on EP & SSV Nominations">
                 <div class="project-id">SGLLM39</div>
                 <div class="project-name">EP Assistant - Reminder on EP & SSV nominations</div>
                 <div class="project-pic">Curie Angjy</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency">
                 <div class="project-id">SGLLM68</div>
                 <div class="project-name">Affiliate CS Bot</div>
                 <div class="project-pic">Pearlyn Teomw</div>
@@ -451,14 +464,14 @@
 <div class="cell" data-domain="WH" data-status="parallel-run" style="background:#d1fae5">
 </div>
 <div class="cell" data-domain="SPX" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#f97316" title="Set up a bot with KB on all integration related Q&A to support on NSS Seller API integration process">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Set up a bot with KB on all integration related Q&A to support on NSS Seller API integration process">
                 <div class="project-id">SGLLM09</div>
                 <div class="project-name">NSS API Bot Support</div>
                 <div class="project-pic">Mika Lin</div>
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#10b981" title="A bot that able to verify the 2 matched items are the same pair or not">
+<div class="project" style="border-left-color:#10b981" data-tooltip="A bot that able to verify the 2 matched items are the same pair or not">
                 <div class="project-id">SGLLM27</div>
                 <div class="project-name">Item Matching Validation Bot</div>
                 <div class="project-pic">Weionn Ling</div>
@@ -467,7 +480,7 @@
 <div class="cell" data-domain="Product" data-status="parallel-run" style="background:#d1fae5">
 </div>
 <div class="cell" data-domain="BI" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#14b8a6" title="A bot to be able to assist on various data suite operation.  1) To find DataSuite workflow from gsheet 2) To find Datahub workflow from gsheet 3) Mass freeze unused workflow 4) Retrieve logs quickly without opening DataSuite">
+<div class="project" style="border-left-color:#14b8a6" data-tooltip="A bot to be able to assist on various data suite operation.  1) To find DataSuite workflow from gsheet 2) To find Datahub workflow from gsheet 3) Mass freeze unused workflow 4) Retrieve logs quickly without opening DataSuite">
                 <div class="project-id">SGLLM03</div>
                 <div class="project-name">Data Suite Assistant</div>
                 <div class="project-pic">Weionn Ling</div>
@@ -475,126 +488,126 @@
 </div>
 <div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">20</span></div>
 <div class="cell" data-domain="MKT" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#8b5cf6" title="AI to help SeaTalk PICs on incomplete EDM submissions">
-                <div class="project-id">SGLLM36</div>
-                <div class="project-name">PN Reminder Assistant</div>
-                <div class="project-pic">Calista Chiakt</div>
-                <div class="project-impact">$6,250/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" title="AI to help SeaTalk PICs on incomplete EDM submissions">
-                <div class="project-id">SGLLM43</div>
-                <div class="project-name">EDM Reminder Assistant</div>
-                <div class="project-pic">Calista Chiakt</div>
-                <div class="project-impact">$6,250/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" title="To help notify Seatalk PICs when brands have been successfully matched with creators. Details included in the message: 1. Creator Name 2. Stream Date & Time  3. Creator Delivery Address  4. Latest Delivery Date  To help compile the list of confirmed streams for each creator so that Seatalk PICs can disseminate to respective creators. Details to be included in the message:  1. Creator Name 2. Brand 3. Stream Date & Time  +  D-4 of livestream to ensure items/ samples have been delivered or at least check and prompt to ensure it has been done (reminder checklist - banner boosted, coin set up)">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="To help notify Seatalk PICs when brands have been successfully matched with creators. Details included in the message: 1. Creator Name 2. Stream Date & Time  3. Creator Delivery Address  4. Latest Delivery Date  To help compile the list of confirmed streams for each creator so that Seatalk PICs can ">
                 <div class="project-id">SGLLM64</div>
                 <div class="project-name">LS Brand Matching & Anchor Brand Match</div>
                 <div class="project-pic">Szeinn Tan</div>
                 <div class="project-impact">$213,336/yr</div>
             </div>
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI to help SeaTalk PICs on incomplete EDM submissions">
+                <div class="project-id">SGLLM36</div>
+                <div class="project-name">PN Reminder Assistant</div>
+                <div class="project-pic">Calista Chiakt</div>
+                <div class="project-impact">$6,250/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI to help SeaTalk PICs on incomplete EDM submissions">
+                <div class="project-id">SGLLM43</div>
+                <div class="project-name">EDM Reminder Assistant</div>
+                <div class="project-pic">Calista Chiakt</div>
+                <div class="project-impact">$6,250/yr</div>
+            </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#3b82f6" title="Gemini model that reviews product listings to identify counterfeit risks by checking brand consistency, spotting suspicious naming patterns, comparing prices with the market, and then classifying items as Safe to sell, Needs manual review, Potentially counterfeit, or Unbranded / Cannot verify">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Gemini model that reviews product listings to identify counterfeit risks by checking brand consistency, spotting suspicious naming patterns, comparing prices with the market, and then classifying items as Safe to sell, Needs manual review, Potentially counterfeit, or Unbranded / Cannot verify">
                 <div class="project-id">SGLLM02</div>
                 <div class="project-name">Counterfeit Listing Check (CLC)</div>
                 <div class="project-pic">Siqi Lin</div>
                 <div class="project-impact">$74,484/yr</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Detecting Contact weightage shift CSAT performance, Analyze performance dip">
-                <div class="project-id">SGLLM05</div>
-                <div class="project-name">Chatbot performance analysis</div>
-                <div class="project-pic">Chrishantan P</div>
-                <div class="project-impact">$9,300/yr</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" title="A bot to be able to QA the agent response/cases">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="A bot to be able to QA the agent response/cases">
                 <div class="project-id">SGLLM10</div>
                 <div class="project-name">CS QA Assistant</div>
                 <div class="project-pic">Huishan Kang, Chrishantan P</div>
                 <div class="project-impact">$72,000/yr</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
-                <div class="project-id">SGLLM32</div>
-                <div class="project-name">Market Research Analyst</div>
-                <div class="project-pic">Aaron Ling San Lye</div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Detecting Contact weightage shift CSAT performance, Analyze performance dip">
+                <div class="project-id">SGLLM05</div>
+                <div class="project-name">Chatbot performance analysis</div>
+                <div class="project-pic">Chrishantan P</div>
+                <div class="project-impact">$9,300/yr</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
-                <div class="project-id">SGLLM33</div>
-                <div class="project-name">ProdBot Chatbot</div>
-                <div class="project-pic">Aaron Ling San Lye Damien Heng</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" title="To help classify reviews from google map so we can take more effective action based on the category">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="To help classify reviews from google map so we can take more effective action based on the category">
                 <div class="project-id">SGLLM61</div>
                 <div class="project-name">Google Map Review Classifier</div>
                 <div class="project-pic">Chrishantan P</div>
                 <div class="project-impact">$4,797/yr</div>
             </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
+                <div class="project-id">SGLLM32</div>
+                <div class="project-name">Market Research Analyst</div>
+                <div class="project-pic">Aaron Ling San Lye</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
+                <div class="project-id">SGLLM33</div>
+                <div class="project-name">ProdBot Chatbot</div>
+                <div class="project-pic">Aaron Ling San Lye Damien Heng</div>
+            </div>
 </div>
 <div class="cell" data-domain="WH" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#6366f1" title="Directory of data tables and trackers / reports / dashboards that users can search through easily">
-                <div class="project-id">SGLLM55</div>
-                <div class="project-name">PTE training bot</div>
-                <div class="project-pic">Kwangxiong</div>
-                <div class="project-impact">$785/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6366f1" title="Help answer any questions about current WH inventory at SKU level, including sales data and Days of Stock.">
+<div class="project" style="border-left-color:#6366f1" data-tooltip="Help answer any questions about current WH inventory at SKU level, including sales data and Days of Stock.">
                 <div class="project-id">SGLLM91</div>
                 <div class="project-name">WH Inventory Bot</div>
                 <div class="project-pic">Kwangxiong</div>
                 <div class="project-impact">$11,271/yr</div>
             </div>
+<div class="project" style="border-left-color:#6366f1" data-tooltip="Directory of data tables and trackers / reports / dashboards that users can search through easily">
+                <div class="project-id">SGLLM55</div>
+                <div class="project-name">PTE training bot</div>
+                <div class="project-pic">Kwangxiong</div>
+                <div class="project-impact">$785/yr</div>
+            </div>
 </div>
 <div class="cell" data-domain="SPX" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#f97316" title="Gemini model that automatically assess ePOD quality, enabling driver accountability and reduce losses from substandard submissions.">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Gemini model that automatically assess ePOD quality, enabling driver accountability and reduce losses from substandard submissions.">
                 <div class="project-id">SGLLM01</div>
                 <div class="project-name">POD Validator (e-POD/Auto-QC)</div>
                 <div class="project-pic">Joe Zhoufz</div>
                 <div class="project-impact">$27,700/yr</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="A bot that can send agency report directly and alert to different SPX layers based on threshold">
-                <div class="project-id">SGLLM06</div>
-                <div class="project-name">Agency bot system</div>
-                <div class="project-pic">Mika Lin</div>
-                <div class="project-impact">$16,200/yr</div>
-            </div>
-<div class="project" style="border-left-color:#f97316" title="An AI agent to help analyse parcel-related information from the datawarehouse. It helps user obtain quick numbers and study trends over time.">
+<div class="project" style="border-left-color:#f97316" data-tooltip="An AI agent to help analyse parcel-related information from the datawarehouse. It helps user obtain quick numbers and study trends over time.">
                 <div class="project-id">SGLLM35</div>
                 <div class="project-name">SPX Parcel Analysis</div>
                 <div class="project-pic">Yupeng Ng</div>
                 <div class="project-impact">$24,000/yr</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Using seatalk bot for ops to update picture for potential safety hazard detection & reconfirmation">
+<div class="project" style="border-left-color:#f97316" data-tooltip="A bot that can send agency report directly and alert to different SPX layers based on threshold">
+                <div class="project-id">SGLLM06</div>
+                <div class="project-name">Agency bot system</div>
+                <div class="project-pic">Mika Lin</div>
+                <div class="project-impact">$16,200/yr</div>
+            </div>
+<div class="project" style="border-left-color:#f97316" data-tooltip="Using seatalk bot for ops to update picture for potential safety hazard detection & reconfirmation">
                 <div class="project-id">SGLLM75</div>
                 <div class="project-name">HSE Report Seatalk Bot</div>
                 <div class="project-pic">Clarence Theng</div>
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#10b981" title="Knowledge Management & Information Retrieval tool for Shopee Policies">
-                <div class="project-id">SGLLM19</div>
-                <div class="project-name">RM assistant</div>
-                <div class="project-pic">Celia Ong</div>
-                <div class="project-impact">$17,169/yr</div>
-            </div>
-<div class="project" style="border-left-color:#10b981" title="Knowledge Management & Information Retrieval tool">
-                <div class="project-id">SGLLM21</div>
-                <div class="project-name">Chatbot assistant for ads related topics</div>
-                <div class="project-pic">Celia Ong, Huanenn Chu</div>
-            </div>
-<div class="project" style="border-left-color:#10b981" title="Using LLM to identify and review generic keywords to reduce manual review time">
-                <div class="project-id">SGLLM22</div>
-                <div class="project-name">Keyword reservation filtering tool</div>
-                <div class="project-pic">Celia Ong</div>
-            </div>
-<div class="project" style="border-left-color:#10b981" title="To help recognizing voucher mechanics in listing image from redmart so we can counter their redmart voucher">
+<div class="project" style="border-left-color:#10b981" data-tooltip="To help recognizing voucher mechanics in listing image from redmart so we can counter their redmart voucher">
                 <div class="project-id">SGLLM62</div>
                 <div class="project-name">Lazada Image Scraper</div>
                 <div class="project-pic">Jonathan Gohah</div>
                 <div class="project-impact">$21,000/yr</div>
             </div>
+<div class="project" style="border-left-color:#10b981" data-tooltip="Knowledge Management & Information Retrieval tool for Shopee Policies">
+                <div class="project-id">SGLLM19</div>
+                <div class="project-name">RM assistant</div>
+                <div class="project-pic">Celia Ong</div>
+                <div class="project-impact">$17,169/yr</div>
+            </div>
+<div class="project" style="border-left-color:#10b981" data-tooltip="Knowledge Management & Information Retrieval tool">
+                <div class="project-id">SGLLM21</div>
+                <div class="project-name">Chatbot assistant for ads related topics</div>
+                <div class="project-pic">Celia Ong, Huanenn Chu</div>
+            </div>
+<div class="project" style="border-left-color:#10b981" data-tooltip="Using LLM to identify and review generic keywords to reduce manual review time">
+                <div class="project-id">SGLLM22</div>
+                <div class="project-name">Keyword reservation filtering tool</div>
+                <div class="project-pic">Celia Ong</div>
+            </div>
 </div>
 <div class="cell" data-domain="Product" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#ec4899" title="A bot that reminds MP SG BPMs to follow up with regional team on locally raised features.">
+<div class="project" style="border-left-color:#ec4899" data-tooltip="A bot that reminds MP SG BPMs to follow up with regional team on locally raised features.">
                 <div class="project-id">SGLLM81</div>
                 <div class="project-name">SG BPM Feature Req Follow Up Bot (MP)</div>
                 <div class="project-pic">Stefanie Ohqr, Damien Hengyh</div>
@@ -605,53 +618,53 @@
 </div>
 <div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">9</span></div>
 <div class="cell" data-domain="MKT" data-status="cancelled" style="background:#fecaca">
-<div class="project" style="border-left-color:#8b5cf6" title="AI to Suggest initial draft of optimized daily voucher plan based on existing platform and voucher usage trends">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="AI to Suggest initial draft of optimized daily voucher plan based on existing platform and voucher usage trends">
                 <div class="project-id">SGLLM44</div>
                 <div class="project-name">FBS Voucher Planning Assistant</div>
                 <div class="project-pic">Trisstan Dodwell</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="- To help notify SeaTalk PICs on incomplete details for Live MKT assets stored on google sheet every Friday / Monday.   - To compile list of brands with marketing exposures to Seatalk PICs every Tuesday & on adhoc basis as and when required.">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="- To help notify SeaTalk PICs on incomplete details for Live MKT assets stored on google sheet every Friday / Monday.   - To compile list of brands with marketing exposures to Seatalk PICs every Tuesday & on adhoc basis as and when required.">
                 <div class="project-id">SGLLM66</div>
                 <div class="project-name">Live Marketing Assets </div>
                 <div class="project-pic">Szeinn Tan</div>
             </div>
-<div class="project" style="border-left-color:#8b5cf6" title="Track KOL postings with affiliate links on Instagram, to determine content supply.">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply.">
                 <div class="project-id">SGLLM67</div>
                 <div class="project-name">Post Scrapping on Instagram</div>
                 <div class="project-pic">Pearlyn Teomw</div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="cancelled" style="background:#fecaca">
-<div class="project" style="border-left-color:#3b82f6" title="Bot to be able to perform RR judging based on pre-set criteria">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Bot to be able to perform RR judging based on pre-set criteria">
                 <div class="project-id">SGLLM13</div>
                 <div class="project-name">RR judgement assistant</div>
                 <div class="project-pic">Jc Chong, Tanushri J</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" title="Agent to vet through Chatbot conversation and determine the issue for non deflections">
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Agent to vet through Chatbot conversation and determine the issue for non deflections">
                 <div class="project-id">SGLLM16</div>
                 <div class="project-name">Chatbot Non-deflected QA Assistant</div>
                 <div class="project-pic">Chrishantan P</div>
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="cancelled" style="background:#fecaca">
-<div class="project" style="border-left-color:#6366f1" title="WH stock analyser (black stock preventer)  - On a weekly basis, send a weekly report on a) SKUs with high coverage days but we still buy stocks b) SKUs in which sales has dropped off in L30D and we likely need to discount to clear   --- Context---- - there's way too many SKUs to focus on, a thorough analysis of all the SKUs will take too much effort to do frequently - today, WH occasionally share a SCD report with business teams, but it's high effort and does not go into much granularity">
+<div class="project" style="border-left-color:#6366f1" data-tooltip="WH stock analyser (black stock preventer)  - On a weekly basis, send a weekly report on a) SKUs with high coverage days but we still buy stocks b) SKUs in which sales has dropped off in L30D and we likely need to discount to clear   --- Context---- - there's way too many SKUs to focus on, a thorough">
                 <div class="project-id">SGLLM58</div>
                 <div class="project-name">WH stock analyser (black stock preventer)</div>
                 <div class="project-pic">Kwangxiong</div>
             </div>
 </div>
 <div class="cell" data-domain="SPX" data-status="cancelled" style="background:#fecaca">
-<div class="project" style="border-left-color:#f97316" title="A bot that can:  - Answer basic questions (e.g. FM/LM SOPs) and provide answers in a timely manner - Route more complexed queries that are not in the knowledge bank to a human agent">
+<div class="project" style="border-left-color:#f97316" data-tooltip="A bot that can:  - Answer basic questions (e.g. FM/LM SOPs) and provide answers in a timely manner - Route more complexed queries that are not in the knowledge bank to a human agent">
                 <div class="project-id">SGLLM07</div>
                 <div class="project-name">Driver bot system</div>
                 <div class="project-pic">Mabel Chenyt</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Recommends SPX Locker order capacity to deal with order fluctuations">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Recommends SPX Locker order capacity to deal with order fluctuations">
                 <div class="project-id">SGLLM49</div>
                 <div class="project-name">Dynamic Locker Capacity Planning</div>
                 <div class="project-pic">Clarence Theng</div>
             </div>
-<div class="project" style="border-left-color:#f97316" title="Approve / Reject agency appeal">
+<div class="project" style="border-left-color:#f97316" data-tooltip="Approve / Reject agency appeal">
                 <div class="project-id">SGLLM51</div>
                 <div class="project-name">Agency penalty appeal automation</div>
                 <div class="project-pic">Clarence Theng</div>
