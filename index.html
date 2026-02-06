@@ -56,229 +56,104 @@
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
-            <option value="OPS">OPS (24 projects, $246,709/yr)</option>
-            <option value="BD">BD (14 projects, $215,884/yr)</option>
-            <option value="MKT">MKT (26 projects, $47,419/yr)</option>
-            <option value="SPX">SPX (17 projects, $13,620/yr)</option>
-            <option value="WH">WH (8 projects, $11,271/yr)</option>
-            <option value="BI">BI (3 projects, $6,600/yr)</option>
+            <option value="SPX">SPX (17 projects, $0/yr)</option>
+            <option value="OPS">OPS (24 projects, $0/yr)</option>
+            <option value="BI">BI (3 projects, $0/yr)</option>
+            <option value="BD">BD (14 projects, $0/yr)</option>
+            <option value="MKT">MKT (26 projects, $0/yr)</option>
+            <option value="WH">WH (8 projects, $0/yr)</option>
             <option value="Product">Product (1 projects, $0/yr)</option>
         </select>
     </div>
 
     <div class="legend" id="legend">
-<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($246,709, 24 projects)</div>
-<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($215,884, 14 projects)</div>
-<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($47,419, 26 projects)</div>
-<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($13,620, 17 projects)</div>
-<div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($11,271, 8 projects)</div>
-<div class="legend-item" data-domain="BI"><div class="legend-color" style="background:#14b8a6"></div>BI ($6,600, 3 projects)</div>
+<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($0, 17 projects)</div>
+<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($0, 24 projects)</div>
+<div class="legend-item" data-domain="BI"><div class="legend-color" style="background:#14b8a6"></div>BI ($0, 3 projects)</div>
+<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($0, 14 projects)</div>
+<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($0, 26 projects)</div>
+<div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($0, 8 projects)</div>
 <div class="legend-item" data-domain="Product"><div class="legend-color" style="background:#ec4899"></div>Product ($0, 1 projects)</div>
 </div>
 <div class="board" id="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
-<div class="header-cell" data-domain="OPS">OPS<div class="impact">$246,709/yr</div></div>
-<div class="header-cell" data-domain="BD">BD<div class="impact">$215,884/yr</div></div>
-<div class="header-cell" data-domain="MKT">MKT<div class="impact">$47,419/yr</div></div>
-<div class="header-cell" data-domain="SPX">SPX<div class="impact">$13,620/yr</div></div>
-<div class="header-cell" data-domain="WH">WH<div class="impact">$11,271/yr</div></div>
-<div class="header-cell" data-domain="BI">BI<div class="impact">$6,600/yr</div></div>
+<div class="header-cell" data-domain="SPX">SPX<div class="impact">$0/yr</div></div>
+<div class="header-cell" data-domain="OPS">OPS<div class="impact">$0/yr</div></div>
+<div class="header-cell" data-domain="BI">BI<div class="impact">$0/yr</div></div>
+<div class="header-cell" data-domain="BD">BD<div class="impact">$0/yr</div></div>
+<div class="header-cell" data-domain="MKT">MKT<div class="impact">$0/yr</div></div>
+<div class="header-cell" data-domain="WH">WH<div class="impact">$0/yr</div></div>
 <div class="header-cell" data-domain="Product">Product<div class="impact">$0/yr</div></div>
 </div>
-<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">32</span></div>
-<div class="cell" data-domain="OPS" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM11</div>
-                <div class="project-name">3PL Feedback Form Automation</div>
-                <div class="project-pic">Aisyah Yusof, Giaing Yap</div>
-                
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM12</div>
-                <div class="project-name">Shopbot Non-deflected QA Assistant</div>
-                <div class="project-pic">Giaing Yap</div>
-                
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM14</div>
-                <div class="project-name">RR Wrong Judgement QA assistnat</div>
-                <div class="project-pic">Jc Chong, Tanushri J</div>
-                
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM15</div>
-                <div class="project-name">Chatbot DSAT QA Assistant</div>
-                <div class="project-pic">Chrishantan P</div>
-                
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM17</div>
-                <div class="project-name">SME case investigation</div>
-                <div class="project-pic">Chrishantan P</div>
-                
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM30</div>
-                <div class="project-name">NPS consolidation assistant</div>
-                <div class="project-pic">Siqi Lin</div>
-                
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM31</div>
-                <div class="project-name">Fraud case investigation assistant</div>
-                <div class="project-pic">Siqi Lin</div>
-                <div class="project-impact">$1,326/yr</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM47</div>
-                <div class="project-name">Off Platform Redirection</div>
-                <div class="project-pic">Weilin Ho</div>
-                
-            </div>
-<div class="project" style="border-left-color:#3b82f6">
-                <div class="project-id">SGLLM48</div>
-                <div class="project-name">Listing review - Quality reviews</div>
-                <div class="project-pic">Syakila Latib</div>
-                
-            </div>
-</div>
-<div class="cell" data-domain="BD" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#10b981">
-                <div class="project-id">SGLLM18</div>
-                <div class="project-name">Chatbot assistant for FBS sellers</div>
-                <div class="project-pic">Celia Ong, Weionn Ling</div>
-                
-            </div>
-<div class="project" style="border-left-color:#10b981">
-                <div class="project-id">SGLLM24</div>
-                <div class="project-name">Seller Performance Insights Generator</div>
-                <div class="project-pic">Celia Ong, Weionn Ling</div>
-                <div class="project-impact">$9,300/yr</div>
-            </div>
-<div class="project" style="border-left-color:#10b981">
-                <div class="project-id">SGLLM25</div>
-                <div class="project-name">RM Navigator</div>
-                <div class="project-pic">Celia Ong</div>
-                <div class="project-impact">$16,200/yr</div>
-            </div>
-<div class="project" style="border-left-color:#10b981">
-                <div class="project-id">SGLLM29</div>
-                <div class="project-name">Homepage Banner QC</div>
-                <div class="project-pic">Celia Ong, Weionn Ling</div>
-                <div class="project-impact">$72,000/yr</div>
-            </div>
-</div>
-<div class="cell" data-domain="MKT" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM45</div>
-                <div class="project-name">Seller Voucher Selection QC for Games</div>
-                <div class="project-pic">Angeline Chong</div>
-                
-            </div>
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM83</div>
-                <div class="project-name">Crawl data tool</div>
-                <div class="project-pic">TBC</div>
-                <div class="project-impact">$24,000/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM84</div>
-                <div class="project-name">Push Notification Generation bot</div>
-                <div class="project-pic">Angeline Chong, Yueyue Zhang</div>
-                <div class="project-impact">$6,250/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM85</div>
-                <div class="project-name">Mall Levers Daily Update bot</div>
-                <div class="project-pic">Julian Chan</div>
-                
-            </div>
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM86</div>
-                <div class="project-name">Weekly PN Insights Report</div>
-                <div class="project-pic">Chelsea Chuasy, Calista Chiakt</div>
-                
-            </div>
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM87</div>
-                <div class="project-name">Corporate Voucher CS Bot</div>
-                <div class="project-pic">Jinle Tan, Husna Alkhatib</div>
-                
-            </div>
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM88</div>
-                <div class="project-name">VIP EP Assistant - QC on EP & SSV nominations</div>
-                <div class="project-pic">Fuqi Chia</div>
-                
-            </div>
-<div class="project" style="border-left-color:#8b5cf6">
-                <div class="project-id">SGLLM90</div>
-                <div class="project-name">MariBank CS Bot</div>
-                <div class="project-pic">Not assigned</div>
-                
-            </div>
-</div>
+<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">31</span></div>
 <div class="cell" data-domain="SPX" data-status="to-start" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#f97316">
                 <div class="project-id">SGLLM50</div>
                 <div class="project-name">Driver Headcount & Manpower Planning AI</div>
                 <div class="project-pic">Clarence Theng</div>
-                
             </div>
 <div class="project" style="border-left-color:#f97316">
                 <div class="project-id">SGLLM76</div>
                 <div class="project-name">NSS commercial invoice validation & processing</div>
                 <div class="project-pic">Mika Lin</div>
-                
             </div>
 <div class="project" style="border-left-color:#f97316">
                 <div class="project-id">SGLLM77</div>
                 <div class="project-name">Driver Performance Anomaly Monitoring</div>
                 <div class="project-pic">Not assigned</div>
-                
             </div>
 <div class="project" style="border-left-color:#f97316">
                 <div class="project-id">SGLLM78</div>
                 <div class="project-name">Transfer slip extraction & validation</div>
                 <div class="project-pic">Mika Lin</div>
-                
             </div>
 </div>
-<div class="cell" data-domain="WH" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#6366f1">
-                <div class="project-id">SGLLM56</div>
-                <div class="project-name">RR reason classifier</div>
-                <div class="project-pic">Kwangxiong</div>
-                
+<div class="cell" data-domain="OPS" data-status="to-start" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM11</div>
+                <div class="project-name">3PL Feedback Form Automation</div>
+                <div class="project-pic">Aisyah Yusof, Giaing Yap</div>
             </div>
-<div class="project" style="border-left-color:#6366f1">
-                <div class="project-id">SGLLM57</div>
-                <div class="project-name">Individualised performance feedback provider</div>
-                <div class="project-pic">Kwangxiong</div>
-                
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM12</div>
+                <div class="project-name">Shopbot Non-deflected QA Assistant</div>
+                <div class="project-pic">Giaing Yap</div>
             </div>
-<div class="project" style="border-left-color:#6366f1">
-                <div class="project-id">SGLLM58</div>
-                <div class="project-name">WH stock analyser (black stock preventer)
-
-- On a weekly basis, send a weekly report on
-a) SKUs with high coverage days but we still buy stocks
-b) SKUs in which sales has dropped off in L30D and we likely need to discount to clear</div>
-                <div class="project-pic">Kwangxiong</div>
-                
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM14</div>
+                <div class="project-name">RR Wrong Judgement QA assistnat</div>
+                <div class="project-pic">Jc Chong, Tanushri J</div>
             </div>
-<div class="project" style="border-left-color:#6366f1">
-                <div class="project-id">SGLLM59</div>
-                <div class="project-name">Campaign detailed AAR analyst</div>
-                <div class="project-pic">Kwangxiong</div>
-                
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM15</div>
+                <div class="project-name">Chatbot DSAT QA Assistant</div>
+                <div class="project-pic">Chrishantan P</div>
             </div>
-<div class="project" style="border-left-color:#6366f1">
-                <div class="project-id">SGLLM60</div>
-                <div class="project-name">Relayout optimiser</div>
-                <div class="project-pic">Kwangxiong</div>
-                <div class="project-impact">$11,271/yr</div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM17</div>
+                <div class="project-name">SME case investigation</div>
+                <div class="project-pic">Chrishantan P</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM30</div>
+                <div class="project-name">NPS consolidation assistant</div>
+                <div class="project-pic">Siqi Lin</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM31</div>
+                <div class="project-name">Fraud case investigation assistant</div>
+                <div class="project-pic">Siqi Lin</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM47</div>
+                <div class="project-name">Off Platform Redirection</div>
+                <div class="project-pic">Weilin Ho</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6">
+                <div class="project-id">SGLLM48</div>
+                <div class="project-name">Listing review - Quality reviews</div>
+                <div class="project-pic">Syakila Latib</div>
             </div>
 </div>
 <div class="cell" data-domain="BI" data-status="to-start" style="background:#f3f4f6">
@@ -286,49 +161,142 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM53</div>
                 <div class="project-name">SeaTalk JIRA ticket creator</div>
                 <div class="project-pic">Not assigned</div>
-                
             </div>
 <div class="project" style="border-left-color:#14b8a6">
                 <div class="project-id">SGLLM54</div>
                 <div class="project-name">Internal BI Knowledge Base for Data Discovery</div>
                 <div class="project-pic">Not assigned</div>
-                <div class="project-impact">$6,600/yr</div>
+            </div>
+</div>
+<div class="cell" data-domain="BD" data-status="to-start" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM18</div>
+                <div class="project-name">Chatbot assistant for FBS sellers</div>
+                <div class="project-pic">Celia Ong, Weionn Ling</div>
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM24</div>
+                <div class="project-name">Seller Performance Insights Generator</div>
+                <div class="project-pic">Celia Ong, Weionn Ling</div>
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM25</div>
+                <div class="project-name">RM Navigator</div>
+                <div class="project-pic">Celia Ong</div>
+            </div>
+<div class="project" style="border-left-color:#10b981">
+                <div class="project-id">SGLLM29</div>
+                <div class="project-name">Homepage Banner QC</div>
+                <div class="project-pic">Celia Ong, Weionn Ling</div>
+            </div>
+</div>
+<div class="cell" data-domain="MKT" data-status="to-start" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM45</div>
+                <div class="project-name">Seller Voucher Selection QC for Games</div>
+                <div class="project-pic">Angeline Chong</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM83</div>
+                <div class="project-name">Crawl data tool</div>
+                <div class="project-pic">Tbc</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM84</div>
+                <div class="project-name">Push Notification Generation bot</div>
+                <div class="project-pic">Angeline Chong, Yueyue Zhang</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM85</div>
+                <div class="project-name">Mall Levers Daily Update bot</div>
+                <div class="project-pic">Julian Chan</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM86</div>
+                <div class="project-name">Weekly PN Insights Report</div>
+                <div class="project-pic">Chelsea Chuasy, Calista Chiakt</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM87</div>
+                <div class="project-name">Corporate Voucher CS Bot</div>
+                <div class="project-pic">Jinle Tan, Husna Alkhatib</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM88</div>
+                <div class="project-name">VIP EP Assistant - QC on EP & SSV nominations</div>
+                <div class="project-pic">Fuqi Chia</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6">
+                <div class="project-id">SGLLM90</div>
+                <div class="project-name">MariBank CS Bot</div>
+                <div class="project-pic">Not assigned</div>
+            </div>
+</div>
+<div class="cell" data-domain="WH" data-status="to-start" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM56</div>
+                <div class="project-name">RR reason classifier</div>
+                <div class="project-pic">Kwangxiong</div>
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM57</div>
+                <div class="project-name">Individualised performance feedback provider</div>
+                <div class="project-pic">Kwangxiong</div>
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM59</div>
+                <div class="project-name">Campaign detailed AAR analyst</div>
+                <div class="project-pic">Kwangxiong</div>
+            </div>
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM60</div>
+                <div class="project-name">Relayout optimiser</div>
+                <div class="project-pic">Kwangxiong</div>
             </div>
 </div>
 <div class="cell" data-domain="Product" data-status="to-start" style="background:#f3f4f6">
 </div>
 <div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">13</span></div>
+<div class="cell" data-domain="SPX" data-status="poc" style="background:#fef3c7">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM08</div>
+                <div class="project-name">Driver Route assignment recommendation</div>
+                <div class="project-pic">Clarence Theng</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM63</div>
+                <div class="project-name">Driver Performance Anomaly Monitoring</div>
+                <div class="project-pic">Mabel Chenyt</div>
+            </div>
+</div>
 <div class="cell" data-domain="OPS" data-status="poc" style="background:#fef3c7">
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM71</div>
                 <div class="project-name">BCRS - Beverage Container Recycling Scheme</div>
                 <div class="project-pic">Alan Leehw, Joel Lee</div>
-                <div class="project-impact">$21,000/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM79</div>
                 <div class="project-name">Counterfeit Whitelist Appeal Review</div>
-                <div class="project-pic">Giaing Yap, Joel Lee, Aisyah Yusof</div>
-                
+                <div class="project-pic">Giaing Yap, Joel Lee</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM80</div>
                 <div class="project-name">Logistics Stuck Report Distributor & Summarizer</div>
                 <div class="project-pic">Justin Cheng</div>
-                <div class="project-impact">$213,336/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM92</div>
                 <div class="project-name">Spam Text Review Rating</div>
                 <div class="project-pic">Giaing Yap, Aisyah Yusof</div>
-                
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM93</div>
                 <div class="project-name">Spam Image & Video Review Rating</div>
                 <div class="project-pic">Giaing Yap, Aisyah Yusof</div>
-                
             </div>
+</div>
+<div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="cell" data-domain="BD" data-status="poc" style="background:#fef3c7">
 </div>
@@ -337,45 +305,26 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM40</div>
                 <div class="project-name">EP Assistant - QC on EP & SSV nominations</div>
                 <div class="project-pic">Curie Angjy</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM42</div>
                 <div class="project-name">Thematic Ideation Generator</div>
                 <div class="project-pic">Julian Chan</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM46</div>
                 <div class="project-name">Automated Email Template for Shopee Video</div>
                 <div class="project-pic">Alvin Teoyk</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM65</div>
                 <div class="project-name">Brand Activation Submission Reminder Assistant</div>
                 <div class="project-pic">Julian Chan</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM69</div>
                 <div class="project-name">PN Approval Bot</div>
                 <div class="project-pic">Chelsea Chuasy, Calista Chiakt</div>
-                
-            </div>
-</div>
-<div class="cell" data-domain="SPX" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM08</div>
-                <div class="project-name">Driver Route assignment recommendation</div>
-                <div class="project-pic">Clarence Theng</div>
-                
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM63</div>
-                <div class="project-name">Driver Performance Anomaly Monitoring</div>
-                <div class="project-pic">Mabel Chenyt</div>
-                
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="poc" style="background:#fef3c7">
@@ -383,58 +332,67 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM70</div>
                 <div class="project-name">WH Backlog and Part-timer allocation bot</div>
                 <div class="project-pic">Jonathan Gohah, Eanxiang Teoh</div>
-                
             </div>
-</div>
-<div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="cell" data-domain="Product" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">15</span></div>
+<div class="cell" data-domain="SPX" data-status="design-and-build" style="background:#dbeafe">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM52</div>
+                <div class="project-name">Address Mismatch Detection AI</div>
+                <div class="project-pic">Clarence Theng</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM73</div>
+                <div class="project-name">Parcel Recovery - Faded/No AWB Matching</div>
+                <div class="project-pic">Mika Lin</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM74</div>
+                <div class="project-name">Pick up Vehicle Load Audit AI</div>
+                <div class="project-pic">Mabel Chenyt</div>
+            </div>
+</div>
 <div class="cell" data-domain="OPS" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM04</div>
                 <div class="project-name">Shopbot DSAT QA Assistant</div>
                 <div class="project-pic">Giaing Yap</div>
-                
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM34</div>
                 <div class="project-name">Voice Call Analyst</div>
                 <div class="project-pic">Weionn Ling, Chrishantan P</div>
-                
             </div>
+</div>
+<div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
 </div>
 <div class="cell" data-domain="BD" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM20</div>
                 <div class="project-name">Chatbot assistant for MS related topics</div>
                 <div class="project-pic">Celia Ong</div>
-                <div class="project-impact">$27,700/yr</div>
             </div>
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM23</div>
                 <div class="project-name">Listing Review and Rating tool</div>
                 <div class="project-pic">Alan Leehw, Celia Ong</div>
-                
             </div>
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM26</div>
                 <div class="project-name">RM KPI Assistant</div>
                 <div class="project-pic">Celia Ong</div>
-                
             </div>
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM28</div>
                 <div class="project-name">Item Link Finder Bot</div>
-                <div class="project-pic">Celia Ong, Sili Terh</div>
-                
+                <div class="project-pic">Sili Terh, Celia Ong</div>
             </div>
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM72</div>
                 <div class="project-name">Invoice matching for payment to suppliers</div>
                 <div class="project-pic">Alan Leehw, Celia Ong</div>
-                
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="design-and-build" style="background:#dbeafe">
@@ -442,68 +400,54 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM37</div>
                 <div class="project-name">Voucher Usage Monitoring Agent</div>
                 <div class="project-pic">Chianyee Ng</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM38</div>
                 <div class="project-name">Voucher Budget Monitoring Agent</div>
                 <div class="project-pic">Chianyee Ng</div>
-                <div class="project-impact">$17,169/yr</div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM41</div>
-                <div class="project-name">Real Time Tracker for Shopee Video</div>
+                <div class="project-name">Real Time Tracker for Shopee Video </div>
                 <div class="project-pic">Alvin Teoyk</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM82</div>
                 <div class="project-name">Livestream Matching (Match Creator to Brand directly via schedule)</div>
                 <div class="project-pic">Ian Kweekh, Kayla Angsq</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM89</div>
                 <div class="project-name">VIP CS Bot</div>
                 <div class="project-pic">Fuqi Chia</div>
-                
-            </div>
-</div>
-<div class="cell" data-domain="SPX" data-status="design-and-build" style="background:#dbeafe">
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM52</div>
-                <div class="project-name">Address Mismatch Detection AI</div>
-                <div class="project-pic">Clarence Theng</div>
-                
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM73</div>
-                <div class="project-name">Parcel Recovery - Faded/No AWB Matching</div>
-                <div class="project-pic">Mika Lin</div>
-                
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM74</div>
-                <div class="project-name">Pick up Vehicle Load Audit AI</div>
-                <div class="project-pic">Mabel Chenyt</div>
-                <div class="project-impact">$360/yr</div>
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="design-and-build" style="background:#dbeafe">
 </div>
-<div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
-</div>
 <div class="cell" data-domain="Product" data-status="design-and-build" style="background:#dbeafe">
 </div>
 <div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">5</span></div>
+<div class="cell" data-domain="SPX" data-status="parallel-run" style="background:#d1fae5">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM09</div>
+                <div class="project-name">NSS API Bot Support</div>
+                <div class="project-pic">Mika Lin</div>
+            </div>
+</div>
 <div class="cell" data-domain="OPS" data-status="parallel-run" style="background:#d1fae5">
+</div>
+<div class="cell" data-domain="BI" data-status="parallel-run" style="background:#d1fae5">
+<div class="project" style="border-left-color:#14b8a6">
+                <div class="project-id">SGLLM03</div>
+                <div class="project-name">Data Suite Assistant</div>
+                <div class="project-pic">Weionn Ling</div>
+            </div>
 </div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM27</div>
                 <div class="project-name">Item Matching Validation Bot</div>
                 <div class="project-pic">Weionn Ling</div>
-                <div class="project-impact">$16,200/yr</div>
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
@@ -511,98 +455,94 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM39</div>
                 <div class="project-name">EP Assistant - Reminder on EP & SSV nominations</div>
                 <div class="project-pic">Curie Angjy</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM68</div>
                 <div class="project-name">Affiliate CS Bot</div>
                 <div class="project-pic">Pearlyn Teomw</div>
-                
-            </div>
-</div>
-<div class="cell" data-domain="SPX" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM09</div>
-                <div class="project-name">NSS API Bot Support</div>
-                <div class="project-pic">Mika Lin</div>
-                
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="parallel-run" style="background:#d1fae5">
 </div>
-<div class="cell" data-domain="BI" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#14b8a6">
-                <div class="project-id">SGLLM03</div>
-                <div class="project-name">Data Suite Assistant</div>
-                <div class="project-pic">Weionn Ling</div>
-                
-            </div>
-</div>
 <div class="cell" data-domain="Product" data-status="parallel-run" style="background:#d1fae5">
 </div>
 <div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">20</span></div>
+<div class="cell" data-domain="SPX" data-status="live" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM01</div>
+                <div class="project-name">POD Validator (e-POD/Auto-QC)</div>
+                <div class="project-pic">Joe Zhoufz</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM06</div>
+                <div class="project-name">Agency bot system</div>
+                <div class="project-pic">Mika Lin</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM35</div>
+                <div class="project-name">SPX Parcel Analysis</div>
+                <div class="project-pic">Yupeng Ng</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM75</div>
+                <div class="project-name">HSE Report Seatalk Bot</div>
+                <div class="project-pic">Clarence Theng</div>
+            </div>
+</div>
 <div class="cell" data-domain="OPS" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM02</div>
                 <div class="project-name">Counterfeit Listing Check (CLC)</div>
                 <div class="project-pic">Siqi Lin</div>
-                <div class="project-impact">$6,250/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM05</div>
                 <div class="project-name">Chatbot performance analysis</div>
                 <div class="project-pic">Chrishantan P</div>
-                
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM10</div>
                 <div class="project-name">CS QA Assistant</div>
                 <div class="project-pic">Huishan Kang, Chrishantan P</div>
-                
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM32</div>
                 <div class="project-name">Market Research Analyst</div>
                 <div class="project-pic">Aaron Ling San Lye</div>
-                
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM33</div>
                 <div class="project-name">ProdBot Chatbot</div>
                 <div class="project-pic">Aaron Ling San Lye Damien Heng</div>
-                
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM61</div>
                 <div class="project-name">Google Map Review Classifier</div>
                 <div class="project-pic">Chrishantan P</div>
-                <div class="project-impact">$4,797/yr</div>
             </div>
+</div>
+<div class="cell" data-domain="BI" data-status="live" style="background:#bbf7d0">
 </div>
 <div class="cell" data-domain="BD" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM19</div>
                 <div class="project-name">RM assistant</div>
                 <div class="project-pic">Celia Ong</div>
-                
             </div>
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM21</div>
                 <div class="project-name">Chatbot assistant for ads related topics</div>
                 <div class="project-pic">Celia Ong, Huanenn Chu</div>
-                <div class="project-impact">$74,484/yr</div>
             </div>
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM22</div>
                 <div class="project-name">Keyword reservation filtering tool</div>
                 <div class="project-pic">Celia Ong</div>
-                
             </div>
 <div class="project" style="border-left-color:#10b981">
                 <div class="project-id">SGLLM62</div>
                 <div class="project-name">Lazada Image Scraper</div>
                 <div class="project-pic">Jonathan Gohah</div>
-                
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="live" style="background:#bbf7d0">
@@ -610,45 +550,16 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM36</div>
                 <div class="project-name">PN Reminder Assistant</div>
                 <div class="project-pic">Calista Chiakt</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM43</div>
                 <div class="project-name">EDM Reminder Assistant</div>
                 <div class="project-pic">Calista Chiakt</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM64</div>
                 <div class="project-name">LS Brand Matching & Anchor Brand Match</div>
                 <div class="project-pic">Szeinn Tan</div>
-                
-            </div>
-</div>
-<div class="cell" data-domain="SPX" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM01</div>
-                <div class="project-name">POD Validator (e-POD/Auto-QC)</div>
-                <div class="project-pic">Joe Zhoufz</div>
-                
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM06</div>
-                <div class="project-name">Agency bot system</div>
-                <div class="project-pic">Mika Lin</div>
-                <div class="project-impact">$13,260/yr</div>
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM35</div>
-                <div class="project-name">SPX Parcel Analysis</div>
-                <div class="project-pic">Yupeng Ng</div>
-                
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM75</div>
-                <div class="project-name">HSE Report Seatalk Bot</div>
-                <div class="project-pic">Clarence Theng</div>
-                
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="live" style="background:#bbf7d0">
@@ -656,39 +567,51 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM55</div>
                 <div class="project-name">PTE training bot</div>
                 <div class="project-pic">Kwangxiong</div>
-                
             </div>
 <div class="project" style="border-left-color:#6366f1">
                 <div class="project-id">SGLLM91</div>
                 <div class="project-name">WH Inventory Bot</div>
                 <div class="project-pic">Kwangxiong</div>
-                
             </div>
-</div>
-<div class="cell" data-domain="BI" data-status="live" style="background:#bbf7d0">
 </div>
 <div class="cell" data-domain="Product" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#ec4899">
                 <div class="project-id">SGLLM81</div>
                 <div class="project-name">SG BPM Feature Req Follow Up Bot (MP)</div>
                 <div class="project-pic">Stefanie Ohqr, Damien Hengyh</div>
-                
             </div>
 </div>
-<div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">8</span></div>
+<div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">9</span></div>
+<div class="cell" data-domain="SPX" data-status="cancelled" style="background:#fecaca">
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM07</div>
+                <div class="project-name">Driver bot system</div>
+                <div class="project-pic">Mabel Chenyt</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM49</div>
+                <div class="project-name">Dynamic Locker Capacity Planning</div>
+                <div class="project-pic">Clarence Theng</div>
+            </div>
+<div class="project" style="border-left-color:#f97316">
+                <div class="project-id">SGLLM51</div>
+                <div class="project-name">Agency penalty appeal automation</div>
+                <div class="project-pic">Clarence Theng</div>
+            </div>
+</div>
 <div class="cell" data-domain="OPS" data-status="cancelled" style="background:#fecaca">
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM13</div>
                 <div class="project-name">RR judgement assistant</div>
                 <div class="project-pic">Jc Chong, Tanushri J</div>
-                
             </div>
 <div class="project" style="border-left-color:#3b82f6">
                 <div class="project-id">SGLLM16</div>
                 <div class="project-name">Chatbot Non-deflected QA Assistant</div>
                 <div class="project-pic">Chrishantan P</div>
-                
             </div>
+</div>
+<div class="cell" data-domain="BI" data-status="cancelled" style="background:#fecaca">
 </div>
 <div class="cell" data-domain="BD" data-status="cancelled" style="background:#fecaca">
 </div>
@@ -697,44 +620,24 @@ b) SKUs in which sales has dropped off in L30D and we likely need to discount to
                 <div class="project-id">SGLLM44</div>
                 <div class="project-name">FBS Voucher Planning Assistant</div>
                 <div class="project-pic">Trisstan Dodwell</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM66</div>
-                <div class="project-name">Live Marketing Assets</div>
+                <div class="project-name">Live Marketing Assets </div>
                 <div class="project-pic">Szeinn Tan</div>
-                
             </div>
 <div class="project" style="border-left-color:#8b5cf6">
                 <div class="project-id">SGLLM67</div>
                 <div class="project-name">Post Scrapping on Instagram</div>
                 <div class="project-pic">Pearlyn Teomw</div>
-                
-            </div>
-</div>
-<div class="cell" data-domain="SPX" data-status="cancelled" style="background:#fecaca">
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM07</div>
-                <div class="project-name">Driver bot system</div>
-                <div class="project-pic">Mabel Chenyt</div>
-                
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM49</div>
-                <div class="project-name">Dynamic Locker Capacity Planning</div>
-                <div class="project-pic">Clarence Theng</div>
-                
-            </div>
-<div class="project" style="border-left-color:#f97316">
-                <div class="project-id">SGLLM51</div>
-                <div class="project-name">Agency penalty appeal automation</div>
-                <div class="project-pic">Clarence Theng</div>
-                
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="cancelled" style="background:#fecaca">
-</div>
-<div class="cell" data-domain="BI" data-status="cancelled" style="background:#fecaca">
+<div class="project" style="border-left-color:#6366f1">
+                <div class="project-id">SGLLM58</div>
+                <div class="project-name">WH stock analyser (black stock preventer)</div>
+                <div class="project-pic">Kwangxiong</div>
+            </div>
 </div>
 <div class="cell" data-domain="Product" data-status="cancelled" style="background:#fecaca">
 </div>
