@@ -63,43 +63,43 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Domains ordered by impact (left=highest)</p>
+    <p class="subtitle">Total Impact: $1,233,756/yr | Live Projects: $538,965/yr</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
-            <option value="BD">BD (14 projects, $403,691/yr)</option>
-            <option value="MKT">MKT (26 projects, $323,420/yr)</option>
-            <option value="OPS">OPS (24 projects, $238,291/yr)</option>
-            <option value="WH">WH (8 projects, $150,156/yr)</option>
-            <option value="SPX">SPX (17 projects, $91,141/yr)</option>
-            <option value="BI">BI (3 projects, $10,800/yr)</option>
-            <option value="Product">Product (1 projects, $360/yr)</option>
+            <option value="BD">BD (14 projects, $403,691/yr, Live: $49,132)</option>
+            <option value="MKT">MKT (27 projects, $336,668/yr, Live: $226,556)</option>
+            <option value="OPS">OPS (24 projects, $249,818/yr, Live: $181,273)</option>
+            <option value="WH">WH (8 projects, $150,156/yr, Live: $12,056)</option>
+            <option value="SPX">SPX (17 projects, $93,063/yr, Live: $69,588)</option>
+            <option value="Product">Product (1 projects, $360/yr, Live: $360)</option>
+            <option value="BI">BI (3 projects, $0/yr, Live: $0)</option>
         </select>
     </div>
 
     <div class="legend" id="legend">
-<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($403,691, 14 projects)</div>
-<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($323,420, 26 projects)</div>
-<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($238,291, 24 projects)</div>
-<div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($150,156, 8 projects)</div>
-<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($91,141, 17 projects)</div>
-<div class="legend-item" data-domain="BI"><div class="legend-color" style="background:#14b8a6"></div>BI ($10,800, 3 projects)</div>
-<div class="legend-item" data-domain="Product"><div class="legend-color" style="background:#ec4899"></div>Product ($360, 1 projects)</div>
+<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($403,691/yr, Live: $49,132, 14 projects)</div>
+<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($336,668/yr, Live: $226,556, 27 projects)</div>
+<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($249,818/yr, Live: $181,273, 24 projects)</div>
+<div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($150,156/yr, Live: $12,056, 8 projects)</div>
+<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($93,063/yr, Live: $69,588, 17 projects)</div>
+<div class="legend-item" data-domain="Product"><div class="legend-color" style="background:#ec4899"></div>Product ($360/yr, Live: $360, 1 projects)</div>
+<div class="legend-item" data-domain="BI"><div class="legend-color" style="background:#14b8a6"></div>BI ($0/yr, Live: $0, 3 projects)</div>
 </div>
 <div class="board" id="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
-<div class="header-cell" data-domain="BD">BD<div class="impact">$403,691/yr</div></div>
-<div class="header-cell" data-domain="MKT">MKT<div class="impact">$323,420/yr</div></div>
-<div class="header-cell" data-domain="OPS">OPS<div class="impact">$238,291/yr</div></div>
-<div class="header-cell" data-domain="WH">WH<div class="impact">$150,156/yr</div></div>
-<div class="header-cell" data-domain="SPX">SPX<div class="impact">$91,141/yr</div></div>
-<div class="header-cell" data-domain="BI">BI<div class="impact">$10,800/yr</div></div>
-<div class="header-cell" data-domain="Product">Product<div class="impact">$360/yr</div></div>
+<div class="header-cell" data-domain="BD">BD<div class="impact">$403,691/yr (Live: $49,132)</div></div>
+<div class="header-cell" data-domain="MKT">MKT<div class="impact">$336,668/yr (Live: $226,556)</div></div>
+<div class="header-cell" data-domain="OPS">OPS<div class="impact">$249,818/yr (Live: $181,273)</div></div>
+<div class="header-cell" data-domain="WH">WH<div class="impact">$150,156/yr (Live: $12,056)</div></div>
+<div class="header-cell" data-domain="SPX">SPX<div class="impact">$93,063/yr (Live: $69,588)</div></div>
+<div class="header-cell" data-domain="Product">Product<div class="impact">$360/yr (Live: $360)</div></div>
+<div class="header-cell" data-domain="BI">BI<div class="impact">$0/yr (Live: $0)</div></div>
 </div>
-<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">29</span></div>
+<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">28</span></div>
 <div class="cell" data-domain="BD" data-status="to-start" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#10b981" data-tooltip="AI engine that compiles seller info, performance metrics, and generates priority scores. Outlines which programmes the sellers are on (CCB, FBS , Livestream Xtra) Creates standard extracts of data for Monthly/Quarterly business reviews w. sellers">
                 <div class="project-id">SGLLM24</div>
@@ -137,6 +137,7 @@
                 <div class="project-id">SGLLM45</div>
                 <div class="project-name">Seller Voucher Selection QC for Games</div>
                 <div class="project-pic">Angeline Chong</div>
+                <div class="project-impact">$1,728/yr</div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-tooltip="Generate effective PNs based on events running daily, by order of priority set by MKT PICs. This would allow faster allocation & mass creation of PNs instead of individually, saving hours. e.g. > PIC inputs of all game dates, event & rewards > AI allocates based on what event is running on that day ">
                 <div class="project-id">SGLLM84</div>
@@ -186,27 +187,23 @@
                 <div class="project-id">SGLLM47</div>
                 <div class="project-name">Off Platform Redirection</div>
                 <div class="project-pic">Weilin Ho</div>
-                <div class="project-impact">$2,496/yr</div>
+                <div class="project-impact">$3,520/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Detect rating reviews with buyer complains of product quality/misrepresented listings and flag for QC/takedown">
+                <div class="project-id">SGLLM48</div>
+                <div class="project-name">Listing review - Quality reviews</div>
+                <div class="project-pic">Shangkari</div>
+                <div class="project-impact">$480/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6" data-tooltip="Bot to be QA human wrong judgement result">
                 <div class="project-id">SGLLM14</div>
                 <div class="project-name">RR Wrong Judgement QA assistnat</div>
                 <div class="project-pic">Jc Chong, Tanushri J</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" data-tooltip="Using LLM to better consolidate and synthesize buyer/seller feedback to NPS - improve efficiency (to review)">
-                <div class="project-id">SGLLM30</div>
-                <div class="project-name">NPS consolidation assistant</div>
-                <div class="project-pic">Siqi Lin</div>
-            </div>
 <div class="project" style="border-left-color:#3b82f6" data-tooltip="use LLM to produce diverse fraudulent customer journeys or seller patterns, then use them to augment and identify fraud cases (to review)">
                 <div class="project-id">SGLLM31</div>
                 <div class="project-name">Fraud case investigation assistant</div>
                 <div class="project-pic">Siqi Lin</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-tooltip="Detect rating reviews with buyer complains of product quality/misrepresented listings and flag for QC/takedown">
-                <div class="project-id">SGLLM48</div>
-                <div class="project-name">Listing review - Quality reviews</div>
-                <div class="project-pic">Shangkari</div>
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="to-start" style="background:#f3f4f6">
@@ -240,7 +237,7 @@
                 <div class="project-id">SGLLM50</div>
                 <div class="project-name">Driver Headcount & Manpower Planning AI</div>
                 <div class="project-pic">Clarence Theng</div>
-                <div class="project-impact">$4,500/yr</div>
+                <div class="project-impact">$4,875/yr</div>
             </div>
 <div class="project" style="border-left-color:#f97316" data-tooltip="Allow NSS commercial invoice validation and processing">
                 <div class="project-id">SGLLM76</div>
@@ -258,6 +255,8 @@
                 <div class="project-pic">Mika Lin</div>
             </div>
 </div>
+<div class="cell" data-domain="Product" data-status="to-start" style="background:#f3f4f6">
+</div>
 <div class="cell" data-domain="BI" data-status="to-start" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#14b8a6" data-tooltip="Assist BI teams and stakeholders to create JIRA tickets through Seatalk (also including other features: update, extract information).">
                 <div class="project-id">SGLLM53</div>
@@ -270,9 +269,7 @@
                 <div class="project-pic">Not assigned</div>
             </div>
 </div>
-<div class="cell" data-domain="Product" data-status="to-start" style="background:#f3f4f6">
-</div>
-<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">14</span></div>
+<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">13</span></div>
 <div class="cell" data-domain="BD" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
@@ -311,12 +308,6 @@
                 <div class="project-pic">Alan Leehw, Joel Lee</div>
                 <div class="project-impact">$30,000/yr</div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" data-tooltip="Agent to replicate manual workflow and decide to accept/reject seller's complain on 3PL switch request">
-                <div class="project-id">SGLLM11</div>
-                <div class="project-name">3PL Feedback Form Automation</div>
-                <div class="project-pic">Aisyah Yusof, Giaing Yap</div>
-                <div class="project-impact">$21,600/yr</div>
-            </div>
 <div class="project" style="border-left-color:#3b82f6" data-tooltip="Provides a summary of ageing stuck orders that are immediate actionables. Orders ageing >=7 days must be attended to and cleared by EOD.  Additional needs being considered: 1. Instead of a hardcoded time trigger, bot checks report readiness at certain intervals, and will only output message if repor">
                 <div class="project-id">SGLLM80</div>
                 <div class="project-name">Logistics Stuck Report Distributor & Summarizer</div>
@@ -341,14 +332,14 @@
                 <div class="project-pic">Giaing Yap, Aisyah Yusof</div>
                 <div class="project-impact">$480/yr</div>
             </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Agent to replicate manual workflow and decide to accept/reject seller's complain on 3PL switch request">
+                <div class="project-id">SGLLM11</div>
+                <div class="project-name">3PL Feedback Form Automation</div>
+                <div class="project-pic">Aisyah Yusof, Giaing Yap</div>
+                <div class="project-impact">$131/yr</div>
+            </div>
 </div>
 <div class="cell" data-domain="WH" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#6366f1" data-tooltip="This bot  1) automates the daily extraction and distribution of warehouse backlog data to SeaTalk, saving 30 minutes of manual reporting time by supervisor  2) provides module-specific insights and forecasted loads, allowing Team Leads to accurately determine the exact number of part-time employees ">
-                <div class="project-id">SGLLM70</div>
-                <div class="project-name">WH Backlog and Part-timer allocation bot</div>
-                <div class="project-pic">Jonathan Gohah, Eanxiang Teoh</div>
-                <div class="project-impact">$13,260/yr</div>
-            </div>
 </div>
 <div class="cell" data-domain="SPX" data-status="poc" style="background:#fef3c7">
 <div class="project" style="border-left-color:#f97316" data-tooltip="To suggest fleet supervisors on driver replacement when driver absent to minimize human judgement and error">
@@ -363,9 +354,9 @@
                 <div class="project-pic">Mabel Chenyt</div>
             </div>
 </div>
-<div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
-</div>
 <div class="cell" data-domain="Product" data-status="poc" style="background:#fef3c7">
+</div>
+<div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">15</span></div>
 <div class="cell" data-domain="BD" data-status="design-and-build" style="background:#dbeafe">
@@ -433,6 +424,7 @@
                 <div class="project-id">SGLLM04</div>
                 <div class="project-name">Shopbot DSAT QA Assistant</div>
                 <div class="project-pic">Giaing Yap</div>
+                <div class="project-impact">$10,800/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6" data-tooltip="The AI Assistant will help to transform a raw call/chat transcript into: 1) a polished transcript with clear speaker labels, 2) a CS QA summary (short, audit-ready), 3) a structured JSON record (for CRM/analytics ingestion), and 4) a CS QA Evaluation Sheet (scored, coaching-ready).">
                 <div class="project-id">SGLLM34</div>
@@ -460,11 +452,11 @@
                 <div class="project-pic">Mabel Chenyt</div>
             </div>
 </div>
-<div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
-</div>
 <div class="cell" data-domain="Product" data-status="design-and-build" style="background:#dbeafe">
 </div>
-<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">5</span></div>
+<div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
+</div>
+<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">6</span></div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#10b981" data-tooltip="A bot that able to verify the 2 matched items are the same pair or not">
                 <div class="project-id">SGLLM27</div>
@@ -474,20 +466,28 @@
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency">
+                <div class="project-id">SGLLM68</div>
+                <div class="project-name">CS Affiliate Bot</div>
+                <div class="project-pic">Pearlyn Teomw</div>
+                <div class="project-impact">$9,360/yr</div>
+            </div>
 <div class="project" style="border-left-color:#8b5cf6" data-tooltip="EP Assistant to help remind and bump RMs on EP & SSV Nominations">
                 <div class="project-id">SGLLM39</div>
                 <div class="project-name">EP Assistant - Reminder on EP & SSV nominations</div>
                 <div class="project-pic">Not assigned</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency">
-                <div class="project-id">SGLLM68</div>
-                <div class="project-name">Affiliate CS Bot</div>
-                <div class="project-pic">Pearlyn Teomw</div>
+                <div class="project-impact">$1,440/yr</div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="parallel-run" style="background:#d1fae5">
 </div>
 <div class="cell" data-domain="WH" data-status="parallel-run" style="background:#d1fae5">
+<div class="project" style="border-left-color:#6366f1" data-tooltip="This bot  1) automates the daily extraction and distribution of warehouse backlog data to SeaTalk, saving 30 minutes of manual reporting time by supervisor  2) provides module-specific insights and forecasted loads, allowing Team Leads to accurately determine the exact number of part-time employees ">
+                <div class="project-id">SGLLM70</div>
+                <div class="project-name">WH Backlog and Part-timer allocation bot</div>
+                <div class="project-pic">Jonathan Gohah, Eanxiang Teoh</div>
+                <div class="project-impact">$13,260/yr</div>
+            </div>
 </div>
 <div class="cell" data-domain="SPX" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#f97316" data-tooltip="Set up a bot with KB on all integration related Q&A to support on NSS Seller API integration process">
@@ -496,17 +496,16 @@
                 <div class="project-pic">Mika Lin</div>
             </div>
 </div>
+<div class="cell" data-domain="Product" data-status="parallel-run" style="background:#d1fae5">
+</div>
 <div class="cell" data-domain="BI" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#14b8a6" data-tooltip="A bot to be able to assist on various data suite operation.  1) To find DataSuite workflow from gsheet 2) To find Datahub workflow from gsheet 3) Mass freeze unused workflow 4) Retrieve logs quickly without opening DataSuite">
                 <div class="project-id">SGLLM03</div>
                 <div class="project-name">Data Suite Assistant</div>
                 <div class="project-pic">Weionn Ling</div>
-                <div class="project-impact">$10,800/yr</div>
             </div>
 </div>
-<div class="cell" data-domain="Product" data-status="parallel-run" style="background:#d1fae5">
-</div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">20</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">21</span></div>
 <div class="cell" data-domain="BD" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#10b981" data-tooltip="To help recognizing voucher mechanics in listing image from redmart so we can counter their redmart voucher">
                 <div class="project-id">SGLLM62</div>
@@ -552,6 +551,12 @@
                 <div class="project-pic">Calista Chiakt</div>
                 <div class="project-impact">$6,250/yr</div>
             </div>
+<div class="project" style="border-left-color:#8b5cf6" data-tooltip="3 Reminder bots that triggers a chaser to RMs D-5 to D-1 before campaign date to get them to nominate more DDs and SSVs. This will also be helpful for SVIP as it ensures that early access has sufficient DDs and SSVs nominated">
+                <div class="project-id">SGLLM95</div>
+                <div class="project-name">15, 25, DD SSV DD Progress Check Bot</div>
+                <div class="project-pic">Ruixuan Chea</div>
+                <div class="project-impact">$720/yr</div>
+            </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#3b82f6" data-tooltip="Gemini model that reviews product listings to identify counterfeit risks by checking brand consistency, spotting suspicious naming patterns, comparing prices with the market, and then classifying items as Safe to sell, Needs manual review, Potentially counterfeit, or Unbranded / Cannot verify">
@@ -566,6 +571,18 @@
                 <div class="project-pic">Huishan Kang, Chrishantan P</div>
                 <div class="project-impact">$72,000/yr</div>
             </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
+                <div class="project-id">SGLLM32</div>
+                <div class="project-name">Market Research Analyst</div>
+                <div class="project-pic">Aaron Ling San Lye</div>
+                <div class="project-impact">$10,752/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
+                <div class="project-id">SGLLM33</div>
+                <div class="project-name">ProdBot Chatbot</div>
+                <div class="project-pic">Aaron Ling San Lye Damien Heng</div>
+                <div class="project-impact">$9,940/yr</div>
+            </div>
 <div class="project" style="border-left-color:#3b82f6" data-tooltip="Detecting Contact weightage shift CSAT performance, Analyze performance dip">
                 <div class="project-id">SGLLM05</div>
                 <div class="project-name">Chatbot performance analysis</div>
@@ -577,16 +594,6 @@
                 <div class="project-name">Google Map Review Classifier</div>
                 <div class="project-pic">Chrishantan P</div>
                 <div class="project-impact">$4,797/yr</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-tooltip="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
-                <div class="project-id">SGLLM32</div>
-                <div class="project-name">Market Research Analyst</div>
-                <div class="project-pic">Aaron Ling San Lye</div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-tooltip="Market Research and Competitive Intelligence Agent responsible for identifying and structuring critical market insights that is part 1 to a network of agents aimed at automating and improving our product operations & strategy.">
-                <div class="project-id">SGLLM33</div>
-                <div class="project-name">ProdBot Chatbot</div>
-                <div class="project-pic">Aaron Ling San Lye Damien Heng</div>
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="live" style="background:#bbf7d0">
@@ -626,10 +633,8 @@
                 <div class="project-id">SGLLM75</div>
                 <div class="project-name">HSE Report Seatalk Bot</div>
                 <div class="project-pic">Clarence Theng</div>
-                <div class="project-impact">$141/yr</div>
+                <div class="project-impact">$1,688/yr</div>
             </div>
-</div>
-<div class="cell" data-domain="BI" data-status="live" style="background:#bbf7d0">
 </div>
 <div class="cell" data-domain="Product" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#ec4899" data-tooltip="A bot that reminds MP SG BPMs to follow up with regional team on locally raised features.">
@@ -639,7 +644,9 @@
                 <div class="project-impact">$360/yr</div>
             </div>
 </div>
-<div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">10</span></div>
+<div class="cell" data-domain="BI" data-status="live" style="background:#bbf7d0">
+</div>
+<div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">11</span></div>
 <div class="cell" data-domain="BD" data-status="cancelled" style="background:#fecaca">
 </div>
 <div class="cell" data-domain="MKT" data-status="cancelled" style="background:#fecaca">
@@ -675,6 +682,11 @@
                 <div class="project-name">Chatbot Non-deflected QA Assistant</div>
                 <div class="project-pic">Chrishantan P</div>
             </div>
+<div class="project" style="border-left-color:#3b82f6" data-tooltip="Using LLM to better consolidate and synthesize buyer/seller feedback to NPS - improve efficiency (to review)">
+                <div class="project-id">SGLLM30</div>
+                <div class="project-name">NPS consolidation assistant</div>
+                <div class="project-pic">Siqi Lin</div>
+            </div>
 </div>
 <div class="cell" data-domain="WH" data-status="cancelled" style="background:#fecaca">
 <div class="project" style="border-left-color:#6366f1" data-tooltip="WH stock analyser (black stock preventer)  - On a weekly basis, send a weekly report on a) SKUs with high coverage days but we still buy stocks b) SKUs in which sales has dropped off in L30D and we likely need to discount to clear   --- Context---- - there's way too many SKUs to focus on, a thorough">
@@ -700,9 +712,9 @@
                 <div class="project-pic">Clarence Theng</div>
             </div>
 </div>
-<div class="cell" data-domain="BI" data-status="cancelled" style="background:#fecaca">
-</div>
 <div class="cell" data-domain="Product" data-status="cancelled" style="background:#fecaca">
+</div>
+<div class="cell" data-domain="BI" data-status="cancelled" style="background:#fecaca">
 </div>
 </div>
 
