@@ -70,14 +70,14 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $1,338,846/yr | Live Projects: $531,052/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p class="subtitle">Total Impact: $1,301,910/yr | Live Projects: $501,796/yr <span class="highlight-total" id="highlight-total"></span></p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
-            <option value="BD">BD (14 projects, $365,134/yr, Live: $28,744)</option>
-            <option value="MKT">MKT (27 projects, $349,100/yr, Live: $226,556)</option>
+            <option value="BD">BD (15 projects, $366,814/yr, Live: $28,744)</option>
+            <option value="MKT">MKT (27 projects, $310,484/yr, Live: $197,300)</option>
             <option value="OPS">OPS (26 projects, $249,818/yr, Live: $181,273)</option>
             <option value="SPX">SPX (15 projects, $225,063/yr, Live: $69,588)</option>
             <option value="WH">WH (8 projects, $149,371/yr, Live: $24,531)</option>
@@ -87,8 +87,8 @@
     </div>
 
     <div class="legend" id="legend">
-<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($365,134/yr, Live: $28,744, 14 projects)</div>
-<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($349,100/yr, Live: $226,556, 27 projects)</div>
+<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($366,814/yr, Live: $28,744, 15 projects)</div>
+<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($310,484/yr, Live: $197,300, 27 projects)</div>
 <div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($249,818/yr, Live: $181,273, 26 projects)</div>
 <div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($225,063/yr, Live: $69,588, 15 projects)</div>
 <div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($149,371/yr, Live: $24,531, 8 projects)</div>
@@ -98,15 +98,15 @@
 <div class="board" id="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
-<div class="header-cell" data-domain="BD">BD<div class="impact">$365,134/yr (Live: $28,744)</div><div class="highlight-impact" id="hi-BD"></div></div>
-<div class="header-cell" data-domain="MKT">MKT<div class="impact">$349,100/yr (Live: $226,556)</div><div class="highlight-impact" id="hi-MKT"></div></div>
+<div class="header-cell" data-domain="BD">BD<div class="impact">$366,814/yr (Live: $28,744)</div><div class="highlight-impact" id="hi-BD"></div></div>
+<div class="header-cell" data-domain="MKT">MKT<div class="impact">$310,484/yr (Live: $197,300)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="OPS">OPS<div class="impact">$249,818/yr (Live: $181,273)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$225,063/yr (Live: $69,588)</div><div class="highlight-impact" id="hi-SPX"></div></div>
 <div class="header-cell" data-domain="WH">WH<div class="impact">$149,371/yr (Live: $24,531)</div><div class="highlight-impact" id="hi-WH"></div></div>
 <div class="header-cell" data-domain="Product">Product<div class="impact">$360/yr (Live: $360)</div><div class="highlight-impact" id="hi-Product"></div></div>
 <div class="header-cell" data-domain="BI">BI<div class="impact">$0/yr (Live: $0)</div><div class="highlight-impact" id="hi-BI"></div></div>
 </div>
-<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">29</span></div>
+<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">28</span></div>
 <div class="cell" data-domain="BD" data-status="to-start" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#10b981" data-impact="27692" data-domain="BD" data-tooltip="AI engine that compiles seller info, performance metrics, and generates priority scores. Outlines which programmes the sellers are on (CCB, FBS , Livestream Xtra) Creates standard extracts of data for Monthly/Quarterly business reviews w. sellers" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM24</div>
@@ -132,6 +132,12 @@
                 <div class="project-pic">Not assigned</div>
                 <div class="project-impact">$3,800/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
+<div class="project" style="border-left-color:#10b981" data-impact="1680" data-domain="BD" data-tooltip="AI project to automatically map supplier SKUs to marketplace listings, benchmark prices, and use historical demand to recommend competitive purchase price and buy quantity." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM97</div>
+                <div class="project-name">AI Pricing & Demand Intelligence</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact">$1,680/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
 <div class="project" style="border-left-color:#10b981" data-impact="219" data-domain="BD" data-tooltip="A bot to help QC Mkt Homepage Banners" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM29</div>
                 <div class="project-name">Homepage Banner QC</div>
@@ -140,12 +146,6 @@
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#8b5cf6" data-impact="14976" data-domain="MKT" data-tooltip="Competitive intel triangulated through multiple sources. BPO has to do recurring manual checks on VC discount and quantity by channel and type with specific personalization" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM83</div>
-                <div class="project-name">Crawl data tool</div>
-                <div class="project-pic">Tbc</div>
-                <div class="project-impact">$14,976/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="2496" data-domain="MKT" data-tooltip="Generate weekly insights on PN performance to share with MKT PICs - WoW performance by PN Types - Top posts by PN Types" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM86</div>
                 <div class="project-name">Weekly PN Insights Report</div>
@@ -220,12 +220,6 @@
                 <div class="project-pic">Siqi Lin</div>
                 <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM94</div>
-                <div class="project-name">RR POP auditing</div>
-                <div class="project-pic">Not assigned</div>
-                <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
-            </div>
 <div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Bot summariser for insights about RR cases backlogs, categorize by agent-vs buyer-related" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM96</div>
                 <div class="project-name">RR Backlog Sampling</div>
@@ -295,7 +289,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">14</span></div>
+<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">16</span></div>
 <div class="cell" data-domain="BD" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
@@ -328,6 +322,12 @@
                 <div class="project-name">Automated Email Template for Shopee Video</div>
                 <div class="project-pic">Alvin Teoyk</div>
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM67</div>
+                <div class="project-name">Post Scrapping on Instagram</div>
+                <div class="project-pic">Pearlyn Teomw</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:31 Dec 25]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="poc" style="background:#fef3c7">
@@ -373,6 +373,12 @@
                 <div class="project-pic">Jc Chong, Tanushri J</div>
                 <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
             </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Validates that the right parcels have been been picked-up. Flags out all cases where tracking number in proof-of-pickup does not match the order tracking number. For hourly intervention before parcel is processed back in hub to prevent loss of parcels" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM94</div>
+                <div class="project-name">RR POP auditing</div>
+                <div class="project-pic">Mika Lin, Thialeng Eng</div>
+                <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
+            </div>
 </div>
 <div class="cell" data-domain="SPX" data-status="poc" style="background:#fef3c7">
 <div class="project" style="border-left-color:#f97316" data-impact="24000" data-domain="SPX" data-tooltip="To help better check on driver's productivity using (1) parcels/hr (2) idling time" onclick="toggleHighlight(this)">
@@ -394,7 +400,7 @@
 </div>
 <div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
 </div>
-<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">14</span></div>
+<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">15</span></div>
 <div class="cell" data-domain="BD" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#10b981" data-impact="228096" data-domain="BD" data-tooltip="A bot that (1) verify the 2 matched items are the same pair or not and (2) find closest match of the same item from the same shop (PLT S2S)" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM27</div>
@@ -433,6 +439,12 @@
                 <div class="project-name">Livestream Matching (Match Creator to Brand directly via schedule)</div>
                 <div class="project-pic">Ian Kweekh, Kayla Angsq</div>
                 <div class="project-impact">$74,880/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="14976" data-domain="MKT" data-tooltip="Competitive intel triangulated through multiple sources. BPO has to do recurring manual checks on VC discount and quantity by channel and type with specific personalization" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM83</div>
+                <div class="project-name">Crawl data tool</div>
+                <div class="project-pic">Tbc</div>
+                <div class="project-impact">$14,976/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="2496" data-domain="MKT" data-tooltip="1. Help CS agents to answer basic L1 question for VIP - example: VIP sign up time, VIP coins to be earned, Coins to be reinstated for partial cancellation 2. Update bot to answer  3. Shorten SLA + improves manpower efficiency" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM89</div>
@@ -493,16 +505,10 @@
 </div>
 <div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
 </div>
-<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">4</span></div>
+<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">3</span></div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
 </div>
 <div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#8b5cf6" data-impact="9360" data-domain="MKT" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM68</div>
-                <div class="project-name">CS Affiliate Bot</div>
-                <div class="project-pic">Pearlyn Teomw</div>
-                <div class="project-impact">$9,360/yr <span class="project-eta">[ETA:31 Jan 26]</span></div>
-            </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="EP Assistant to help remind and bump RMs on EP & SSV Nominations" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM39</div>
                 <div class="project-name">EP Assistant - Reminder on EP & SSV nominations</div>
@@ -532,7 +538,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">22</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">23</span></div>
 <div class="cell" data-domain="BD" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#10b981" data-impact="17169" data-domain="BD" data-tooltip="Knowledge Management & Information Retrieval tool for Shopee Policies" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM19</div>
@@ -560,11 +566,17 @@
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#8b5cf6" data-impact="213336" data-domain="MKT" data-tooltip="To help notify Seatalk PICs when brands have been successfully matched with creators. Details included in the message: 1. Creator Name 2. Stream Date & Time  3. Creator Delivery Address  4. Latest Delivery Date  To help compile the list of confirmed streams for each creator so that Seatalk PICs can " onclick="toggleHighlight(this)">
+<div class="project" style="border-left-color:#8b5cf6" data-impact="174720" data-domain="MKT" data-tooltip="To help notify Seatalk PICs when brands have been successfully matched with creators. Details included in the message: 1. Creator Name 2. Stream Date & Time  3. Creator Delivery Address  4. Latest Delivery Date  To help compile the list of confirmed streams for each creator so that Seatalk PICs can " onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM64</div>
                 <div class="project-name">LS Brand Matching & Anchor Brand Match</div>
                 <div class="project-pic">Szeinn Tan</div>
-                <div class="project-impact">$213,336/yr</div>
+                <div class="project-impact">$174,720/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="9360" data-domain="MKT" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM68</div>
+                <div class="project-name">CS Affiliate Bot</div>
+                <div class="project-pic">Pearlyn Teomw</div>
+                <div class="project-impact">$9,360/yr</div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="6250" data-domain="MKT" data-tooltip="AI to help SeaTalk PICs on incomplete EDM submissions" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM36</div>
@@ -678,7 +690,7 @@
 </div>
 <div class="cell" data-domain="BI" data-status="live" style="background:#bbf7d0">
 </div>
-<div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">11</span></div>
+<div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">10</span></div>
 <div class="cell" data-domain="BD" data-status="cancelled" style="background:#fecaca">
 </div>
 <div class="cell" data-domain="MKT" data-status="cancelled" style="background:#fecaca">
@@ -692,12 +704,6 @@
                 <div class="project-id">SGLLM66</div>
                 <div class="project-name">Live Marketing Assets </div>
                 <div class="project-pic">Szeinn Tan</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:31 Dec 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM67</div>
-                <div class="project-name">Post Scrapping on Instagram</div>
-                <div class="project-pic">Pearlyn Teomw</div>
                 <div class="project-impact"> <span class="project-eta">[ETA:31 Dec 25]</span></div>
             </div>
 </div>
