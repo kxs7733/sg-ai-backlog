@@ -23,9 +23,8 @@
         .project {
             background: white; border-radius: 6px; padding: 8px; margin-bottom: 6px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 11px; border-left: 3px solid;
-            transition: all 0.2s;
+            transition: all 0.2s; cursor: pointer; position: relative;
         }
-        .project { cursor: pointer; }
         .project:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); z-index: 100; }
         .project.highlighted { border: 2px solid #facc15; background: #fefce8; box-shadow: 0 0 8px rgba(250,204,21,0.5); }
         .highlight-impact { color: #eab308; font-size: 10px; font-weight: 600; margin-top: 4px; display: none; }
@@ -33,45 +32,29 @@
         .subtitle .highlight-total { color: #eab308; font-weight: 600; display: none; }
         .subtitle .highlight-total.visible { display: inline; }
         .project[data-tooltip]:hover::after {
-            content: attr(data-tooltip);
-            position: absolute;
-            left: 0; top: 100%;
-            background: #1f2937; color: white;
-            padding: 8px 10px; border-radius: 6px;
-            font-size: 11px; line-height: 1.4;
-            max-width: 280px; width: max-content;
-            z-index: 1000; margin-top: 4px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-            white-space: pre-wrap;
+            content: attr(data-tooltip); position: absolute; left: 0; top: 100%;
+            background: #1f2937; color: white; padding: 8px 10px; border-radius: 6px;
+            font-size: 11px; line-height: 1.4; max-width: 280px; width: max-content;
+            z-index: 1000; margin-top: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); white-space: pre-wrap;
         }
-        .project { position: relative; }
         .project-id { font-weight: 600; color: #6b7280; font-size: 9px; }
         .project-name { color: #111827; margin-top: 2px; line-height: 1.3; }
         .project-pic { font-size: 9px; color: #3b82f6; margin-top: 4px; font-weight: 500; }
         .project-impact { font-size: 9px; color: #059669; margin-top: 2px; font-weight: 500; }
         .project-eta { color: #e67e22; font-weight: 500; }
         .count-badge { background: #e5e7eb; color: #374151; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 600; }
-
-        /* Filtered single-domain view */
         #filtered-view { display: none; }
         #filtered-view.active { display: block; }
         .fv-status-section { margin-bottom: 20px; }
-        .fv-status-header {
-            background: #374151; color: white; padding: 10px 16px;
-            font-weight: 600; font-size: 13px; border-radius: 8px 8px 0 0;
-            display: flex; align-items: center; gap: 8px;
-        }
-        .fv-projects-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 8px; padding: 12px; border-radius: 0 0 8px 8px;
-        }
+        .fv-status-header { background: #374151; color: white; padding: 10px 16px; font-weight: 600; font-size: 13px; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 8px; }
+        .fv-projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; padding: 12px; border-radius: 0 0 8px 8px; }
         .fv-projects-grid .project { margin-bottom: 0; }
     </style>
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
     <p class="subtitle">Total Impact: $1,301,910/yr | Live Projects: $501,796/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 10032026 14:52 hrs</p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 11032026 16:10 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
@@ -86,7 +69,6 @@
             <option value="BI">BI (3 projects, $0/yr, Live: $0)</option>
         </select>
     </div>
-
     <div class="legend" id="legend">
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($366,814/yr, Live: $28,744, 15 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($310,484/yr, Live: $197,300, 27 projects)</div>
@@ -769,128 +751,61 @@
 </div>
 
 <div id="filtered-view"></div>
-
 <script>
-const STATUS_BG = {
-    'to-start': '#f3f4f6', 'poc': '#fef3c7', 'design-and-build': '#dbeafe',
-    'parallel-run': '#d1fae5', 'live': '#bbf7d0', 'cancelled': '#fecaca'
-};
-const STATUS_LABELS = {
-    'to-start': 'To Start', 'poc': 'POC', 'design-and-build': 'Design & Build',
-    'parallel-run': 'Parallel Run', 'live': 'Live', 'cancelled': 'Cancelled'
-};
-const STATUS_ORDER = ['to-start', 'poc', 'design-and-build', 'parallel-run', 'live', 'cancelled'];
-
-// Track highlighted project IDs globally
+const STATUS_BG = {'to-start':'#f3f4f6','poc':'#fef3c7','design-and-build':'#dbeafe','parallel-run':'#d1fae5','live':'#bbf7d0','cancelled':'#fecaca'};
+const STATUS_LABELS = {'to-start':'To Start','poc':'POC','design-and-build':'Design & Build','parallel-run':'Parallel Run','live':'Live','cancelled':'Cancelled'};
+const STATUS_ORDER = ['to-start','poc','design-and-build','parallel-run','live','cancelled'];
 const highlightedIds = new Set();
 
 function toggleHighlight(el) {
     const projectId = el.querySelector('.project-id').textContent;
     el.classList.toggle('highlighted');
-
-    if (el.classList.contains('highlighted')) {
-        highlightedIds.add(projectId);
-    } else {
-        highlightedIds.delete(projectId);
-    }
-
-    // Sync highlight state across board and filtered view
+    if (el.classList.contains('highlighted')) { highlightedIds.add(projectId); } else { highlightedIds.delete(projectId); }
     document.querySelectorAll('.project').forEach(p => {
         const pid = p.querySelector('.project-id').textContent;
-        if (highlightedIds.has(pid)) {
-            p.classList.add('highlighted');
-        } else {
-            p.classList.remove('highlighted');
-        }
+        p.classList.toggle('highlighted', highlightedIds.has(pid));
     });
-
     updateHighlightTotals();
 }
 
 function updateHighlightTotals() {
-    // Calculate per-domain and overall highlighted impact from board (source of truth)
-    const domainTotals = {};
-    let grandTotal = 0;
-    let count = 0;
-
+    const domainTotals = {}; let grandTotal = 0, count = 0;
     document.querySelectorAll('#board .project.highlighted').forEach(p => {
         const impact = parseInt(p.getAttribute('data-impact') || '0');
         const domain = p.getAttribute('data-domain');
         domainTotals[domain] = (domainTotals[domain] || 0) + impact;
-        grandTotal += impact;
-        count++;
+        grandTotal += impact; count++;
     });
-
-    // Update domain header indicators
     document.querySelectorAll('.highlight-impact').forEach(el => {
-        const domain = el.id.replace('hi-', '');
-        const val = domainTotals[domain] || 0;
-        if (val > 0) {
-            el.textContent = 'Highlighted: $' + val.toLocaleString() + '/yr';
-            el.classList.add('visible');
-        } else {
-            el.classList.remove('visible');
-        }
+        const domain = el.id.replace('hi-', ''), val = domainTotals[domain] || 0;
+        if (val > 0) { el.textContent = 'Highlighted: $' + val.toLocaleString() + '/yr'; el.classList.add('visible'); }
+        else { el.classList.remove('visible'); }
     });
-
-    // Update overall subtitle
     const totalEl = document.getElementById('highlight-total');
-    if (grandTotal > 0) {
-        totalEl.textContent = '| Highlighted: $' + grandTotal.toLocaleString() + '/yr (' + count + ' projects)';
-        totalEl.classList.add('visible');
-    } else {
-        totalEl.classList.remove('visible');
-    }
+    if (grandTotal > 0) { totalEl.textContent = '| Highlighted: $' + grandTotal.toLocaleString() + '/yr (' + count + ' projects)'; totalEl.classList.add('visible'); }
+    else { totalEl.classList.remove('visible'); }
 }
 
 function filterDomain(domain) {
-    const board = document.getElementById('board');
-    const filteredView = document.getElementById('filtered-view');
-    const legend = document.getElementById('legend');
-
-    if (domain === 'all') {
-        board.style.display = 'grid';
-        filteredView.className = '';
-        filteredView.innerHTML = '';
-        legend.querySelectorAll('.legend-item').forEach(l => l.style.display = '');
-        return;
-    }
-
-    // Hide the grid, show filtered view
-    board.style.display = 'none';
-    filteredView.className = 'active';
-
-    // Only show matching legend
-    legend.querySelectorAll('.legend-item').forEach(l => {
-        l.style.display = l.getAttribute('data-domain') === domain ? '' : 'none';
-    });
-
-    // Collect projects for this domain grouped by status
+    const board = document.getElementById('board'), filteredView = document.getElementById('filtered-view'), legend = document.getElementById('legend');
+    if (domain === 'all') { board.style.display = 'grid'; filteredView.className = ''; filteredView.innerHTML = ''; legend.querySelectorAll('.legend-item').forEach(l => l.style.display = ''); return; }
+    board.style.display = 'none'; filteredView.className = 'active';
+    legend.querySelectorAll('.legend-item').forEach(l => { l.style.display = l.getAttribute('data-domain') === domain ? '' : 'none'; });
     let html = '';
     STATUS_ORDER.forEach(statusSlug => {
         const cell = board.querySelector(`.cell[data-domain="${domain}"][data-status="${statusSlug}"]`);
         if (!cell) return;
         const projects = cell.querySelectorAll('.project');
         if (projects.length === 0) return;
-
-        const bg = STATUS_BG[statusSlug];
-        const label = STATUS_LABELS[statusSlug];
-
-        html += `<div class="fv-status-section">`;
-        html += `<div class="fv-status-header">${label} <span class="count-badge" style="margin-left:4px">${projects.length}</span></div>`;
-        html += `<div class="fv-projects-grid" style="background:${bg}">`;
+        html += `<div class="fv-status-section"><div class="fv-status-header">${STATUS_LABELS[statusSlug]} <span class="count-badge" style="margin-left:4px">${projects.length}</span></div>`;
+        html += `<div class="fv-projects-grid" style="background:${STATUS_BG[statusSlug]}">`;
         projects.forEach(p => { html += p.outerHTML; });
         html += `</div></div>`;
     });
-
     filteredView.innerHTML = html;
-
-    // Re-apply highlight state to cloned cards in filtered view
     filteredView.querySelectorAll('.project').forEach(p => {
         const pid = p.querySelector('.project-id').textContent;
-        if (highlightedIds.has(pid)) {
-            p.classList.add('highlighted');
-        }
+        if (highlightedIds.has(pid)) p.classList.add('highlighted');
     });
 }
 </script>
