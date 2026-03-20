@@ -23,8 +23,9 @@
         .project {
             background: white; border-radius: 6px; padding: 8px; margin-bottom: 6px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.1); font-size: 11px; border-left: 3px solid;
-            transition: all 0.2s; cursor: pointer; position: relative;
+            transition: all 0.2s;
         }
+        .project { cursor: pointer; }
         .project:hover { box-shadow: 0 4px 12px rgba(0,0,0,0.15); transform: translateY(-2px); z-index: 100; }
         .project.highlighted { border: 2px solid #facc15; background: #fefce8; box-shadow: 0 0 8px rgba(250,204,21,0.5); }
         .highlight-impact { color: #eab308; font-size: 10px; font-weight: 600; margin-top: 4px; display: none; }
@@ -32,29 +33,45 @@
         .subtitle .highlight-total { color: #eab308; font-weight: 600; display: none; }
         .subtitle .highlight-total.visible { display: inline; }
         .project[data-tooltip]:hover::after {
-            content: attr(data-tooltip); position: absolute; left: 0; top: 100%;
-            background: #1f2937; color: white; padding: 8px 10px; border-radius: 6px;
-            font-size: 11px; line-height: 1.4; max-width: 280px; width: max-content;
-            z-index: 1000; margin-top: 4px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); white-space: pre-wrap;
+            content: attr(data-tooltip);
+            position: absolute;
+            left: 0; top: 100%;
+            background: #1f2937; color: white;
+            padding: 8px 10px; border-radius: 6px;
+            font-size: 11px; line-height: 1.4;
+            max-width: 280px; width: max-content;
+            z-index: 1000; margin-top: 4px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            white-space: pre-wrap;
         }
+        .project { position: relative; }
         .project-id { font-weight: 600; color: #6b7280; font-size: 9px; }
         .project-name { color: #111827; margin-top: 2px; line-height: 1.3; }
         .project-pic { font-size: 9px; color: #3b82f6; margin-top: 4px; font-weight: 500; }
         .project-impact { font-size: 9px; color: #059669; margin-top: 2px; font-weight: 500; }
         .project-eta { color: #e67e22; font-weight: 500; }
         .count-badge { background: #e5e7eb; color: #374151; padding: 2px 6px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+
+        /* Filtered single-domain view */
         #filtered-view { display: none; }
         #filtered-view.active { display: block; }
         .fv-status-section { margin-bottom: 20px; }
-        .fv-status-header { background: #374151; color: white; padding: 10px 16px; font-weight: 600; font-size: 13px; border-radius: 8px 8px 0 0; display: flex; align-items: center; gap: 8px; }
-        .fv-projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; padding: 12px; border-radius: 0 0 8px 8px; }
+        .fv-status-header {
+            background: #374151; color: white; padding: 10px 16px;
+            font-weight: 600; font-size: 13px; border-radius: 8px 8px 0 0;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .fv-projects-grid {
+            display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 8px; padding: 12px; border-radius: 0 0 8px 8px;
+        }
         .fv-projects-grid .project { margin-bottom: 0; }
     </style>
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $1,369,915/yr | Live Projects: $549,501/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 20032026 00:47 hrs</p>
+    <p class="subtitle">Total Impact: $1,385,275/yr | Live Projects: $567,861/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 20032026 14:06 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
@@ -64,17 +81,18 @@
             <option value="MKT">MKT (27 projects, $310,484/yr, Live: $197,300)</option>
             <option value="OPS">OPS (32 projects, $254,261/yr, Live: $185,693)</option>
             <option value="SPX">SPX (16 projects, $253,208/yr, Live: $112,088)</option>
-            <option value="WH">WH (10 projects, $166,308/yr, Live: $25,316)</option>
+            <option value="WH">WH (11 projects, $181,668/yr, Live: $43,676)</option>
             <option value="Product">Product (1 projects, $360/yr, Live: $360)</option>
             <option value="BI">BI (3 projects, $0/yr, Live: $0)</option>
         </select>
     </div>
+
     <div class="legend" id="legend">
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($385,294/yr, Live: $28,744, 15 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($310,484/yr, Live: $197,300, 27 projects)</div>
 <div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($254,261/yr, Live: $185,693, 32 projects)</div>
 <div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($253,208/yr, Live: $112,088, 16 projects)</div>
-<div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($166,308/yr, Live: $25,316, 10 projects)</div>
+<div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($181,668/yr, Live: $43,676, 11 projects)</div>
 <div class="legend-item" data-domain="Product"><div class="legend-color" style="background:#ec4899"></div>Product ($360/yr, Live: $360, 1 projects)</div>
 <div class="legend-item" data-domain="BI"><div class="legend-color" style="background:#14b8a6"></div>BI ($0/yr, Live: $0, 3 projects)</div>
 </div>
@@ -85,11 +103,11 @@
 <div class="header-cell" data-domain="MKT">MKT<div class="impact">$310,484/yr (Live: $197,300)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="OPS">OPS<div class="impact">$254,261/yr (Live: $185,693)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$253,208/yr (Live: $112,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
-<div class="header-cell" data-domain="WH">WH<div class="impact">$166,308/yr (Live: $25,316)</div><div class="highlight-impact" id="hi-WH"></div></div>
+<div class="header-cell" data-domain="WH">WH<div class="impact">$181,668/yr (Live: $43,676)</div><div class="highlight-impact" id="hi-WH"></div></div>
 <div class="header-cell" data-domain="Product">Product<div class="impact">$360/yr (Live: $360)</div><div class="highlight-impact" id="hi-Product"></div></div>
 <div class="header-cell" data-domain="BI">BI<div class="impact">$0/yr (Live: $0)</div><div class="highlight-impact" id="hi-BI"></div></div>
 </div>
-<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">34</span></div>
+<div class="status-label" data-status="to-start">To Start <span class="count-badge" style="margin-left:5px">32</span></div>
 <div class="cell" data-domain="BD" data-status="to-start" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#10b981" data-impact="27692" data-domain="BD" data-tooltip="AI engine that compiles seller info, performance metrics, and generates priority scores. Outlines which programmes the sellers are on (CCB, FBS , Livestream Xtra) Creates standard extracts of data for Monthly/Quarterly business reviews w. sellers" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM24</div>
@@ -146,12 +164,6 @@
                 <div class="project-name">MariBank CS Bot</div>
                 <div class="project-pic">Not assigned</div>
                 <div class="project-impact">$2,496/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="1728" data-domain="MKT" data-tooltip="AI to assist in reviewing voucher nominations and approve based on set critieria." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM45</div>
-                <div class="project-name">Seller Voucher Selection QC for Games</div>
-                <div class="project-pic">Angeline Chong</div>
-                <div class="project-impact">$1,728/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="1152" data-domain="MKT" data-tooltip="Generate effective PNs based on events running daily, by order of priority set by MKT PICs. This would allow faster allocation & mass creation of PNs instead of individually, saving hours. e.g. > PIC inputs of all game dates, event & rewards > AI allocates based on what event is running on that day " onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM84</div>
@@ -285,12 +297,6 @@
                 <div class="project-pic">Kwangxiong</div>
                 <div class="project-impact">$1,240/yr <span class="project-eta">[ETA:31 Dec 25]</span></div>
             </div>
-<div class="project" style="border-left-color:#6366f1" data-impact="0" data-domain="WH" data-tooltip="Compare input SKU dimensions from WMS against online dimensions and flag up potential discrepancies for Ops to verify." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM104</div>
-                <div class="project-name">Incorrect SKU Dimension Flagger</div>
-                <div class="project-pic">Fadhli Hamza, Nicholas Cheungzy</div>
-                <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
-            </div>
 </div>
 <div class="cell" data-domain="Product" data-status="to-start" style="background:#f3f4f6">
 </div>
@@ -308,7 +314,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">13</span></div>
+<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">11</span></div>
 <div class="cell" data-domain="BD" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
@@ -341,12 +347,6 @@
                 <div class="project-name">Automated Email Template for Shopee Video</div>
                 <div class="project-pic">Alvin Teoyk</div>
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM67</div>
-                <div class="project-name">Post Scrapping on Instagram</div>
-                <div class="project-pic">Pearlyn Teomw</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:31 Dec 25]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="poc" style="background:#fef3c7">
@@ -388,12 +388,6 @@
                 <div class="project-pic">Clarence Theng</div>
                 <div class="project-impact">$5,760/yr <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
-<div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" data-tooltip="Validates that the right parcels have been been picked-up. Flags out all cases where tracking number in proof-of-pickup does not match the order tracking number. For hourly intervention before parcel is processed back in hub to prevent loss of parcels" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM94</div>
-                <div class="project-name">RR POP auditing</div>
-                <div class="project-pic">Mika Lin, Thialeng Eng</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:11 Mar 26]</span></div>
-            </div>
 </div>
 <div class="cell" data-domain="WH" data-status="poc" style="background:#fef3c7">
 </div>
@@ -401,7 +395,7 @@
 </div>
 <div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
 </div>
-<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">17</span></div>
+<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">18</span></div>
 <div class="cell" data-domain="BD" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#10b981" data-impact="228096" data-domain="BD" data-tooltip="A bot that (1) verify the 2 matched items are the same pair or not and (2) find closest match of the same item from the same shop (PLT S2S)" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM27</div>
@@ -453,6 +447,12 @@
                 <div class="project-pic">Fuqi Chia</div>
                 <div class="project-impact">$2,496/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="1728" data-domain="MKT" data-tooltip="AI to assist in reviewing voucher nominations and approve based on set critieria." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM45</div>
+                <div class="project-name">Seller Voucher Selection QC for Games</div>
+                <div class="project-pic">Angeline Chong</div>
+                <div class="project-impact">$1,728/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="Alert users that vouchers are fully used / close to fully used to  (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM37</div>
                 <div class="project-name">Voucher Usage Monitoring Agent</div>
@@ -470,6 +470,12 @@
                 <div class="project-name">Real Time Tracker for Shopee Video </div>
                 <div class="project-pic">Alvin Teoyk</div>
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM67</div>
+                <div class="project-name">Post Scrapping on Instagram</div>
+                <div class="project-pic">Pearlyn Teomw</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:31 Mar 26]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="design-and-build" style="background:#dbeafe">
@@ -507,18 +513,12 @@
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="design-and-build" style="background:#dbeafe">
-<div class="project" style="border-left-color:#6366f1" data-impact="16152" data-domain="WH" data-tooltip="Adapting SGMLLM01 to use SPX POD images to verify correct packaging for premium packaging shops (detection of polymailer vs carton box)" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM100</div>
-                <div class="project-name">Premium Packaging Verifier</div>
-                <div class="project-pic">Zhiying Yeow, Nicholas Cheungzy</div>
-                <div class="project-impact">$16,152/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
 </div>
 <div class="cell" data-domain="Product" data-status="design-and-build" style="background:#dbeafe">
 </div>
 <div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
 </div>
-<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">4</span></div>
+<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">5</span></div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
 </div>
 <div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
@@ -546,6 +546,12 @@
             </div>
 </div>
 <div class="cell" data-domain="WH" data-status="parallel-run" style="background:#d1fae5">
+<div class="project" style="border-left-color:#6366f1" data-impact="13152" data-domain="WH" data-tooltip="Adapting SGMLLM01 to use SPX POD images to verify correct packaging for premium packaging shops (detection of polymailer vs carton box)" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM100</div>
+                <div class="project-name">Premium Packaging Verifier</div>
+                <div class="project-pic">Zhiying Yeow, Nicholas Cheungzy</div>
+                <div class="project-impact">$13,152/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
 </div>
 <div class="cell" data-domain="Product" data-status="parallel-run" style="background:#d1fae5">
 </div>
@@ -557,7 +563,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">26</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">29</span></div>
 <div class="cell" data-domain="BD" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#10b981" data-impact="17169" data-domain="BD" data-tooltip="Knowledge Management & Information Retrieval tool for Shopee Policies" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM19</div>
@@ -696,8 +702,19 @@
                 <div class="project-pic">Mika Lin</div>
                 <div class="project-impact">$1,688/yr</div>
             </div>
+<div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" data-tooltip="Validates that the right parcels have been been picked-up. Flags out all cases where tracking number in proof-of-pickup does not match the order tracking number. For hourly intervention before parcel is processed back in hub to prevent loss of parcels" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM94</div>
+                <div class="project-name">RR POP auditing</div>
+                <div class="project-pic">Mika Lin, Thialeng Eng</div>
+            </div>
 </div>
 <div class="cell" data-domain="WH" data-status="live" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#6366f1" data-impact="18360" data-domain="WH" data-tooltip="Extraction of order data from WMS and insight generation to support (1) WH plans analysis of performance, and (2) WH ops real-time adjustments in reaction to latest order volume" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM111</div>
+                <div class="project-name">WISE Bot: Warehouse Intelligence & Statistics Engine</div>
+                <div class="project-pic">Kwangxiong</div>
+                <div class="project-impact">$18,360/yr</div>
+            </div>
 <div class="project" style="border-left-color:#6366f1" data-impact="13260" data-domain="WH" data-tooltip="This bot  1) automates the daily extraction and distribution of warehouse backlog data to SeaTalk, saving 30 minutes of manual reporting time by supervisor  2) provides module-specific insights and forecasted loads, allowing Team Leads to accurately determine the exact number of part-time employees " onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM70</div>
                 <div class="project-name">WH Backlog and Part-timer allocation bot</div>
@@ -715,6 +732,11 @@
                 <div class="project-name">PTE training bot</div>
                 <div class="project-pic">Kwangxiong</div>
                 <div class="project-impact">$785/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6366f1" data-impact="0" data-domain="WH" data-tooltip="Compare input SKU dimensions from WMS against online dimensions and flag up potential discrepancies for Ops to verify." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM104</div>
+                <div class="project-name">Incorrect SKU Dimension Flagger</div>
+                <div class="project-pic">Fadhli Hamza, Nicholas Cheungzy</div>
             </div>
 </div>
 <div class="cell" data-domain="Product" data-status="live" style="background:#bbf7d0">
@@ -805,61 +827,128 @@
 </div>
 
 <div id="filtered-view"></div>
+
 <script>
-const STATUS_BG = {'to-start':'#f3f4f6','poc':'#fef3c7','design-and-build':'#dbeafe','parallel-run':'#d1fae5','live':'#bbf7d0','cancelled':'#fecaca'};
-const STATUS_LABELS = {'to-start':'To Start','poc':'POC','design-and-build':'Design & Build','parallel-run':'Parallel Run','live':'Live','cancelled':'Cancelled'};
-const STATUS_ORDER = ['to-start','poc','design-and-build','parallel-run','live','cancelled'];
+const STATUS_BG = {
+    'to-start': '#f3f4f6', 'poc': '#fef3c7', 'design-and-build': '#dbeafe',
+    'parallel-run': '#d1fae5', 'live': '#bbf7d0', 'cancelled': '#fecaca'
+};
+const STATUS_LABELS = {
+    'to-start': 'To Start', 'poc': 'POC', 'design-and-build': 'Design & Build',
+    'parallel-run': 'Parallel Run', 'live': 'Live', 'cancelled': 'Cancelled'
+};
+const STATUS_ORDER = ['to-start', 'poc', 'design-and-build', 'parallel-run', 'live', 'cancelled'];
+
+// Track highlighted project IDs globally
 const highlightedIds = new Set();
 
 function toggleHighlight(el) {
     const projectId = el.querySelector('.project-id').textContent;
     el.classList.toggle('highlighted');
-    if (el.classList.contains('highlighted')) { highlightedIds.add(projectId); } else { highlightedIds.delete(projectId); }
+
+    if (el.classList.contains('highlighted')) {
+        highlightedIds.add(projectId);
+    } else {
+        highlightedIds.delete(projectId);
+    }
+
+    // Sync highlight state across board and filtered view
     document.querySelectorAll('.project').forEach(p => {
         const pid = p.querySelector('.project-id').textContent;
-        p.classList.toggle('highlighted', highlightedIds.has(pid));
+        if (highlightedIds.has(pid)) {
+            p.classList.add('highlighted');
+        } else {
+            p.classList.remove('highlighted');
+        }
     });
+
     updateHighlightTotals();
 }
 
 function updateHighlightTotals() {
-    const domainTotals = {}; let grandTotal = 0, count = 0;
+    // Calculate per-domain and overall highlighted impact from board (source of truth)
+    const domainTotals = {};
+    let grandTotal = 0;
+    let count = 0;
+
     document.querySelectorAll('#board .project.highlighted').forEach(p => {
         const impact = parseInt(p.getAttribute('data-impact') || '0');
         const domain = p.getAttribute('data-domain');
         domainTotals[domain] = (domainTotals[domain] || 0) + impact;
-        grandTotal += impact; count++;
+        grandTotal += impact;
+        count++;
     });
+
+    // Update domain header indicators
     document.querySelectorAll('.highlight-impact').forEach(el => {
-        const domain = el.id.replace('hi-', ''), val = domainTotals[domain] || 0;
-        if (val > 0) { el.textContent = 'Highlighted: $' + val.toLocaleString() + '/yr'; el.classList.add('visible'); }
-        else { el.classList.remove('visible'); }
+        const domain = el.id.replace('hi-', '');
+        const val = domainTotals[domain] || 0;
+        if (val > 0) {
+            el.textContent = 'Highlighted: $' + val.toLocaleString() + '/yr';
+            el.classList.add('visible');
+        } else {
+            el.classList.remove('visible');
+        }
     });
+
+    // Update overall subtitle
     const totalEl = document.getElementById('highlight-total');
-    if (grandTotal > 0) { totalEl.textContent = '| Highlighted: $' + grandTotal.toLocaleString() + '/yr (' + count + ' projects)'; totalEl.classList.add('visible'); }
-    else { totalEl.classList.remove('visible'); }
+    if (grandTotal > 0) {
+        totalEl.textContent = '| Highlighted: $' + grandTotal.toLocaleString() + '/yr (' + count + ' projects)';
+        totalEl.classList.add('visible');
+    } else {
+        totalEl.classList.remove('visible');
+    }
 }
 
 function filterDomain(domain) {
-    const board = document.getElementById('board'), filteredView = document.getElementById('filtered-view'), legend = document.getElementById('legend');
-    if (domain === 'all') { board.style.display = 'grid'; filteredView.className = ''; filteredView.innerHTML = ''; legend.querySelectorAll('.legend-item').forEach(l => l.style.display = ''); return; }
-    board.style.display = 'none'; filteredView.className = 'active';
-    legend.querySelectorAll('.legend-item').forEach(l => { l.style.display = l.getAttribute('data-domain') === domain ? '' : 'none'; });
+    const board = document.getElementById('board');
+    const filteredView = document.getElementById('filtered-view');
+    const legend = document.getElementById('legend');
+
+    if (domain === 'all') {
+        board.style.display = 'grid';
+        filteredView.className = '';
+        filteredView.innerHTML = '';
+        legend.querySelectorAll('.legend-item').forEach(l => l.style.display = '');
+        return;
+    }
+
+    // Hide the grid, show filtered view
+    board.style.display = 'none';
+    filteredView.className = 'active';
+
+    // Only show matching legend
+    legend.querySelectorAll('.legend-item').forEach(l => {
+        l.style.display = l.getAttribute('data-domain') === domain ? '' : 'none';
+    });
+
+    // Collect projects for this domain grouped by status
     let html = '';
     STATUS_ORDER.forEach(statusSlug => {
         const cell = board.querySelector(`.cell[data-domain="${domain}"][data-status="${statusSlug}"]`);
         if (!cell) return;
         const projects = cell.querySelectorAll('.project');
         if (projects.length === 0) return;
-        html += `<div class="fv-status-section"><div class="fv-status-header">${STATUS_LABELS[statusSlug]} <span class="count-badge" style="margin-left:4px">${projects.length}</span></div>`;
-        html += `<div class="fv-projects-grid" style="background:${STATUS_BG[statusSlug]}">`;
+
+        const bg = STATUS_BG[statusSlug];
+        const label = STATUS_LABELS[statusSlug];
+
+        html += `<div class="fv-status-section">`;
+        html += `<div class="fv-status-header">${label} <span class="count-badge" style="margin-left:4px">${projects.length}</span></div>`;
+        html += `<div class="fv-projects-grid" style="background:${bg}">`;
         projects.forEach(p => { html += p.outerHTML; });
         html += `</div></div>`;
     });
+
     filteredView.innerHTML = html;
+
+    // Re-apply highlight state to cloned cards in filtered view
     filteredView.querySelectorAll('.project').forEach(p => {
         const pid = p.querySelector('.project-id').textContent;
-        if (highlightedIds.has(pid)) p.classList.add('highlighted');
+        if (highlightedIds.has(pid)) {
+            p.classList.add('highlighted');
+        }
     });
 }
 </script>
