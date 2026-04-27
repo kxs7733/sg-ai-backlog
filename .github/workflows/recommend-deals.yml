@@ -1,0 +1,26 @@
+name: Recommend Deals Daily
+
+on:
+  schedule:
+    - cron: '0 1 * * *'  # 09:00 SGT = 01:00 UTC
+  workflow_dispatch:
+
+jobs:
+  recommend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install requests cloudscraper
+
+      - name: Run recommender
+        env:
+          URA_ACCESS_KEY: ${{ secrets.URA_ACCESS_KEY }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python recommend_deals.py
