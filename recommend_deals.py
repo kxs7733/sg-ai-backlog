@@ -1,20 +1,24 @@
 #!/usr/bin/env python3
 """Daily SG real-estate deal recommender.
 
-Pulls live listings from PropertyGuru (private condo resale, EC, landed) under
-SGD 2M, scores each against URA private-residential caveats (sourced from
-data.gov.sg, no key required) from the last 12 months in the same project /
-district, and pushes the top 3 PSF discounts to Telegram.
+Pulls live listings from PropertyGuru (private condo resale, EC, landed),
+computes per-project and per-district median asking PSF from the listing pool
+itself, and pushes the top 3 listings (under SGD 2M) with the largest PSF
+discount vs their peer-group median to Telegram.
+
+Caveat: comps are asking-prices, not transacted prices. A listing flagged as
+"-15% vs project" means it's 15% below the median ask of comparable PG
+listings, not 15% below the last URA caveat. Useful for spotting underpriced
+listings, but worth sanity-checking before action.
 
 Required env vars:
   TELEGRAM_BOT_TOKEN
   TELEGRAM_CHAT_ID
 
 Optional env vars:
-  DATAGOV_RESOURCE_ID - override auto-discovery if it picks the wrong dataset
-  MAX_PRICE_SGD       - default 2_000_000
+  MAX_PRICE_SGD       - default 2_000_000 (ranking cap)
+  COMP_PRICE_CAP_SGD  - default 1.5 * MAX_PRICE (comp pool search cap)
   TOP_N               - default 3
-  LOOKBACK_MONTHS     - default 12
   DRY_RUN             - "1" prints to stdout instead of Telegram
 """
 
@@ -26,7 +30,6 @@ import time
 from collections import defaultdict
 from datetime import datetime, timedelta, timezone
 from statistics import median
-from urllib.parse import quote
 
 import requests
 
@@ -36,8 +39,8 @@ except ImportError:
     cloudscraper = None
 
 MAX_PRICE = int(os.environ.get('MAX_PRICE_SGD', '2000000'))
+COMP_PRICE_CAP = int(os.environ.get('COMP_PRICE_CAP_SGD', str(int(MAX_PRICE * 1.5))))
 TOP_N = int(os.environ.get('TOP_N', '3'))
-LOOKBACK_MONTHS = int(os.environ.get('LOOKBACK_MONTHS', '12'))
 DRY_RUN = os.environ.get('DRY_RUN') == '1'
 
 UA = (
@@ -45,159 +48,40 @@ UA = (
     '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 )
 
-# ---------- Caveats via data.gov.sg --------------------------------------
-# URA Private Residential Property Transactions are mirrored on data.gov.sg
-# under their CKAN-compatible API. We auto-discover the resource_id by
-# package_search so we don't have to hardcode an ID that may rot. Override
-# with DATAGOV_RESOURCE_ID env var if discovery picks the wrong one.
-
-DATAGOV_PKG_SEARCH = 'https://data.gov.sg/api/action/package_search'
-DATAGOV_DATASTORE = 'https://data.gov.sg/api/action/datastore_search'
-DATAGOV_QUERIES = [
-    'private residential property transactions',
-    'realis private residential',
-    'URA private residential',
-]
+# ---------- Comps from PG listing pool ------------------------------------
+# Asking-price-vs-asking-price comps. For each target listing, median PSF of
+# OTHER PG listings (under COMP_PRICE_CAP) in the same project (>=3 comps),
+# else same district (>=5 comps). Self always excluded from the pool.
 
 
-def discover_resource_id() -> str | None:
-    override = os.environ.get('DATAGOV_RESOURCE_ID')
-    if override:
-        print(f'  using DATAGOV_RESOURCE_ID override: {override}')
-        return override
-    for q in DATAGOV_QUERIES:
-        try:
-            r = requests.get(DATAGOV_PKG_SEARCH, params={'q': q}, timeout=30)
-            r.raise_for_status()
-            data = r.json()
-        except (requests.RequestException, ValueError) as e:
-            print(f'  package_search failed for "{q}": {e}')
+def comps_index(listings: list[dict]) -> dict:
+    by_project: dict = defaultdict(list)  # (project_upper, district) -> [(id, psf)]
+    by_district: dict = defaultdict(list)  # district -> [(id, psf)]
+    for L in listings:
+        proj = (L.get('project') or '').strip().upper()
+        dist = L.get('district') or ''
+        psf = L.get('psf')
+        if not psf:
             continue
-        if not data.get('success'):
-            continue
-        candidates: list[dict] = []
-        for pkg in data.get('result', {}).get('results', []):
-            title = (pkg.get('title') or '').lower()
-            if 'private residential' not in title or 'transaction' not in title:
-                continue
-            for res in pkg.get('resources', []):
-                if (res.get('format') or '').upper() not in ('CSV', 'JSON', ''):
-                    continue
-                candidates.append(res)
-        candidates.sort(key=lambda r: r.get('last_modified') or r.get('created') or '', reverse=True)
-        if candidates:
-            rid = candidates[0].get('id')
-            print(f'  discovered resource_id={rid} ({candidates[0].get("name")})')
-            return rid
-    return None
+        if proj and dist:
+            by_project[(proj, dist)].append((L['id'], psf))
+        if dist:
+            by_district[dist].append((L['id'], psf))
+    return {'project': dict(by_project), 'district': dict(by_district)}
 
 
-def fetch_caveats(resource_id: str, hard_cap: int = 100_000) -> list[dict]:
-    rows: list[dict] = []
-    page = 5000
-    offset = 0
-    while offset < hard_cap:
-        r = requests.get(
-            DATAGOV_DATASTORE,
-            params={'resource_id': resource_id, 'limit': page, 'offset': offset},
-            timeout=60,
-        )
-        r.raise_for_status()
-        data = r.json()
-        if not data.get('success'):
-            print(f'  datastore_search non-success: {data}')
-            break
-        records = data.get('result', {}).get('records', [])
-        if not records:
-            break
-        rows.extend(records)
-        if len(records) < page:
-            break
-        offset += len(records)
-    return rows
-
-
-def _f(rec: dict, *keys) -> str:
-    for k in keys:
-        v = rec.get(k)
-        if v not in (None, ''):
-            return str(v).strip()
-    return ''
-
-
-def normalize_caveats(records: list[dict]) -> list[dict]:
-    """Map raw data.gov.sg fields onto the script's internal schema."""
-    out: list[dict] = []
-    for rec in records:
-        try:
-            price = float(_f(rec, 'price', 'Price', 'transacted_price') or 0)
-            area_sqm = float(_f(rec, 'area', 'Area', 'area_sqm', 'floor_area_sqm') or 0)
-        except ValueError:
-            continue
-        if price <= 0 or area_sqm <= 0:
-            continue
-        district = _f(rec, 'district', 'District', 'postal_district')
-        dm = re.search(r'(\d{1,2})', district)
-        district = f'{int(dm.group(1)):02d}' if dm else ''
-        out.append({
-            'project': _f(rec, 'project', 'Project', 'project_name').upper(),
-            'street': _f(rec, 'street', 'Street', 'street_name'),
-            'district': district,
-            'market': _f(rec, 'market_segment', 'marketSegment'),
-            'price': price,
-            'area_sqm': area_sqm,
-            'psf_sgd': price / area_sqm / 10.7639,
-            'contract_date': _f(rec, 'contract_date', 'contractDate'),
-            'property_type': _f(rec, 'property_type', 'type', 'propertyType'),
-            'tenure': _f(rec, 'tenure', 'Tenure'),
-            'type_of_sale': _f(rec, 'type_of_sale', 'typeOfSale'),
-        })
-    return out
-
-
-def caveat_date(raw: str) -> datetime | None:
-    """Parse contract date. Accepts MMYY ('0124') or ISO ('2024-01-15')."""
-    if not raw:
-        return None
-    raw = raw.strip()
-    if len(raw) == 4 and raw.isdigit():
-        try:
-            m, y = int(raw[:2]), int(raw[2:])
-            return datetime(2000 + y, m, 1)
-        except ValueError:
-            return None
-    for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%Y-%m', '%b-%y', '%b %Y'):
-        try:
-            return datetime.strptime(raw, fmt)
-        except ValueError:
-            continue
-    return None
-
-
-def comps_index(caveats: list[dict]) -> dict:
-    """Build (project, district) -> recent PSF list within lookback window."""
-    cutoff = datetime.now() - timedelta(days=LOOKBACK_MONTHS * 30)
-    idx: dict = defaultdict(list)
-    by_district: dict = defaultdict(list)
-    for c in caveats:
-        d = caveat_date(c['contract_date'])
-        if not d or d < cutoff:
-            continue
-        idx[(c['project'], c['district'])].append(c['psf_sgd'])
-        by_district[c['district']].append(c['psf_sgd'])
-    return {'project': dict(idx), 'district': dict(by_district)}
-
-
-def comp_psf(idx: dict, project: str, district: str) -> tuple[float | None, int, str]:
-    """Return (median_psf, n_comps, scope). Project-level if >=3 comps, else district."""
+def comp_psf(
+    idx: dict, project: str, district: str, self_id
+) -> tuple[float | None, int, str]:
+    """Return (median_psf, n_comps, scope). Excludes self by id."""
     proj = (project or '').strip().upper()
     pkey = (proj, district)
-    proj_psfs = idx['project'].get(pkey, [])
-    if len(proj_psfs) >= 3:
-        return median(proj_psfs), len(proj_psfs), 'project'
-    dist_psfs = idx['district'].get(district, [])
-    if len(dist_psfs) >= 5:
-        return median(dist_psfs), len(dist_psfs), 'district'
+    proj_pool = [psf for lid, psf in idx['project'].get(pkey, []) if lid != self_id]
+    if len(proj_pool) >= 3:
+        return median(proj_pool), len(proj_pool), 'project'
+    dist_pool = [psf for lid, psf in idx['district'].get(district, []) if lid != self_id]
+    if len(dist_pool) >= 5:
+        return median(dist_pool), len(dist_pool), 'district'
     return None, 0, 'none'
 
 
@@ -299,7 +183,7 @@ def pg_parse_listings(blob: dict, segment: str) -> list[dict]:
             if isinstance(price, str):
                 price = float(re.sub(r'[^\d.]', '', price) or 0)
             price = float(price)
-            if price <= 0 or price > MAX_PRICE:
+            if price <= 0 or price > COMP_PRICE_CAP:
                 continue
             sqft = (
                 L.get('floorArea')
@@ -362,11 +246,11 @@ def pg_parse_listings(blob: dict, segment: str) -> list[dict]:
     return deduped
 
 
-def pg_listings(max_price: int) -> tuple[list[dict], list[str]]:
+def pg_listings(search_price_cap: int) -> tuple[list[dict], list[str]]:
     listings: list[dict] = []
     errors: list[str] = []
     for label, path in PG_SEGMENTS:
-        url = PG_BASE + path.format(max_price=max_price)
+        url = PG_BASE + path.format(max_price=search_price_cap)
         print(f'Scraping {label}: {url}')
         html = pg_fetch_html(url)
         if not html:
@@ -384,10 +268,12 @@ def pg_listings(max_price: int) -> tuple[list[dict], list[str]]:
 
 # ---------- Scoring -------------------------------------------------------
 
-def score_listings(listings: list[dict], idx: dict) -> list[dict]:
+def score_listings(listings: list[dict], idx: dict, max_price: int) -> list[dict]:
     scored = []
     for L in listings:
-        med, n, scope = comp_psf(idx, L['project'], L['district'])
+        if L['price'] > max_price:
+            continue
+        med, n, scope = comp_psf(idx, L['project'], L['district'], L['id'])
         if med is None or med <= 0:
             continue
         discount_pct = (med - L['psf']) / med * 100.0
@@ -398,7 +284,6 @@ def score_listings(listings: list[dict], idx: dict) -> list[dict]:
             'comp_scope': scope,
             'discount_pct': discount_pct,
         })
-    # Best deals = biggest positive discount
     scored.sort(key=lambda x: x['discount_pct'], reverse=True)
     return scored
 
@@ -459,34 +344,22 @@ def send_telegram(text: str) -> None:
 def main() -> int:
     errors: list[str] = []
 
-    print('Discovering data.gov.sg resource for URA private resi transactions...')
-    resource_id = discover_resource_id()
-    if not resource_id:
-        print(
-            'Could not auto-discover URA dataset on data.gov.sg. '
-            'Set DATAGOV_RESOURCE_ID env var manually.',
-            file=sys.stderr,
-        )
-        return 2
-
-    print('Fetching caveats...')
-    raw = fetch_caveats(resource_id)
-    print(f'  {len(raw)} raw rows')
-    caveats = normalize_caveats(raw)
-    print(f'  {len(caveats)} usable caveat rows after normalization')
-    idx = comps_index(caveats)
     print(
-        f'  {len(idx["project"])} project comp keys, '
+        f'Scraping PropertyGuru up to {fmt_money(COMP_PRICE_CAP)} '
+        f'(ranking cap {fmt_money(MAX_PRICE)})...'
+    )
+    listings, scrape_errs = pg_listings(COMP_PRICE_CAP)
+    errors.extend(scrape_errs)
+    print(f'  {len(listings)} total listings in comp pool')
+
+    idx = comps_index(listings)
+    print(
+        f'  {len(idx["project"])} (project, district) keys, '
         f'{len(idx["district"])} district keys'
     )
 
-    print('Scraping PropertyGuru...')
-    listings, scrape_errs = pg_listings(MAX_PRICE)
-    errors.extend(scrape_errs)
-    print(f'  {len(listings)} total listings under {fmt_money(MAX_PRICE)}')
-
-    scored = score_listings(listings, idx)
-    print(f'  {len(scored)} listings have usable comps')
+    scored = score_listings(listings, idx, MAX_PRICE)
+    print(f'  {len(scored)} listings under {fmt_money(MAX_PRICE)} have usable comps')
     top = scored[:TOP_N]
 
     msg = render_message(top, errors)
