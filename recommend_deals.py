@@ -2,20 +2,20 @@
 """Daily SG real-estate deal recommender.
 
 Pulls live listings from PropertyGuru (private condo resale, EC, landed) under
-SGD 2M, scores each against URA private-residential caveats from the last 12
-months in the same project / district, and pushes the top 3 PSF discounts to
-Telegram.
+SGD 2M, scores each against URA private-residential caveats (sourced from
+data.gov.sg, no key required) from the last 12 months in the same project /
+district, and pushes the top 3 PSF discounts to Telegram.
 
 Required env vars:
-  URA_ACCESS_KEY    - registered on https://www.ura.gov.sg/maps/api/
   TELEGRAM_BOT_TOKEN
   TELEGRAM_CHAT_ID
 
 Optional env vars:
-  MAX_PRICE_SGD     - default 2_000_000
-  TOP_N             - default 3
-  LOOKBACK_MONTHS   - default 12
-  DRY_RUN           - "1" prints to stdout instead of Telegram
+  DATAGOV_RESOURCE_ID - override auto-discovery if it picks the wrong dataset
+  MAX_PRICE_SGD       - default 2_000_000
+  TOP_N               - default 3
+  LOOKBACK_MONTHS     - default 12
+  DRY_RUN             - "1" prints to stdout instead of Telegram
 """
 
 import json
@@ -45,80 +45,133 @@ UA = (
     '(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36'
 )
 
-# ---------- URA caveats ---------------------------------------------------
+# ---------- Caveats via data.gov.sg --------------------------------------
+# URA Private Residential Property Transactions are mirrored on data.gov.sg
+# under their CKAN-compatible API. We auto-discover the resource_id by
+# package_search so we don't have to hardcode an ID that may rot. Override
+# with DATAGOV_RESOURCE_ID env var if discovery picks the wrong one.
 
-URA_TOKEN_URL = 'https://eservice.ura.gov.sg/uraDataService/insertNewToken/v1'
-URA_TXN_URL = (
-    'https://eservice.ura.gov.sg/uraDataService/invokeUraDS/v1'
-    '?service=PMI_Resi_Transaction&batch={batch}'
-)
-
-
-def ura_token(access_key: str) -> str:
-    r = requests.get(
-        URA_TOKEN_URL,
-        headers={'AccessKey': access_key, 'User-Agent': UA},
-        timeout=30,
-    )
-    r.raise_for_status()
-    data = r.json()
-    if data.get('Status') != 'Success':
-        raise RuntimeError(f'URA token error: {data}')
-    return data['Result']
+DATAGOV_PKG_SEARCH = 'https://data.gov.sg/api/action/package_search'
+DATAGOV_DATASTORE = 'https://data.gov.sg/api/action/datastore_search'
+DATAGOV_QUERIES = [
+    'private residential property transactions',
+    'realis private residential',
+    'URA private residential',
+]
 
 
-def ura_caveats(access_key: str, token: str) -> list[dict]:
-    """Pull all 4 batches of URA private resi transactions (~last 5 yrs)."""
+def discover_resource_id() -> str | None:
+    override = os.environ.get('DATAGOV_RESOURCE_ID')
+    if override:
+        print(f'  using DATAGOV_RESOURCE_ID override: {override}')
+        return override
+    for q in DATAGOV_QUERIES:
+        try:
+            r = requests.get(DATAGOV_PKG_SEARCH, params={'q': q}, timeout=30)
+            r.raise_for_status()
+            data = r.json()
+        except (requests.RequestException, ValueError) as e:
+            print(f'  package_search failed for "{q}": {e}')
+            continue
+        if not data.get('success'):
+            continue
+        candidates: list[dict] = []
+        for pkg in data.get('result', {}).get('results', []):
+            title = (pkg.get('title') or '').lower()
+            if 'private residential' not in title or 'transaction' not in title:
+                continue
+            for res in pkg.get('resources', []):
+                if (res.get('format') or '').upper() not in ('CSV', 'JSON', ''):
+                    continue
+                candidates.append(res)
+        candidates.sort(key=lambda r: r.get('last_modified') or r.get('created') or '', reverse=True)
+        if candidates:
+            rid = candidates[0].get('id')
+            print(f'  discovered resource_id={rid} ({candidates[0].get("name")})')
+            return rid
+    return None
+
+
+def fetch_caveats(resource_id: str, hard_cap: int = 100_000) -> list[dict]:
     rows: list[dict] = []
-    for batch in (1, 2, 3, 4):
+    page = 5000
+    offset = 0
+    while offset < hard_cap:
         r = requests.get(
-            URA_TXN_URL.format(batch=batch),
-            headers={
-                'AccessKey': access_key,
-                'Token': token,
-                'User-Agent': UA,
-            },
+            DATAGOV_DATASTORE,
+            params={'resource_id': resource_id, 'limit': page, 'offset': offset},
             timeout=60,
         )
         r.raise_for_status()
         data = r.json()
-        if data.get('Status') != 'Success':
-            print(f'  URA batch {batch} non-success: {data.get("Message")}')
-            continue
-        for project in data.get('Result', []):
-            project_name = (project.get('project') or '').strip().upper()
-            street = (project.get('street') or '').strip()
-            district = (project.get('district') or '').strip()
-            market = project.get('marketSegment', '')  # CCR/RCR/OCR
-            for tx in project.get('transaction', []):
-                try:
-                    psf = float(tx.get('price', 0)) / float(tx.get('area', 0)) / 10.7639
-                except (ValueError, ZeroDivisionError, TypeError):
-                    continue
-                rows.append({
-                    'project': project_name,
-                    'street': street,
-                    'district': district,
-                    'market': market,
-                    'price': float(tx.get('price', 0)),
-                    'area_sqm': float(tx.get('area', 0)),
-                    'psf_sgd': psf,
-                    'contract_date': tx.get('contractDate', ''),  # MMYY
-                    'property_type': tx.get('propertyType', ''),
-                    'tenure': tx.get('tenure', ''),
-                    'type_of_sale': tx.get('typeOfSale', ''),
-                })
+        if not data.get('success'):
+            print(f'  datastore_search non-success: {data}')
+            break
+        records = data.get('result', {}).get('records', [])
+        if not records:
+            break
+        rows.extend(records)
+        if len(records) < page:
+            break
+        offset += len(records)
     return rows
 
 
-def caveat_date(mmyy: str) -> datetime | None:
-    if not mmyy or len(mmyy) != 4:
+def _f(rec: dict, *keys) -> str:
+    for k in keys:
+        v = rec.get(k)
+        if v not in (None, ''):
+            return str(v).strip()
+    return ''
+
+
+def normalize_caveats(records: list[dict]) -> list[dict]:
+    """Map raw data.gov.sg fields onto the script's internal schema."""
+    out: list[dict] = []
+    for rec in records:
+        try:
+            price = float(_f(rec, 'price', 'Price', 'transacted_price') or 0)
+            area_sqm = float(_f(rec, 'area', 'Area', 'area_sqm', 'floor_area_sqm') or 0)
+        except ValueError:
+            continue
+        if price <= 0 or area_sqm <= 0:
+            continue
+        district = _f(rec, 'district', 'District', 'postal_district')
+        dm = re.search(r'(\d{1,2})', district)
+        district = f'{int(dm.group(1)):02d}' if dm else ''
+        out.append({
+            'project': _f(rec, 'project', 'Project', 'project_name').upper(),
+            'street': _f(rec, 'street', 'Street', 'street_name'),
+            'district': district,
+            'market': _f(rec, 'market_segment', 'marketSegment'),
+            'price': price,
+            'area_sqm': area_sqm,
+            'psf_sgd': price / area_sqm / 10.7639,
+            'contract_date': _f(rec, 'contract_date', 'contractDate'),
+            'property_type': _f(rec, 'property_type', 'type', 'propertyType'),
+            'tenure': _f(rec, 'tenure', 'Tenure'),
+            'type_of_sale': _f(rec, 'type_of_sale', 'typeOfSale'),
+        })
+    return out
+
+
+def caveat_date(raw: str) -> datetime | None:
+    """Parse contract date. Accepts MMYY ('0124') or ISO ('2024-01-15')."""
+    if not raw:
         return None
-    try:
-        m, y = int(mmyy[:2]), int(mmyy[2:])
-        return datetime(2000 + y, m, 1)
-    except ValueError:
-        return None
+    raw = raw.strip()
+    if len(raw) == 4 and raw.isdigit():
+        try:
+            m, y = int(raw[:2]), int(raw[2:])
+            return datetime(2000 + y, m, 1)
+        except ValueError:
+            return None
+    for fmt in ('%Y-%m-%d', '%d/%m/%Y', '%Y-%m', '%b-%y', '%b %Y'):
+        try:
+            return datetime.strptime(raw, fmt)
+        except ValueError:
+            continue
+    return None
 
 
 def comps_index(caveats: list[dict]) -> dict:
@@ -406,24 +459,21 @@ def send_telegram(text: str) -> None:
 def main() -> int:
     errors: list[str] = []
 
-    access_key = os.environ.get('URA_ACCESS_KEY')
-    if not access_key:
-        print('URA_ACCESS_KEY missing', file=sys.stderr)
+    print('Discovering data.gov.sg resource for URA private resi transactions...')
+    resource_id = discover_resource_id()
+    if not resource_id:
+        print(
+            'Could not auto-discover URA dataset on data.gov.sg. '
+            'Set DATAGOV_RESOURCE_ID env var manually.',
+            file=sys.stderr,
+        )
         return 2
 
-    # Diagnostic only - never log full key
-    masked = (
-        f'{access_key[:4]}...{access_key[-4:]}' if len(access_key) >= 8 else '<short>'
-    )
-    print(
-        f'URA_ACCESS_KEY loaded: len={len(access_key)} masked={masked}'
-    )
-
-    print('Fetching URA token...')
-    token = ura_token(access_key)
-    print('Pulling URA caveats...')
-    caveats = ura_caveats(access_key, token)
-    print(f'  {len(caveats)} caveat rows')
+    print('Fetching caveats...')
+    raw = fetch_caveats(resource_id)
+    print(f'  {len(raw)} raw rows')
+    caveats = normalize_caveats(raw)
+    print(f'  {len(caveats)} usable caveat rows after normalization')
     idx = comps_index(caveats)
     print(
         f'  {len(idx["project"])} project comp keys, '
