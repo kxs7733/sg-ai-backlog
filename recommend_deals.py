@@ -47,9 +47,9 @@ UA = (
 
 # ---------- URA caveats ---------------------------------------------------
 
-URA_TOKEN_URL = 'https://www.ura.gov.sg/uraDataService/insertNewToken.action'
+URA_TOKEN_URL = 'https://eservice.ura.gov.sg/uraDataService/insertNewToken/v1'
 URA_TXN_URL = (
-    'https://www.ura.gov.sg/uraDataService/invokeUraDS'
+    'https://eservice.ura.gov.sg/uraDataService/invokeUraDS/v1'
     '?service=PMI_Resi_Transaction&batch={batch}'
 )
 
