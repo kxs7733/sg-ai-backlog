@@ -411,6 +411,14 @@ def main() -> int:
         print('URA_ACCESS_KEY missing', file=sys.stderr)
         return 2
 
+    # Diagnostic only - never log full key
+    masked = (
+        f'{access_key[:4]}...{access_key[-4:]}' if len(access_key) >= 8 else '<short>'
+    )
+    print(
+        f'URA_ACCESS_KEY loaded: len={len(access_key)} masked={masked}'
+    )
+
     print('Fetching URA token...')
     token = ura_token(access_key)
     print('Pulling URA caveats...')
