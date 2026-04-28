@@ -53,14 +53,14 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $1,481,763/yr | Live Projects: $767,188/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 28042026 01:14 hrs</p>
+    <p class="subtitle">Total Impact: $1,493,763/yr | Live Projects: $767,188/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 29042026 01:30 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
-            <option value="SPX">SPX (19 projects, $409,208/yr, Live: $268,088)</option>
+            <option value="SPX">SPX (19 projects, $421,208/yr, Live: $268,088)</option>
             <option value="MKT">MKT (29 projects, $394,100/yr, Live: $201,044)</option>
             <option value="OPS">OPS (33 projects, $258,375/yr, Live: $202,026)</option>
             <option value="BD">BD (15 projects, $233,972/yr, Live: $51,994)</option>
@@ -70,7 +70,7 @@
         </select>
     </div>
     <div class="legend" id="legend">
-<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($409,208/yr, Live: $268,088, 19 projects)</div>
+<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($421,208/yr, Live: $268,088, 19 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($394,100/yr, Live: $201,044, 29 projects)</div>
 <div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($258,375/yr, Live: $202,026, 33 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($233,972/yr, Live: $51,994, 15 projects)</div>
@@ -81,7 +81,7 @@
 <div class="board" id="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
-<div class="header-cell" data-domain="SPX">SPX<div class="impact">$409,208/yr (Live: $268,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
+<div class="header-cell" data-domain="SPX">SPX<div class="impact">$421,208/yr (Live: $268,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
 <div class="header-cell" data-domain="MKT">MKT<div class="impact">$394,100/yr (Live: $201,044)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="OPS">OPS<div class="impact">$258,375/yr (Live: $202,026)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$233,972/yr (Live: $51,994)</div><div class="highlight-impact" id="hi-BD"></div></div>
@@ -523,7 +523,7 @@
 </div>
 <div class="cell" data-domain="WH" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#6366f1" data-impact="13152" data-domain="WH" data-tooltip="Adapting SGMLLM01 to use SPX POD images to verify correct packaging for premium packaging shops (detection of polymailer vs carton box)" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM100</div>
+                <div class="project-id">SGLLM99</div>
                 <div class="project-name">Premium Packaging Verifier</div>
                 <div class="project-pic">Zhiying Yeow, Nicholas Cheungzy</div>
                 <div class="project-impact">$13,152/yr <span class="project-eta">[ETA tbc]</span></div>
@@ -777,17 +777,17 @@
 </div>
 <div class="status-label" data-status="cancelled">Cancelled <span class="count-badge" style="margin-left:5px">10</span></div>
 <div class="cell" data-domain="SPX" data-status="cancelled" style="background:#fecaca">
+<div class="project" style="border-left-color:#f97316" data-impact="12000" data-domain="SPX" data-tooltip="Recommends SPX Locker order capacity to deal with order fluctuations" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM49</div>
+                <div class="project-name">Dynamic Locker Capacity Planning</div>
+                <div class="project-pic">Clarence Theng</div>
+                <div class="project-impact">$12,000/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
 <div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" data-tooltip="A bot that can:  - Answer basic questions (e.g. FM/LM SOPs) and provide answers in a timely manner - Route more complexed queries that are not in the knowledge bank to a human agent" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM07</div>
                 <div class="project-name">Driver bot system</div>
                 <div class="project-pic">Mabel Chenyt</div>
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" data-tooltip="Recommends SPX Locker order capacity to deal with order fluctuations" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM49</div>
-                <div class="project-name">Dynamic Locker Capacity Planning</div>
-                <div class="project-pic">Clarence Theng</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
             </div>
 <div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" data-tooltip="Using Model to judge on pick up vehicle's loading situation" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM74</div>
