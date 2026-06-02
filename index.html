@@ -53,14 +53,14 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $1,681,117/yr | Live Projects: $960,331/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 02062026 04:10 hrs</p>
+    <p class="subtitle">Total Impact: $1,699,837/yr | Live Projects: $960,331/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 03062026 03:36 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
-            <option value="MKT">MKT (57 projects, $512,708/yr, Live: $294,884)</option>
+            <option value="MKT">MKT (57 projects, $531,428/yr, Live: $294,884)</option>
             <option value="SPX">SPX (19 projects, $421,208/yr, Live: $268,088)</option>
             <option value="OPS">OPS (37 projects, $369,858/yr, Live: $301,329)</option>
             <option value="BD">BD (16 projects, $191,235/yr, Live: $51,994)</option>
@@ -70,7 +70,7 @@
         </select>
     </div>
     <div class="legend" id="legend">
-<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($512,708/yr, Live: $294,884, 57 projects)</div>
+<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($531,428/yr, Live: $294,884, 57 projects)</div>
 <div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($421,208/yr, Live: $268,088, 19 projects)</div>
 <div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($369,858/yr, Live: $301,329, 37 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($191,235/yr, Live: $51,994, 16 projects)</div>
@@ -81,7 +81,7 @@
 <div class="board" id="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
-<div class="header-cell" data-domain="MKT">MKT<div class="impact">$512,708/yr (Live: $294,884)</div><div class="highlight-impact" id="hi-MKT"></div></div>
+<div class="header-cell" data-domain="MKT">MKT<div class="impact">$531,428/yr (Live: $294,884)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$421,208/yr (Live: $268,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
 <div class="header-cell" data-domain="OPS">OPS<div class="impact">$369,858/yr (Live: $301,329)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$191,235/yr (Live: $51,994)</div><div class="highlight-impact" id="hi-BD"></div></div>
@@ -511,11 +511,23 @@
                 <div class="project-pic">Tbc</div>
                 <div class="project-impact">$14,976/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="12480" data-domain="MKT" data-tooltip="Alert users that vouchers are fully used / close to fully used to  (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM37</div>
+                <div class="project-name">Voucher Usage Monitoring Agent</div>
+                <div class="project-pic">Chianyee Ng</div>
+                <div class="project-impact">$12,480/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="9984" data-domain="MKT" data-tooltip="Problem statement: Some livestream initiatives require brands to activate AMS for affiliate participation, but in cases where AMS is not enabled, affiliates do not receive commissions from both the brand and the platform. This leads to escalations to TMs, who must rely on manual download boards to c" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM115</div>
                 <div class="project-name">Livestream Payment Crawling</div>
                 <div class="project-pic">Bryantiong Jy</div>
                 <div class="project-impact">$9,984/yr <span class="project-eta">[ETA:25 May 26]</span></div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="6240" data-domain="MKT" data-tooltip="Alert users that vouchers budget is running faster than expected to (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM38</div>
+                <div class="project-name">Voucher Budget Monitoring Agent</div>
+                <div class="project-pic">Chianyee Ng</div>
+                <div class="project-impact">$6,240/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="6240" data-domain="MKT" data-tooltip="1. Help CS agents to answer basic L1 question for VIP - example: VIP sign up time, VIP coins to be earned, Coins to be reinstated for partial cancellation 2. Update bot to answer  3. Shorten SLA + improves manpower efficiency" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM89</div>
@@ -528,18 +540,6 @@
                 <div class="project-name">Seller Voucher Selection QC for Games</div>
                 <div class="project-pic">Angeline Chong</div>
                 <div class="project-impact">$1,728/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="Alert users that vouchers are fully used / close to fully used to  (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM37</div>
-                <div class="project-name">Voucher Usage Monitoring Agent</div>
-                <div class="project-pic">Chianyee Ng</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="Alert users that vouchers budget is running faster than expected to (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM38</div>
-                <div class="project-name">Voucher Budget Monitoring Agent</div>
-                <div class="project-pic">Chianyee Ng</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="0" data-domain="MKT" data-tooltip="AI to help generate real-time Video data at an affiliate level in terms of content generation (number of video posts) and conversion (ADO & ADG) with WoW and MoM views, and transform into key summary reports" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM41</div>
