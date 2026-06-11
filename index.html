@@ -53,15 +53,15 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $1,784,670/yr | Live Projects: $963,708/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 11062026 02:24 hrs</p>
+    <p class="subtitle">Total Impact: $1,784,670/yr | Live Projects: $965,148/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 12062026 02:40 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
-            <option value="MKT">MKT (61 projects, $566,612/yr, Live: $296,612)</option>
-            <option value="SPX">SPX (20 projects, $469,208/yr, Live: $268,088)</option>
+            <option value="MKT">MKT (61 projects, $566,612/yr, Live: $298,052)</option>
+            <option value="SPX">SPX (22 projects, $469,208/yr, Live: $268,088)</option>
             <option value="OPS">OPS (38 projects, $370,787/yr, Live: $302,258)</option>
             <option value="BD">BD (17 projects, $191,955/yr, Live: $52,714)</option>
             <option value="WH">WH (13 projects, $185,748/yr, Live: $43,676)</option>
@@ -70,8 +70,8 @@
         </select>
     </div>
     <div class="legend" id="legend">
-<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($566,612/yr, Live: $296,612, 61 projects)</div>
-<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($469,208/yr, Live: $268,088, 20 projects)</div>
+<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($566,612/yr, Live: $298,052, 61 projects)</div>
+<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($469,208/yr, Live: $268,088, 22 projects)</div>
 <div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($370,787/yr, Live: $302,258, 38 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($191,955/yr, Live: $52,714, 17 projects)</div>
 <div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($185,748/yr, Live: $43,676, 13 projects)</div>
@@ -81,7 +81,7 @@
 <div class="board" id="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
-<div class="header-cell" data-domain="MKT">MKT<div class="impact">$566,612/yr (Live: $296,612)</div><div class="highlight-impact" id="hi-MKT"></div></div>
+<div class="header-cell" data-domain="MKT">MKT<div class="impact">$566,612/yr (Live: $298,052)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$469,208/yr (Live: $268,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
 <div class="header-cell" data-domain="OPS">OPS<div class="impact">$370,787/yr (Live: $302,258)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$191,955/yr (Live: $52,714)</div><div class="highlight-impact" id="hi-BD"></div></div>
@@ -410,7 +410,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">11</span></div>
+<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">13</span></div>
 <div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
 <div class="project" style="border-left-color:#8b5cf6" data-impact="2304" data-domain="MKT" data-tooltip="AI Assistant to help manage and QC EP/SSV nominations: (i) check pricing accuracy & mechanics, (ii) track status of nominations, (iii) evaluate quality of nominated EPs, (iv) flagging of conflicting FD or DD campaigns running concurrently" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM40</div>
@@ -437,6 +437,18 @@
                 <div class="project-name">Driver Route assignment recommendation</div>
                 <div class="project-pic">Clarence Theng</div>
                 <div class="project-impact">$5,760/yr <span class="project-eta">[ETA:1 Oct 25]</span></div>
+            </div>
+<div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" data-tooltip="To perform audit checks base on driver GPS and driver delivery task parcel location mapping to check on driver fuel submission is accurate or not" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM160</div>
+                <div class="project-name">Fuel Auditing Tool</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM161</div>
+                <div class="project-name">SPX Locker CCTV monitoring</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="poc" style="background:#fef3c7">
@@ -491,7 +503,7 @@
 </div>
 <div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
 </div>
-<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">26</span></div>
+<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">25</span></div>
 <div class="cell" data-domain="MKT" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#8b5cf6" data-impact="69888" data-domain="MKT" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply." onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM67</div>
@@ -546,12 +558,6 @@
                 <div class="project-name">Seller Voucher Selection QC for Games</div>
                 <div class="project-pic">Angeline Chong</div>
                 <div class="project-impact">$1,728/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="1. Agent to check each row and check if all necessary cells have been completed.  2. Agent to highlight what cells are incomplete and ping respective MKT functions PIC to complete details. 3. Agent to ping in Homepage assets deployment (MKT x MKT Ops) ST Group Chat)  Mastersheets DHC: <LINK> Popup: " onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM137</div>
-                <div class="project-name">Homepage Asset Submission Reminder</div>
-                <div class="project-pic">Not assigned</div>
-                <div class="project-impact">$1,440/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="1248" data-domain="MKT" data-tooltip="AI to read based on what type of package and dates, then auto-plot into Banners Calendar 1. Agent to consolidate all activations that need Mall Assets into a master sheet 2. Agent to plot the assets based on mastersheet into A-2 Mall Calendar, in particular this sheet <LINK> 3. Rule based approach t" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM155</div>
@@ -713,7 +719,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">47</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">48</span></div>
 <div class="cell" data-domain="MKT" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#8b5cf6" data-impact="174720" data-domain="MKT" data-tooltip="To help notify Seatalk PICs when brands have been successfully matched with creators. Details included in the message: 1. Creator Name 2. Stream Date & Time  3. Creator Delivery Address  4. Latest Delivery Date  To help compile the list of confirmed streams for each creator so that Seatalk PICs can " onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM64</div>
@@ -766,6 +772,12 @@
 <div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="EP Assistant to help remind and bump RMs on EP & SSV Nominations" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM39</div>
                 <div class="project-name">EP Assistant - Reminder on EP & SSV nominations</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact">$1,440/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="1. Agent to check each row and check if all necessary cells have been completed.  2. Agent to highlight what cells are incomplete and ping respective MKT functions PIC to complete details. 3. Agent to ping in Homepage assets deployment (MKT x MKT Ops) ST Group Chat)  Mastersheets DHC: <LINK> Popup: " onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM137</div>
+                <div class="project-name">Homepage Asset Submission Reminder</div>
                 <div class="project-pic">Not assigned</div>
                 <div class="project-impact">$1,440/yr</div>
             </div>
