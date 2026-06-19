@@ -12,7 +12,7 @@ import requests
 
 # Config
 SPREADSHEET_ID = '1gRPcXtBQcSayTvJ1Gp9Z02Zls_HaiN5bDYNvTw9n9RQ'
-SHEET_RANGE = 'SG Project Overview!A2:V200'
+SHEET_RANGE = 'SG Project Overview!A2:Y200'
 OUTPUT_FILE = 'index.html'
 
 DOMAIN_COLORS = {
@@ -29,9 +29,11 @@ STATUS_BG = {
     'parallel-run': '#d1fae5', 'live': '#bbf7d0', 'cancelled': '#fecaca',
 }
 
-# Column indices (A=0 ... V=21)
+# Column indices. NOTE: 2 PIC columns inserted (Jun 2026) — old single
+# "Project PIC" (T) became Business PIC (T), AI Champion/PMO PIC (U),
+# Development PIC (V), shifting Status U->W and ETA V->X. Impact (S) unchanged.
 COL_ID, COL_DOMAIN, COL_NAME, COL_DESC = 0, 1, 2, 3
-COL_IMPACT, COL_PIC, COL_STATUS, COL_ETA = 18, 19, 20, 21
+COL_IMPACT, COL_PIC, COL_STATUS, COL_ETA = 18, 19, 22, 23  # S, T, W, X
 
 
 def get_access_token():
