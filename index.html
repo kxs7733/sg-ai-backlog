@@ -53,16 +53,16 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $2,061,458/yr | Live Projects: $1,362,169/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 07072026 02:04 hrs</p>
+    <p class="subtitle">Total Impact: $2,169,216/yr | Live Projects: $1,362,169/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 08072026 01:51 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
             <option value="SPX">SPX (22 projects, $698,648/yr, Live: $568,088)</option>
+            <option value="OPS">OPS (43 projects, $556,299/yr, Live: $313,945)</option>
             <option value="MKT">MKT (61 projects, $535,556/yr, Live: $369,188)</option>
-            <option value="OPS">OPS (42 projects, $448,541/yr, Live: $313,945)</option>
             <option value="BD">BD (18 projects, $192,605/yr, Live: $66,912)</option>
             <option value="WH">WH (13 projects, $185,748/yr, Live: $43,676)</option>
             <option value="Product">Product (1 projects, $360/yr, Live: $360)</option>
@@ -71,8 +71,8 @@
     </div>
     <div class="legend" id="legend">
 <div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($698,648/yr, Live: $568,088, 22 projects)</div>
+<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($556,299/yr, Live: $313,945, 43 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($535,556/yr, Live: $369,188, 61 projects)</div>
-<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($448,541/yr, Live: $313,945, 42 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($192,605/yr, Live: $66,912, 18 projects)</div>
 <div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($185,748/yr, Live: $43,676, 13 projects)</div>
 <div class="legend-item" data-domain="Product"><div class="legend-color" style="background:#ec4899"></div>Product ($360/yr, Live: $360, 1 projects)</div>
@@ -82,8 +82,8 @@
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$698,648/yr (Live: $568,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
+<div class="header-cell" data-domain="OPS">OPS<div class="impact">$556,299/yr (Live: $313,945)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="MKT">MKT<div class="impact">$535,556/yr (Live: $369,188)</div><div class="highlight-impact" id="hi-MKT"></div></div>
-<div class="header-cell" data-domain="OPS">OPS<div class="impact">$448,541/yr (Live: $313,945)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$192,605/yr (Live: $66,912)</div><div class="highlight-impact" id="hi-BD"></div></div>
 <div class="header-cell" data-domain="WH">WH<div class="impact">$185,748/yr (Live: $43,676)</div><div class="highlight-impact" id="hi-WH"></div></div>
 <div class="header-cell" data-domain="Product">Product<div class="impact">$360/yr (Live: $360)</div><div class="highlight-impact" id="hi-Product"></div></div>
@@ -114,6 +114,32 @@
                 <div class="project-name">RR POOH Audit</div>
                 <div class="project-pic">Not assigned</div>
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+</div>
+<div class="cell" data-domain="OPS" data-status="to-start" style="background:#f3f4f6">
+<div class="project" style="border-left-color:#3b82f6" data-impact="25344" data-domain="OPS" data-tooltip="use LLM to produce diverse fraudulent customer journeys or seller patterns, then use them to augment and identify fraud cases (to review)" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM31</div>
+                <div class="project-name">Fraud case investigation assistant</div>
+                <div class="project-pic">Siqi Lin</div>
+                <div class="project-impact">$25,344/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="6600" data-domain="OPS" data-tooltip="Agent to vet through Chatbot conversation and determine the issue for bad CSAT" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM15</div>
+                <div class="project-name">Chatbot DSAT QA Assistant</div>
+                <div class="project-pic">Chrishantan P</div>
+                <div class="project-impact">$6,600/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="6000" data-domain="OPS" data-tooltip="Alert team on new SME received Identify potential SME based on users utterance & keywords  To be able to prompt and read across multiple platforms (DMS, CSIH, BDC) to derive quick information of user history and engagement with shopee to derive a recommended direction of assessment (to review)(" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM17</div>
+                <div class="project-name">SME case investigation</div>
+                <div class="project-pic">Chrishantan P</div>
+                <div class="project-impact">$6,000/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="148" data-domain="OPS" data-tooltip="AI exports pending fraud review cases from DMS to facilitate agent investigations." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM163</div>
+                <div class="project-name">DMS Watchlist</div>
+                <div class="project-pic">Tanushri J, Adibah Yasin</div>
+                <div class="project-impact">$148/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="to-start" style="background:#f3f4f6">
@@ -274,32 +300,6 @@
                 <div class="project-impact">$576/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="cell" data-domain="OPS" data-status="to-start" style="background:#f3f4f6">
-<div class="project" style="border-left-color:#3b82f6" data-impact="25344" data-domain="OPS" data-tooltip="use LLM to produce diverse fraudulent customer journeys or seller patterns, then use them to augment and identify fraud cases (to review)" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM31</div>
-                <div class="project-name">Fraud case investigation assistant</div>
-                <div class="project-pic">Siqi Lin</div>
-                <div class="project-impact">$25,344/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="6600" data-domain="OPS" data-tooltip="Agent to vet through Chatbot conversation and determine the issue for bad CSAT" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM15</div>
-                <div class="project-name">Chatbot DSAT QA Assistant</div>
-                <div class="project-pic">Chrishantan P</div>
-                <div class="project-impact">$6,600/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="6000" data-domain="OPS" data-tooltip="Alert team on new SME received Identify potential SME based on users utterance & keywords  To be able to prompt and read across multiple platforms (DMS, CSIH, BDC) to derive quick information of user history and engagement with shopee to derive a recommended direction of assessment (to review)(" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM17</div>
-                <div class="project-name">SME case investigation</div>
-                <div class="project-pic">Chrishantan P</div>
-                <div class="project-impact">$6,000/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="148" data-domain="OPS" data-tooltip="AI exports pending fraud review cases from DMS to facilitate agent investigations." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM163</div>
-                <div class="project-name">DMS Watchlist</div>
-                <div class="project-pic">Tanushri J, Adibah Yasin</div>
-                <div class="project-impact">$148/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
-            </div>
-</div>
 <div class="cell" data-domain="BD" data-status="to-start" style="background:#f3f4f6">
 </div>
 <div class="cell" data-domain="WH" data-status="to-start" style="background:#f3f4f6">
@@ -383,20 +383,6 @@
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#8b5cf6" data-impact="2304" data-domain="MKT" data-tooltip="AI Assistant to help manage and QC EP/SSV nominations: (i) check pricing accuracy & mechanics, (ii) track status of nominations, (iii) evaluate quality of nominated EPs, (iv) flagging of conflicting FD or DD campaigns running concurrently" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM40</div>
-                <div class="project-name">EP Assistant - QC on EP & SSV nominations</div>
-                <div class="project-pic">Not assigned</div>
-                <div class="project-impact">$2,304/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="1728" data-domain="MKT" data-tooltip="AI to generate multiple campaign titles, taglines, and collection names aligned with objectives and seasonality. (i) Adapt tone (fun, premium, urgent) and avoids repetition across campaigns. (ii) Suggest engaging titles using trending keywords, past campaigns, and consumer search data. (iii) Support" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM42</div>
-                <div class="project-name">Thematic Ideation Generator</div>
-                <div class="project-pic">Julian Chan</div>
-                <div class="project-impact">$1,728/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-</div>
 <div class="cell" data-domain="OPS" data-status="poc" style="background:#fef3c7">
 <div class="project" style="border-left-color:#3b82f6" data-impact="30000" data-domain="OPS" data-tooltip="BCRS is a gov program to incentivize buyers to recycle beverage containers for $0.10.  Program requires sellers to increase prices by X, and this increase in price will be commission exempt.   Bot will go through all listings within specified sub categories to identify 1) if listing meets criteria t" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM71</div>
@@ -423,6 +409,20 @@
                 <div class="project-impact">$3,520/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
+<div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
+<div class="project" style="border-left-color:#8b5cf6" data-impact="2304" data-domain="MKT" data-tooltip="AI Assistant to help manage and QC EP/SSV nominations: (i) check pricing accuracy & mechanics, (ii) track status of nominations, (iii) evaluate quality of nominated EPs, (iv) flagging of conflicting FD or DD campaigns running concurrently" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM40</div>
+                <div class="project-name">EP Assistant - QC on EP & SSV nominations</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact">$2,304/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="1728" data-domain="MKT" data-tooltip="AI to generate multiple campaign titles, taglines, and collection names aligned with objectives and seasonality. (i) Adapt tone (fun, premium, urgent) and avoids repetition across campaigns. (ii) Suggest engaging titles using trending keywords, past campaigns, and consumer search data. (iii) Support" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM42</div>
+                <div class="project-name">Thematic Ideation Generator</div>
+                <div class="project-pic">Julian Chan</div>
+                <div class="project-impact">$1,728/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+</div>
 <div class="cell" data-domain="BD" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="cell" data-domain="WH" data-status="poc" style="background:#fef3c7">
@@ -444,6 +444,50 @@
                 <div class="project-name">Address Mismatch Detection AI</div>
                 <div class="project-pic">Clarence Theng</div>
                 <div class="project-impact">$2,400/yr <span class="project-eta">[ETA:31 Dec 25]</span></div>
+            </div>
+</div>
+<div class="cell" data-domain="OPS" data-status="design-and-build" style="background:#dbeafe">
+<div class="project" style="border-left-color:#3b82f6" data-impact="107758" data-domain="OPS" data-tooltip="Bot to analyze which seller contributes loss, detect if able to recover loss from on-going orders, check buyer-seller collusion." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM167</div>
+                <div class="project-name">Review Negative Escrow Bot</div>
+                <div class="project-pic">Gokila P, Tanushri J</div>
+                <div class="project-impact">$107,758/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="8870" data-domain="OPS" data-tooltip="To improve on text/keyword detection for shop impersonation case. Use offcial store database to detect brand name permutations and keyword variations" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM108</div>
+                <div class="project-name">Shop Impersonator Phase 1: Brand Name Recognition</div>
+                <div class="project-pic">Komalata Menon</div>
+                <div class="project-impact">$8,870/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="8870" data-domain="OPS" data-tooltip="To improve on image logo detection for shop impersonation case by implementing logo recognition and image similarity models to detect unauthorized brand logo usage." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM109</div>
+                <div class="project-name">Shop Impersonator Phase 2: Visual Brand Detection</div>
+                <div class="project-pic">Komalata Menon</div>
+                <div class="project-impact">$8,870/yr <span class="project-eta">[ETA:31 Aug 26]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="4118" data-domain="OPS" data-tooltip="To screen chats & identify if sellers are sending empty parcels, and to bucket into two broad intent (false fulfilment to bypass fulfillment policies OR fraudulent behavior)." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM149</div>
+                <div class="project-name">Empty Parcel Screener</div>
+                <div class="project-pic">Weilin Ho</div>
+                <div class="project-impact">$4,118/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="3720" data-domain="OPS" data-tooltip="Rule based Bot that helps on validating Seller's appeal on listings due to counterfeit reasoning by - checking seller's uploaded proofs i.e: invoices, LOA" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM79</div>
+                <div class="project-name">Counterfeit Whitelist Appeal Review</div>
+                <div class="project-pic">Qaiyum S, Syakila Latib</div>
+                <div class="project-impact">$3,720/yr <span class="project-eta">[ETA:30 Jan 26]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="The AI Assistant will help to transform a raw call/chat transcript into: 1) a polished transcript with clear speaker labels, 2) a CS QA summary (short, audit-ready), 3) a structured JSON record (for CRM/analytics ingestion), and 4) a CS QA Evaluation Sheet (scored, coaching-ready)." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM34</div>
+                <div class="project-name">Voice Call Analyst</div>
+                <div class="project-pic">Weionn Ling, Chrishantan P</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Detect rating reviews with buyer complains of product quality/misrepresented listings and flag for QC/takedown" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM48</div>
+                <div class="project-name">Listing review - Quality reviews</div>
+                <div class="project-pic">Shangkari</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:30 Jun 26]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="design-and-build" style="background:#dbeafe">
@@ -496,50 +540,6 @@
                 <div class="project-impact">$576/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="cell" data-domain="OPS" data-status="design-and-build" style="background:#dbeafe">
-<div class="project" style="border-left-color:#3b82f6" data-impact="8870" data-domain="OPS" data-tooltip="To improve on text/keyword detection for shop impersonation case. Use offcial store database to detect brand name permutations and keyword variations" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM108</div>
-                <div class="project-name">Shop Impersonator Phase 1: Brand Name Recognition</div>
-                <div class="project-pic">Komalata Menon</div>
-                <div class="project-impact">$8,870/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="8870" data-domain="OPS" data-tooltip="To improve on image logo detection for shop impersonation case by implementing logo recognition and image similarity models to detect unauthorized brand logo usage." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM109</div>
-                <div class="project-name">Shop Impersonator Phase 2: Visual Brand Detection</div>
-                <div class="project-pic">Komalata Menon</div>
-                <div class="project-impact">$8,870/yr <span class="project-eta">[ETA:31 Aug 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="4118" data-domain="OPS" data-tooltip="To screen chats & identify if sellers are sending empty parcels, and to bucket into two broad intent (false fulfilment to bypass fulfillment policies OR fraudulent behavior)." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM149</div>
-                <div class="project-name">Empty Parcel Screener</div>
-                <div class="project-pic">Weilin Ho</div>
-                <div class="project-impact">$4,118/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="3720" data-domain="OPS" data-tooltip="Rule based Bot that helps on validating Seller's appeal on listings due to counterfeit reasoning by - checking seller's uploaded proofs i.e: invoices, LOA" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM79</div>
-                <div class="project-name">Counterfeit Whitelist Appeal Review</div>
-                <div class="project-pic">Qaiyum S, Syakila Latib</div>
-                <div class="project-impact">$3,720/yr <span class="project-eta">[ETA:30 Jan 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="The AI Assistant will help to transform a raw call/chat transcript into: 1) a polished transcript with clear speaker labels, 2) a CS QA summary (short, audit-ready), 3) a structured JSON record (for CRM/analytics ingestion), and 4) a CS QA Evaluation Sheet (scored, coaching-ready)." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM34</div>
-                <div class="project-name">Voice Call Analyst</div>
-                <div class="project-pic">Weionn Ling, Chrishantan P</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Detect rating reviews with buyer complains of product quality/misrepresented listings and flag for QC/takedown" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM48</div>
-                <div class="project-name">Listing review - Quality reviews</div>
-                <div class="project-pic">Shangkari</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Jun 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Bot to analyze which seller contributes loss, detect if able to recover loss from on-going orders, check buyer-seller collusion." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM167</div>
-                <div class="project-name">Review Negative Escrow Bot</div>
-                <div class="project-pic">Gokila P, Tanushri J</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Jul 26]</span></div>
-            </div>
-</div>
 <div class="cell" data-domain="BD" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#10b981" data-impact="27692" data-domain="BD" data-tooltip="AI engine that compiles seller info, performance metrics, and generates priority scores. Outlines which programmes the sellers are on (CCB, FBS , Livestream Xtra) Creates standard extracts of data for Monthly/Quarterly business reviews w. sellers" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM24</div>
@@ -575,14 +575,6 @@
                 <div class="project-impact">$24,000/yr <span class="project-eta">[ETA:28 Jan 25]</span></div>
             </div>
 </div>
-<div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#8b5cf6" data-impact="2880" data-domain="MKT" data-tooltip="PN Approvals are currently manual and done through Seatalk.   Bot will help to approve PNs based on our current booking volume (data stored on google sheet) by:  - Day - Send base per day - Monthly PN Limit" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM69</div>
-                <div class="project-name">PN Approval Bot</div>
-                <div class="project-pic">Chelsea Chuasy, Calista Chiakt</div>
-                <div class="project-impact">$2,880/yr <span class="project-eta">[ETA:31 Dec 25]</span></div>
-            </div>
-</div>
 <div class="cell" data-domain="OPS" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#3b82f6" data-impact="6288" data-domain="OPS" data-tooltip="Bot to generate PDF file of proof screenshot & transaction summary by buyers from Order Admin to evaluate the chargeback dispute escalated from Payment" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM162</div>
@@ -595,6 +587,14 @@
                 <div class="project-name">Buyer order cancellation abuse</div>
                 <div class="project-pic">Not assigned</div>
                 <div class="project-impact"> <span class="project-eta">[ETA:30 Jul 26]</span></div>
+            </div>
+</div>
+<div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
+<div class="project" style="border-left-color:#8b5cf6" data-impact="2880" data-domain="MKT" data-tooltip="PN Approvals are currently manual and done through Seatalk.   Bot will help to approve PNs based on our current booking volume (data stored on google sheet) by:  - Day - Send base per day - Monthly PN Limit" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM69</div>
+                <div class="project-name">PN Approval Bot</div>
+                <div class="project-pic">Chelsea Chuasy, Calista Chiakt</div>
+                <div class="project-impact">$2,880/yr <span class="project-eta">[ETA:31 Dec 25]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
@@ -623,7 +623,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">56</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">57</span></div>
 <div class="cell" data-domain="SPX" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#f97316" data-impact="420000" data-domain="SPX" data-tooltip="To support on SPX search on Faded AWB / No AWB" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM117</div>
@@ -672,86 +672,6 @@
                 <div class="project-name">HSE Report Seatalk Bot</div>
                 <div class="project-pic">Mika Lin</div>
                 <div class="project-impact">$1,688/yr</div>
-            </div>
-</div>
-<div class="cell" data-domain="MKT" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#8b5cf6" data-impact="174720" data-domain="MKT" data-tooltip="To help notify Seatalk PICs when brands have been successfully matched with creators. Details included in the message: 1. Creator Name 2. Stream Date & Time  3. Creator Delivery Address  4. Latest Delivery Date  To help compile the list of confirmed streams for each creator so that Seatalk PICs can " onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM64</div>
-                <div class="project-name">LS Brand Matching & Anchor Brand Match</div>
-                <div class="project-pic">Szeinn Tan</div>
-                <div class="project-impact">$174,720/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="74880" data-domain="MKT" data-tooltip="An automated scheduling system that enables talent managers to efficiently view, select, and confirm livestream time slots for creators." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM82</div>
-                <div class="project-name">Livestream Matching (Match Creator to Brand directly via schedule)</div>
-                <div class="project-pic">Ian Kweekh, Kayla Angsq</div>
-                <div class="project-impact">$74,880/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="69888" data-domain="MKT" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM67</div>
-                <div class="project-name">Post Scrapping on Instagram</div>
-                <div class="project-pic">Pearlyn Teomw</div>
-                <div class="project-impact">$69,888/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="14400" data-domain="MKT" data-tooltip="To send activation form for brands to submit to RMs (BD) through SeaTalk, then to periodically check that submission has been made. To remind RMs trhough seatalk if submission has not been made yet. - Agent check on upcoming BAU Activations/campaigns based on Mall Tracker - Agent to send out the act" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM65</div>
-                <div class="project-name">Brand Activation Submission Reminder Assistant</div>
-                <div class="project-pic">Julian Chan</div>
-                <div class="project-impact">$14,400/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="12480" data-domain="MKT" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM68</div>
-                <div class="project-name">Affiliate CS Bot</div>
-                <div class="project-pic">Pearlyn Teomw</div>
-                <div class="project-impact">$12,480/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="6250" data-domain="MKT" data-tooltip="AI to help SeaTalk PICs on incomplete EDM submissions" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM36</div>
-                <div class="project-name">PN Reminder Assistant</div>
-                <div class="project-pic">Calista Chiakt</div>
-                <div class="project-impact">$6,250/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="6250" data-domain="MKT" data-tooltip="AI to help SeaTalk PICs on incomplete EDM submissions" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM43</div>
-                <div class="project-name">EDM Reminder Assistant</div>
-                <div class="project-pic">Calista Chiakt</div>
-                <div class="project-impact">$6,250/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="3744" data-domain="MKT" data-tooltip="Weekly chase for RMs to input vouchers & deals for FBS Wed" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM116</div>
-                <div class="project-name">FBS Wed Chaser Bot</div>
-                <div class="project-pic">Ruixuan Chea</div>
-                <div class="project-impact">$3,744/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="1728" data-domain="MKT" data-tooltip="Bot to send to one single group chat.  >Bot reminder assistant to check if all columns are submitted, and to flag RMs if details are not submitted accordingly. Similar in concept to Brand Activation Submission Reminder Assistant.  Concept wise will be similar to Brand Activation Submission Reminder " onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM136</div>
-                <div class="project-name">AB/BP Mastersheet and Submission Reminder Assistant</div>
-                <div class="project-pic">Not assigned</div>
-                <div class="project-impact">$1,728/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="EP Assistant to help remind and bump RMs on EP & SSV Nominations" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM39</div>
-                <div class="project-name">EP Assistant - Reminder on EP & SSV nominations</div>
-                <div class="project-pic">Not assigned</div>
-                <div class="project-impact">$1,440/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="1. Agent to check each row and check if all necessary cells have been completed.  2. Agent to highlight what cells are incomplete and ping respective MKT functions PIC to complete details. 3. Agent to ping in Homepage assets deployment (MKT x MKT Ops) ST Group Chat)  Mastersheets DHC: <LINK> Popup: " onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM137</div>
-                <div class="project-name">Homepage Asset Submission Reminder</div>
-                <div class="project-pic">Not assigned</div>
-                <div class="project-impact">$1,440/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="1248" data-domain="MKT" data-tooltip="AI to read based on what type of package and dates, then auto-plot into Banners Calendar 1. Agent to consolidate all activations that need Mall Assets into a master sheet 2. Agent to plot the assets based on mastersheet into A-2 Mall Calendar, in particular this sheet <LINK> 3. Rule based approach t" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM155</div>
-                <div class="project-name">Mall Assets Plotting Assistant</div>
-                <div class="project-pic">Not assigned</div>
-                <div class="project-impact">$1,248/yr</div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="720" data-domain="MKT" data-tooltip="3 Reminder bots that triggers a chaser to RMs D-5 to D-1 before campaign date to get them to nominate more DDs and SSVs. This will also be helpful for SVIP as it ensures that early access has sufficient DDs and SSVs nominated" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM95</div>
-                <div class="project-name">15, 25, DD SSV DD Progress Check Bot</div>
-                <div class="project-pic">Ruixuan Chea</div>
-                <div class="project-impact">$720/yr</div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="live" style="background:#bbf7d0">
@@ -875,6 +795,91 @@
                 <div class="project-pic">Jiahui Kuek</div>
                 <div class="project-impact">$94/yr</div>
             </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Bot to generate file for SBD/ACL extension based on user input orders detail (OrderSN)" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM169</div>
+                <div class="project-name">SBD/ ACL Extension File Bot</div>
+                <div class="project-pic">Kaixin Lim, Norlyn Aziz</div>
+            </div>
+</div>
+<div class="cell" data-domain="MKT" data-status="live" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#8b5cf6" data-impact="174720" data-domain="MKT" data-tooltip="To help notify Seatalk PICs when brands have been successfully matched with creators. Details included in the message: 1. Creator Name 2. Stream Date & Time  3. Creator Delivery Address  4. Latest Delivery Date  To help compile the list of confirmed streams for each creator so that Seatalk PICs can " onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM64</div>
+                <div class="project-name">LS Brand Matching & Anchor Brand Match</div>
+                <div class="project-pic">Szeinn Tan</div>
+                <div class="project-impact">$174,720/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="74880" data-domain="MKT" data-tooltip="An automated scheduling system that enables talent managers to efficiently view, select, and confirm livestream time slots for creators." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM82</div>
+                <div class="project-name">Livestream Matching (Match Creator to Brand directly via schedule)</div>
+                <div class="project-pic">Ian Kweekh, Kayla Angsq</div>
+                <div class="project-impact">$74,880/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="69888" data-domain="MKT" data-tooltip="Track KOL postings with affiliate links on Instagram, to determine content supply." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM67</div>
+                <div class="project-name">Post Scrapping on Instagram</div>
+                <div class="project-pic">Pearlyn Teomw</div>
+                <div class="project-impact">$69,888/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="14400" data-domain="MKT" data-tooltip="To send activation form for brands to submit to RMs (BD) through SeaTalk, then to periodically check that submission has been made. To remind RMs trhough seatalk if submission has not been made yet. - Agent check on upcoming BAU Activations/campaigns based on Mall Tracker - Agent to send out the act" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM65</div>
+                <div class="project-name">Brand Activation Submission Reminder Assistant</div>
+                <div class="project-pic">Julian Chan</div>
+                <div class="project-impact">$14,400/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="12480" data-domain="MKT" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM68</div>
+                <div class="project-name">Affiliate CS Bot</div>
+                <div class="project-pic">Pearlyn Teomw</div>
+                <div class="project-impact">$12,480/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="6250" data-domain="MKT" data-tooltip="AI to help SeaTalk PICs on incomplete EDM submissions" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM36</div>
+                <div class="project-name">PN Reminder Assistant</div>
+                <div class="project-pic">Calista Chiakt</div>
+                <div class="project-impact">$6,250/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="6250" data-domain="MKT" data-tooltip="AI to help SeaTalk PICs on incomplete EDM submissions" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM43</div>
+                <div class="project-name">EDM Reminder Assistant</div>
+                <div class="project-pic">Calista Chiakt</div>
+                <div class="project-impact">$6,250/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="3744" data-domain="MKT" data-tooltip="Weekly chase for RMs to input vouchers & deals for FBS Wed" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM116</div>
+                <div class="project-name">FBS Wed Chaser Bot</div>
+                <div class="project-pic">Ruixuan Chea</div>
+                <div class="project-impact">$3,744/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="1728" data-domain="MKT" data-tooltip="Bot to send to one single group chat.  >Bot reminder assistant to check if all columns are submitted, and to flag RMs if details are not submitted accordingly. Similar in concept to Brand Activation Submission Reminder Assistant.  Concept wise will be similar to Brand Activation Submission Reminder " onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM136</div>
+                <div class="project-name">AB/BP Mastersheet and Submission Reminder Assistant</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact">$1,728/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="EP Assistant to help remind and bump RMs on EP & SSV Nominations" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM39</div>
+                <div class="project-name">EP Assistant - Reminder on EP & SSV nominations</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact">$1,440/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="1440" data-domain="MKT" data-tooltip="1. Agent to check each row and check if all necessary cells have been completed.  2. Agent to highlight what cells are incomplete and ping respective MKT functions PIC to complete details. 3. Agent to ping in Homepage assets deployment (MKT x MKT Ops) ST Group Chat)  Mastersheets DHC: <LINK> Popup: " onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM137</div>
+                <div class="project-name">Homepage Asset Submission Reminder</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact">$1,440/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="1248" data-domain="MKT" data-tooltip="AI to read based on what type of package and dates, then auto-plot into Banners Calendar 1. Agent to consolidate all activations that need Mall Assets into a master sheet 2. Agent to plot the assets based on mastersheet into A-2 Mall Calendar, in particular this sheet <LINK> 3. Rule based approach t" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM155</div>
+                <div class="project-name">Mall Assets Plotting Assistant</div>
+                <div class="project-pic">Not assigned</div>
+                <div class="project-impact">$1,248/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="720" data-domain="MKT" data-tooltip="3 Reminder bots that triggers a chaser to RMs D-5 to D-1 before campaign date to get them to nominate more DDs and SSVs. This will also be helpful for SVIP as it ensures that early access has sufficient DDs and SSVs nominated" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM95</div>
+                <div class="project-name">15, 25, DD SSV DD Progress Check Bot</div>
+                <div class="project-pic">Ruixuan Chea</div>
+                <div class="project-impact">$720/yr</div>
+            </div>
 </div>
 <div class="cell" data-domain="BD" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#10b981" data-impact="18750" data-domain="BD" data-tooltip="Tailored reminders for each RM on KPI progress and tasks to prioritize" onclick="toggleHighlight(this)">
@@ -995,6 +1000,38 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:30 Jun 26]</span></div>
             </div>
 </div>
+<div class="cell" data-domain="OPS" data-status="cancelled" style="background:#fecaca">
+<div class="project" style="border-left-color:#3b82f6" data-impact="1451" data-domain="OPS" data-tooltip="[CANCELLED] to utilise Diana Bot instead. Bot summariser for insights about RR cases backlogs, categorize by agent-vs buyer-related" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM96</div>
+                <div class="project-name">RR Backlog Sampling</div>
+                <div class="project-pic">Gokila P</div>
+                <div class="project-impact">$1,451/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Agent to vet through Shopbot conversation and determine the issue for non deflections" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM12</div>
+                <div class="project-name">Shopbot Non-deflected QA Assistant</div>
+                <div class="project-pic">Giaing Yap</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Bot to be able to perform RR judging based on pre-set criteria" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM13</div>
+                <div class="project-name">RR judgement assistant</div>
+                <div class="project-pic">Jc Chong, Tanushri J</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Agent to vet through Chatbot conversation and determine the issue for non deflections" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM16</div>
+                <div class="project-name">Chatbot Non-deflected QA Assistant</div>
+                <div class="project-pic">Chrishantan P</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Using LLM to better consolidate and synthesize buyer/seller feedback to NPS - improve efficiency (to review)" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM30</div>
+                <div class="project-name">NPS consolidation assistant</div>
+                <div class="project-pic">Siqi Lin</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
+            </div>
+</div>
 <div class="cell" data-domain="MKT" data-status="cancelled" style="background:#fecaca">
 <div class="project" style="border-left-color:#8b5cf6" data-impact="2880" data-domain="MKT" data-tooltip="Reply to prompts / send periodic alerts on voucher usage (i) Update PICs on voucher usage and quantity left - Send an alert on GC every time 10% of qty is utilised and when fully utilised." onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM132</div>
@@ -1061,38 +1098,6 @@
                 <div class="project-name">Mall Levers Daily Update bot</div>
                 <div class="project-pic">Julian Chan</div>
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-</div>
-<div class="cell" data-domain="OPS" data-status="cancelled" style="background:#fecaca">
-<div class="project" style="border-left-color:#3b82f6" data-impact="1451" data-domain="OPS" data-tooltip="[CANCELLED] to utilise Diana Bot instead. Bot summariser for insights about RR cases backlogs, categorize by agent-vs buyer-related" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM96</div>
-                <div class="project-name">RR Backlog Sampling</div>
-                <div class="project-pic">Gokila P</div>
-                <div class="project-impact">$1,451/yr <span class="project-eta">[ETA tbc]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Agent to vet through Shopbot conversation and determine the issue for non deflections" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM12</div>
-                <div class="project-name">Shopbot Non-deflected QA Assistant</div>
-                <div class="project-pic">Giaing Yap</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Bot to be able to perform RR judging based on pre-set criteria" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM13</div>
-                <div class="project-name">RR judgement assistant</div>
-                <div class="project-pic">Jc Chong, Tanushri J</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Agent to vet through Chatbot conversation and determine the issue for non deflections" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM16</div>
-                <div class="project-name">Chatbot Non-deflected QA Assistant</div>
-                <div class="project-pic">Chrishantan P</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Using LLM to better consolidate and synthesize buyer/seller feedback to NPS - improve efficiency (to review)" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM30</div>
-                <div class="project-name">NPS consolidation assistant</div>
-                <div class="project-pic">Siqi Lin</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:30 Nov 25]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="cancelled" style="background:#fecaca">
