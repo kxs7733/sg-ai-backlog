@@ -36,6 +36,7 @@ STATUS_BG = {
 # Development PIC (V), shifting Status U->W and ETA V->X. Impact (S) unchanged.
 COL_ID, COL_DOMAIN, COL_NAME, COL_DESC = 0, 1, 2, 3
 COL_IMPACT, COL_PIC, COL_STATUS, COL_ETA = 18, 19, 22, 23  # S, T, W, X
+COL_PIC_DEV = 21  # V - Development PIC, used when Business PIC (T) is blank
 
 
 def get_access_token():
@@ -109,12 +110,18 @@ def load_projects(rows):
         domain = get_cell(row, COL_DOMAIN).strip()
         if not domain:
             continue
+        # A blank Status is an unfilled cell on a real project, not a signal to
+        # hide it -- default it to the first stage rather than dropping the row.
+        status = get_cell(row, COL_STATUS).strip() or 'To Start'
+        # Business PIC (T) is the owner; fall back to Development PIC (V) when
+        # it is blank so the card names someone instead of "Not assigned".
+        pic = get_cell(row, COL_PIC).strip() or get_cell(row, COL_PIC_DEV)
         project = {
             'id': proj_id, 'domain': domain,
             'name': get_cell(row, COL_NAME),
             'description': get_cell(row, COL_DESC),
-            'status': get_cell(row, COL_STATUS).strip(),
-            'pic': get_cell(row, COL_PIC),
+            'status': status,
+            'pic': pic,
             'eta': get_cell(row, COL_ETA).strip(),
             'impact': parse_impact(get_cell(row, COL_IMPACT)),
         }
