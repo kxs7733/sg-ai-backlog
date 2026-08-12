@@ -53,14 +53,14 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $2,365,492/yr | Live Projects: $1,564,015/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 12082026 14:20 hrs</p>
+    <p class="subtitle">Total Impact: $2,365,492/yr | Live Projects: $1,612,015/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 13082026 00:46 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
-            <option value="SPX">SPX (20 projects, $650,648/yr, Live: $508,088)</option>
+            <option value="SPX">SPX (21 projects, $650,648/yr, Live: $556,088)</option>
             <option value="OPS">OPS (46 projects, $602,317/yr, Live: $478,065)</option>
             <option value="MKT">MKT (72 projects, $513,539/yr, Live: $339,371)</option>
             <option value="BD">BD (61 projects, $327,941/yr, Live: $194,455)</option>
@@ -70,7 +70,7 @@
         </select>
     </div>
     <div class="legend" id="legend">
-<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($650,648/yr, Live: $508,088, 20 projects)</div>
+<div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($650,648/yr, Live: $556,088, 21 projects)</div>
 <div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($602,317/yr, Live: $478,065, 46 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($513,539/yr, Live: $339,371, 72 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($327,941/yr, Live: $194,455, 61 projects)</div>
@@ -81,7 +81,7 @@
 <div class="board" id="board" style="grid-template-columns: 100px repeat(7, minmax(150px, 1fr));">
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
-<div class="header-cell" data-domain="SPX">SPX<div class="impact">$650,648/yr (Live: $508,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
+<div class="header-cell" data-domain="SPX">SPX<div class="impact">$650,648/yr (Live: $556,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
 <div class="header-cell" data-domain="OPS">OPS<div class="impact">$602,317/yr (Live: $478,065)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="MKT">MKT<div class="impact">$513,539/yr (Live: $339,371)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$327,941/yr (Live: $194,455)</div><div class="highlight-impact" id="hi-BD"></div></div>
@@ -338,14 +338,8 @@
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">7</span></div>
+<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">6</span></div>
 <div class="cell" data-domain="SPX" data-status="poc" style="background:#fef3c7">
-<div class="project" style="border-left-color:#f97316" data-impact="48000" data-domain="SPX" data-tooltip="It is an app for drivers to validate that they are sorting in a multistory carpark insteaed of unauthorized area" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM153</div>
-                <div class="project-name">MSCP Audit App</div>
-                <div class="project-pic">Clarence Theng</div>
-                <div class="project-impact">$48,000/yr <span class="project-eta">[ETA:5 Jun 26]</span></div>
-            </div>
 <div class="project" style="border-left-color:#f97316" data-impact="14400" data-domain="SPX" data-tooltip="To verify the Collection Point Invoice against billing pay out amount on a monthly basis. Estimated 350 invoice check per month" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM168</div>
                 <div class="project-name">Collection Point Invoice Validation </div>
@@ -617,7 +611,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">105</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">107</span></div>
 <div class="cell" data-domain="SPX" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#f97316" data-impact="360000" data-domain="SPX" data-tooltip="Problem Statement: Every month around 1300+ parcels are being lost due to damaged/missing labels, miswritten TNs. Manual recovery efforts are time consuming and only yield a 20% to 30% success rate, leading to significant loss. SPX compensates buyers and seller for all these lost parcels.  Solution:" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM117</div>
@@ -628,6 +622,12 @@
 <div class="project" style="border-left-color:#f97316" data-impact="48000" data-domain="SPX" data-tooltip="A bot that can send agency report directly and alert to different SPX layers based on threshold" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM06</div>
                 <div class="project-name">Agency bot system</div>
+                <div class="project-pic">Clarence Theng</div>
+                <div class="project-impact">$48,000/yr</div>
+            </div>
+<div class="project" style="border-left-color:#f97316" data-impact="48000" data-domain="SPX" data-tooltip="It is an app for drivers to validate that they are sorting in a multistory carpark insteaed of unauthorized area" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM153</div>
+                <div class="project-name">MSCP Audit App</div>
                 <div class="project-pic">Clarence Theng</div>
                 <div class="project-impact">$48,000/yr</div>
             </div>
@@ -666,6 +666,11 @@
                 <div class="project-name">HSE Report Seatalk Bot</div>
                 <div class="project-pic">Mika Lin</div>
                 <div class="project-impact">$1,688/yr</div>
+            </div>
+<div class="project" style="border-left-color:#f97316" data-impact="0" data-domain="SPX" data-tooltip="A web-based training application that allows drivers to learn and practise SPX Locker operations through an interactive simulation, followed by a quiz to validate their understanding." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM232</div>
+                <div class="project-name">SPX Locker Simulator</div>
+                <div class="project-pic">Clarence Theng</div>
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="live" style="background:#bbf7d0">
