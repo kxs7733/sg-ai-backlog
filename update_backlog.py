@@ -12,7 +12,9 @@ import requests
 
 # Config
 SPREADSHEET_ID = '1gRPcXtBQcSayTvJ1Gp9Z02Zls_HaiN5bDYNvTw9n9RQ'
-SHEET_RANGE = 'SG Project Overview!A2:Y200'
+# Open-ended row bound: a hardcoded cap (was A2:Y200) silently truncated every
+# project past that sheet row as the backlog grew.
+SHEET_RANGE = 'SG Project Overview!A2:Y'
 OUTPUT_FILE = 'index.html'
 
 DOMAIN_COLORS = {
