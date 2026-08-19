@@ -53,8 +53,8 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $2,564,441/yr | Live Projects: $1,889,403/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 19082026 00:19 hrs</p>
+    <p class="subtitle">Total Impact: $2,617,199/yr | Live Projects: $1,942,161/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 20082026 00:19 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
@@ -64,8 +64,8 @@
             <option value="OPS">OPS (48 projects, $610,897/yr, Live: $486,645)</option>
             <option value="MKT">MKT (72 projects, $513,539/yr, Live: $339,371)</option>
             <option value="BD">BD (58 projects, $290,489/yr, Live: $190,843)</option>
+            <option value="SBS">SBS (10 projects, $280,579/yr, Live: $246,739)</option>
             <option value="WH">WH (17 projects, $270,687/yr, Live: $122,115)</option>
-            <option value="SBS">SBS (10 projects, $227,821/yr, Live: $193,981)</option>
             <option value="Product">Product (1 projects, $360/yr, Live: $360)</option>
             <option value="BI">BI (3 projects, $0/yr, Live: $0)</option>
         </select>
@@ -75,8 +75,8 @@
 <div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($610,897/yr, Live: $486,645, 48 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($513,539/yr, Live: $339,371, 72 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($290,489/yr, Live: $190,843, 58 projects)</div>
+<div class="legend-item" data-domain="SBS"><div class="legend-color" style="background:#6b7280"></div>SBS ($280,579/yr, Live: $246,739, 10 projects)</div>
 <div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($270,687/yr, Live: $122,115, 17 projects)</div>
-<div class="legend-item" data-domain="SBS"><div class="legend-color" style="background:#6b7280"></div>SBS ($227,821/yr, Live: $193,981, 10 projects)</div>
 <div class="legend-item" data-domain="Product"><div class="legend-color" style="background:#ec4899"></div>Product ($360/yr, Live: $360, 1 projects)</div>
 <div class="legend-item" data-domain="BI"><div class="legend-color" style="background:#14b8a6"></div>BI ($0/yr, Live: $0, 3 projects)</div>
 </div>
@@ -87,8 +87,8 @@
 <div class="header-cell" data-domain="OPS">OPS<div class="impact">$610,897/yr (Live: $486,645)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="MKT">MKT<div class="impact">$513,539/yr (Live: $339,371)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$290,489/yr (Live: $190,843)</div><div class="highlight-impact" id="hi-BD"></div></div>
+<div class="header-cell" data-domain="SBS">SBS<div class="impact">$280,579/yr (Live: $246,739)</div><div class="highlight-impact" id="hi-SBS"></div></div>
 <div class="header-cell" data-domain="WH">WH<div class="impact">$270,687/yr (Live: $122,115)</div><div class="highlight-impact" id="hi-WH"></div></div>
-<div class="header-cell" data-domain="SBS">SBS<div class="impact">$227,821/yr (Live: $193,981)</div><div class="highlight-impact" id="hi-SBS"></div></div>
 <div class="header-cell" data-domain="Product">Product<div class="impact">$360/yr (Live: $360)</div><div class="highlight-impact" id="hi-Product"></div></div>
 <div class="header-cell" data-domain="BI">BI<div class="impact">$0/yr (Live: $0)</div><div class="highlight-impact" id="hi-BI"></div></div>
 </div>
@@ -293,6 +293,8 @@
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
+<div class="cell" data-domain="SBS" data-status="to-start" style="background:#f3f4f6">
+</div>
 <div class="cell" data-domain="WH" data-status="to-start" style="background:#f3f4f6">
 <div class="project" style="border-left-color:#6366f1" data-impact="58000" data-domain="WH" data-tooltip="A bot does a daily sweep of every SKU's location to check if they are in the right place based on their hotness, and suggest opportunities to improve layout. Barring other contraints, every SKU's distance to OB station should be inversely proportional to their hotness. This bot will look at all thes" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM60</div>
@@ -324,8 +326,6 @@
                 <div class="project-pic">Not assigned</div>
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
-</div>
-<div class="cell" data-domain="SBS" data-status="to-start" style="background:#f3f4f6">
 </div>
 <div class="cell" data-domain="Product" data-status="to-start" style="background:#f3f4f6">
 </div>
@@ -388,9 +388,9 @@
 </div>
 <div class="cell" data-domain="BD" data-status="poc" style="background:#fef3c7">
 </div>
-<div class="cell" data-domain="WH" data-status="poc" style="background:#fef3c7">
-</div>
 <div class="cell" data-domain="SBS" data-status="poc" style="background:#fef3c7">
+</div>
+<div class="cell" data-domain="WH" data-status="poc" style="background:#fef3c7">
 </div>
 <div class="cell" data-domain="Product" data-status="poc" style="background:#fef3c7">
 </div>
@@ -519,8 +519,6 @@
                 <div class="project-impact">$149/yr <span class="project-eta">[ETA:1 Aug 26]</span></div>
             </div>
 </div>
-<div class="cell" data-domain="WH" data-status="design-and-build" style="background:#dbeafe">
-</div>
 <div class="cell" data-domain="SBS" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#6b7280" data-impact="13680" data-domain="SBS" data-tooltip="Retail Acquisition team goes through many supplier catalogues now to find SKUs worth buying, by manually matching these SKUs to our sales data This is very time consuming because format of item name, variant etc can vary a lot, and it's hard to estimate the true total ADIS of all the same items sold" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM148</div>
@@ -528,6 +526,8 @@
                 <div class="project-pic">Pang Jun Jie, Crystal Liyue</div>
                 <div class="project-impact">$13,680/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
+</div>
+<div class="cell" data-domain="WH" data-status="design-and-build" style="background:#dbeafe">
 </div>
 <div class="cell" data-domain="Product" data-status="design-and-build" style="background:#dbeafe">
 </div>
@@ -578,6 +578,8 @@
 </div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
 </div>
+<div class="cell" data-domain="SBS" data-status="parallel-run" style="background:#d1fae5">
+</div>
 <div class="cell" data-domain="WH" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#6366f1" data-impact="70500" data-domain="WH" data-tooltip="- Digitalises hardcopy delivery orders (DO) - Semantic check on product descriptions, matches to ASN SKU list - Identifies the correct quantity type and count based on item desecription (carton, bundles, single piece)" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM146</div>
@@ -597,8 +599,6 @@
                 <div class="project-pic">Fadhli Hamza, Nicholas Cheungzy</div>
                 <div class="project-impact">$4,080/yr <span class="project-eta">[ETA:20 Mar 26]</span></div>
             </div>
-</div>
-<div class="cell" data-domain="SBS" data-status="parallel-run" style="background:#d1fae5">
 </div>
 <div class="cell" data-domain="Product" data-status="parallel-run" style="background:#d1fae5">
 </div>
@@ -1221,6 +1221,55 @@
                 <div class="project-pic">Not assigned</div>
             </div>
 </div>
+<div class="cell" data-domain="SBS" data-status="live" style="background:#bbf7d0">
+<div class="project" style="border-left-color:#6b7280" data-impact="123558" data-domain="SBS" data-tooltip="Develop an LLM-based model to assess whether listing images meet quality standards, and generate replacement images when needed. This includes:  Detecting incorrect vs. correct images Editing existing images to improve resolution, remove unnecessary details, and preserve image integrity Sourcing rep" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM237</div>
+                <div class="project-name">Listing Optimisation (Item Images)</div>
+                <div class="project-pic">Nicholas Leewc</div>
+                <div class="project-impact">$123,558/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="45936" data-domain="SBS" data-tooltip="Built a Smart Platform workflow that outputs mp_sku_ids with negative PC1$, item/model name, supplier, and date of occurrence in a Seatalk chat group. The Bot tags relevant merch PICs for rectification on a daily basis after pricing report is refreshed." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM233</div>
+                <div class="project-name">Retail Negative PC1 Margins Reminder Bot</div>
+                <div class="project-pic">Cheechung Chau</div>
+                <div class="project-impact">$45,936/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="37584" data-domain="SBS" data-tooltip="Developed a AppsScript algorithm to automatically match skus from Retail vs competitor skus using Brand, Item Name, Model Name. - Algorithm can be modified to match Brand + Item Name only as well - Useful for large datasets e.g. SMart currently at ~9k skus vs Redmart at ~103k skus" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM236</div>
+                <div class="project-name">Retail-to-Competitor SKU Matching Automation</div>
+                <div class="project-pic">Cheechung Chau</div>
+                <div class="project-impact">$37,584/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="17706" data-domain="SBS" data-tooltip="Claude-powered tool to help KAMs to automatically map new skus to RedMart and MP competitors based on brand and item name" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM239</div>
+                <div class="project-name">New SKU mapping</div>
+                <div class="project-pic">Nicholas Leewc</div>
+                <div class="project-impact">$17,706/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="16572" data-domain="SBS" data-tooltip="Developed to streamline and eliminate the manual effort involved in redmart product price checking." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM241</div>
+                <div class="project-name">Redmart Price Pull Bot</div>
+                <div class="project-pic">Yin Zhi Chua</div>
+                <div class="project-impact">$16,572/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="3612" data-domain="SBS" data-tooltip="To help recognizing voucher mechanics in listing image from redmart so we can counter their redmart voucher" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM62</div>
+                <div class="project-name">Lazada Image Scraper</div>
+                <div class="project-pic">Jonathan Gohah, Michal Borowik</div>
+                <div class="project-impact">$3,612/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="1771" data-domain="SBS" data-tooltip="Alert Bot to ping PICs whenever vouchers usage exceed threshold" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM240</div>
+                <div class="project-name">Voucher Bot Alert</div>
+                <div class="project-pic">Nicholas Leewc</div>
+                <div class="project-impact">$1,771/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="0" data-domain="SBS" data-tooltip="Utilise Claude to generate a new set of listing title and description based on set requirements" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM238</div>
+                <div class="project-name">Listing Optimisation (Item Title + Description)</div>
+                <div class="project-pic">Nicholas Leewc</div>
+            </div>
+</div>
 <div class="cell" data-domain="WH" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#6366f1" data-impact="64000" data-domain="WH" data-tooltip="A bot that analyzes each WH operator's performance on the day before, and provide some feedback vs their usual performance. This shortens feedback cycle to operators.  Context:  - Our incentive for each operator is calculated at monthly level. Usually feedback cycle is too long. - A daily feedback g" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM57</div>
@@ -1267,55 +1316,6 @@
                 <div class="project-id">SGLLM219</div>
                 <div class="project-name">ASN Closing Status Summary Tool</div>
                 <div class="project-pic">Not assigned</div>
-            </div>
-</div>
-<div class="cell" data-domain="SBS" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#6b7280" data-impact="70800" data-domain="SBS" data-tooltip="Develop an LLM-based model to assess whether listing images meet quality standards, and generate replacement images when needed. This includes:  Detecting incorrect vs. correct images Editing existing images to improve resolution, remove unnecessary details, and preserve image integrity Sourcing rep" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM237</div>
-                <div class="project-name">Listing Optimisation (Item Images)</div>
-                <div class="project-pic">Nicholas Leewc</div>
-                <div class="project-impact">$70,800/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6b7280" data-impact="45936" data-domain="SBS" data-tooltip="Built a Smart Platform workflow that outputs mp_sku_ids with negative PC1$, item/model name, supplier, and date of occurrence in a Seatalk chat group. The Bot tags relevant merch PICs for rectification on a daily basis after pricing report is refreshed." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM233</div>
-                <div class="project-name">Retail Negative PC1 Margins Reminder Bot</div>
-                <div class="project-pic">Cheechung Chau</div>
-                <div class="project-impact">$45,936/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6b7280" data-impact="37584" data-domain="SBS" data-tooltip="Developed a AppsScript algorithm to automatically match skus from Retail vs competitor skus using Brand, Item Name, Model Name. - Algorithm can be modified to match Brand + Item Name only as well - Useful for large datasets e.g. SMart currently at ~9k skus vs Redmart at ~103k skus" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM236</div>
-                <div class="project-name">Retail-to-Competitor SKU Matching Automation</div>
-                <div class="project-pic">Cheechung Chau</div>
-                <div class="project-impact">$37,584/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6b7280" data-impact="17706" data-domain="SBS" data-tooltip="Claude-powered tool to help KAMs to automatically map new skus to RedMart and MP competitors based on brand and item name" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM239</div>
-                <div class="project-name">New SKU mapping</div>
-                <div class="project-pic">Nicholas Leewc</div>
-                <div class="project-impact">$17,706/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6b7280" data-impact="16572" data-domain="SBS" data-tooltip="Developed to streamline and eliminate the manual effort involved in redmart product price checking." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM241</div>
-                <div class="project-name">Redmart Price Pull Bot</div>
-                <div class="project-pic">Yin Zhi Chua</div>
-                <div class="project-impact">$16,572/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6b7280" data-impact="3612" data-domain="SBS" data-tooltip="To help recognizing voucher mechanics in listing image from redmart so we can counter their redmart voucher" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM62</div>
-                <div class="project-name">Lazada Image Scraper</div>
-                <div class="project-pic">Jonathan Gohah, Michal Borowik</div>
-                <div class="project-impact">$3,612/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6b7280" data-impact="1771" data-domain="SBS" data-tooltip="Alert Bot to ping PICs whenever vouchers usage exceed threshold" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM240</div>
-                <div class="project-name">Voucher Bot Alert</div>
-                <div class="project-pic">Nicholas Leewc</div>
-                <div class="project-impact">$1,771/yr</div>
-            </div>
-<div class="project" style="border-left-color:#6b7280" data-impact="0" data-domain="SBS" data-tooltip="Utilise Claude to generate a new set of listing title and description based on set requirements" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM238</div>
-                <div class="project-name">Listing Optimisation (Item Title + Description)</div>
-                <div class="project-pic">Nicholas Leewc</div>
             </div>
 </div>
 <div class="cell" data-domain="Product" data-status="live" style="background:#bbf7d0">
@@ -1547,20 +1547,20 @@
                 <div class="project-impact">$219/yr <span class="project-eta">[ETA:31 Jul 26]</span></div>
             </div>
 </div>
-<div class="cell" data-domain="WH" data-status="cancelled" style="background:#fecaca">
-<div class="project" style="border-left-color:#6366f1" data-impact="0" data-domain="WH" data-tooltip="WH stock analyser (black stock preventer)  - On a weekly basis, send a weekly report on a) SKUs with high coverage days but we still buy stocks b) SKUs in which sales has dropped off in L30D and we likely need to discount to clear   --- Context---- - there's way too many SKUs to focus on, a thorough" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM58</div>
-                <div class="project-name">WH stock analyser (black stock preventer)</div>
-                <div class="project-pic">Kwangxiong</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:31 Dec 25]</span></div>
-            </div>
-</div>
 <div class="cell" data-domain="SBS" data-status="cancelled" style="background:#fecaca">
 <div class="project" style="border-left-color:#6b7280" data-impact="20160" data-domain="SBS" data-tooltip="AI project to automatically map supplier SKUs to marketplace listings, benchmark prices, and use historical demand to recommend competitive purchase price and buy quantity." onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM97</div>
                 <div class="project-name">AI Pricing & Demand Intelligence</div>
                 <div class="project-pic">Not assigned</div>
                 <div class="project-impact">$20,160/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+</div>
+<div class="cell" data-domain="WH" data-status="cancelled" style="background:#fecaca">
+<div class="project" style="border-left-color:#6366f1" data-impact="0" data-domain="WH" data-tooltip="WH stock analyser (black stock preventer)  - On a weekly basis, send a weekly report on a) SKUs with high coverage days but we still buy stocks b) SKUs in which sales has dropped off in L30D and we likely need to discount to clear   --- Context---- - there's way too many SKUs to focus on, a thorough" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM58</div>
+                <div class="project-name">WH stock analyser (black stock preventer)</div>
+                <div class="project-pic">Kwangxiong</div>
+                <div class="project-impact"> <span class="project-eta">[ETA:31 Dec 25]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="Product" data-status="cancelled" style="background:#fecaca">
