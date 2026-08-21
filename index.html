@@ -53,18 +53,18 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $2,616,809/yr | Live Projects: $1,937,247/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 21082026 00:22 hrs</p>
+    <p class="subtitle">Total Impact: $2,729,986/yr | Live Projects: $1,850,133/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 22082026 00:20 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
             <option value="SPX">SPX (21 projects, $650,648/yr, Live: $556,088)</option>
-            <option value="OPS">OPS (49 projects, $610,507/yr, Live: $481,731)</option>
+            <option value="OPS">OPS (49 projects, $610,507/yr, Live: $366,135)</option>
             <option value="MKT">MKT (72 projects, $513,539/yr, Live: $339,371)</option>
-            <option value="BD">BD (58 projects, $290,489/yr, Live: $190,843)</option>
-            <option value="SBS">SBS (10 projects, $280,579/yr, Live: $246,739)</option>
+            <option value="BD">BD (60 projects, $375,184/yr, Live: $190,843)</option>
+            <option value="SBS">SBS (11 projects, $309,061/yr, Live: $275,221)</option>
             <option value="WH">WH (17 projects, $270,687/yr, Live: $122,115)</option>
             <option value="Product">Product (1 projects, $360/yr, Live: $360)</option>
             <option value="BI">BI (3 projects, $0/yr, Live: $0)</option>
@@ -72,10 +72,10 @@
     </div>
     <div class="legend" id="legend">
 <div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($650,648/yr, Live: $556,088, 21 projects)</div>
-<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($610,507/yr, Live: $481,731, 49 projects)</div>
+<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($610,507/yr, Live: $366,135, 49 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($513,539/yr, Live: $339,371, 72 projects)</div>
-<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($290,489/yr, Live: $190,843, 58 projects)</div>
-<div class="legend-item" data-domain="SBS"><div class="legend-color" style="background:#6b7280"></div>SBS ($280,579/yr, Live: $246,739, 10 projects)</div>
+<div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($375,184/yr, Live: $190,843, 60 projects)</div>
+<div class="legend-item" data-domain="SBS"><div class="legend-color" style="background:#6b7280"></div>SBS ($309,061/yr, Live: $275,221, 11 projects)</div>
 <div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($270,687/yr, Live: $122,115, 17 projects)</div>
 <div class="legend-item" data-domain="Product"><div class="legend-color" style="background:#ec4899"></div>Product ($360/yr, Live: $360, 1 projects)</div>
 <div class="legend-item" data-domain="BI"><div class="legend-color" style="background:#14b8a6"></div>BI ($0/yr, Live: $0, 3 projects)</div>
@@ -84,10 +84,10 @@
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$650,648/yr (Live: $556,088)</div><div class="highlight-impact" id="hi-SPX"></div></div>
-<div class="header-cell" data-domain="OPS">OPS<div class="impact">$610,507/yr (Live: $481,731)</div><div class="highlight-impact" id="hi-OPS"></div></div>
+<div class="header-cell" data-domain="OPS">OPS<div class="impact">$610,507/yr (Live: $366,135)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="MKT">MKT<div class="impact">$513,539/yr (Live: $339,371)</div><div class="highlight-impact" id="hi-MKT"></div></div>
-<div class="header-cell" data-domain="BD">BD<div class="impact">$290,489/yr (Live: $190,843)</div><div class="highlight-impact" id="hi-BD"></div></div>
-<div class="header-cell" data-domain="SBS">SBS<div class="impact">$280,579/yr (Live: $246,739)</div><div class="highlight-impact" id="hi-SBS"></div></div>
+<div class="header-cell" data-domain="BD">BD<div class="impact">$375,184/yr (Live: $190,843)</div><div class="highlight-impact" id="hi-BD"></div></div>
+<div class="header-cell" data-domain="SBS">SBS<div class="impact">$309,061/yr (Live: $275,221)</div><div class="highlight-impact" id="hi-SBS"></div></div>
 <div class="header-cell" data-domain="WH">WH<div class="impact">$270,687/yr (Live: $122,115)</div><div class="highlight-impact" id="hi-WH"></div></div>
 <div class="header-cell" data-domain="Product">Product<div class="impact">$360/yr (Live: $360)</div><div class="highlight-impact" id="hi-Product"></div></div>
 <div class="header-cell" data-domain="BI">BI<div class="impact">$0/yr (Live: $0)</div><div class="highlight-impact" id="hi-BI"></div></div>
@@ -396,7 +396,7 @@
 </div>
 <div class="cell" data-domain="BI" data-status="poc" style="background:#fef3c7">
 </div>
-<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">20</span></div>
+<div class="status-label" data-status="design-and-build">Design & Build <span class="count-badge" style="margin-left:5px">22</span></div>
 <div class="cell" data-domain="SPX" data-status="design-and-build" style="background:#dbeafe">
 <div class="project" style="border-left-color:#f97316" data-impact="12000" data-domain="SPX" data-tooltip="To audit check FM driver's POOH Existing regional GPT Screening logic: https://docs.google.com/presentation/d/19NINMwus6cshX5SVqiM69yxBCV1q9lfELGfsEQqwCK4/edit?slide=id.g36bc38c9eaa_0_23#slide=id.g36bc38c9eaa_0_23" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM165</div>
@@ -470,6 +470,18 @@
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="design-and-build" style="background:#dbeafe">
+<div class="project" style="border-left-color:#10b981" data-impact="70329" data-domain="BD" data-tooltip="Developed to streamline and eliminate the manual effort involved in product price checking." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM243</div>
+                <div class="project-name">Competitor Model Job</div>
+                <div class="project-pic">Atq</div>
+                <div class="project-impact">$70,329/yr <span class="project-eta">[ETA:30 Sep 26]</span></div>
+            </div>
+<div class="project" style="border-left-color:#10b981" data-impact="14366" data-domain="BD" data-tooltip="Tool to review Shopee Ads Assets: - validate submitted assets vs the guideline - produce qc report" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM245</div>
+                <div class="project-name">BRUCE (Ads)</div>
+                <div class="project-pic">Kateryna</div>
+                <div class="project-impact">$14,366/yr <span class="project-eta">[ETA:30 Sep 26]</span></div>
+            </div>
 <div class="project" style="border-left-color:#10b981" data-impact="9504" data-domain="BD" data-tooltip="Daily report and follow up with FBS specialist" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM186</div>
                 <div class="project-name">Inbound trouble shoot reporting</div>
@@ -533,7 +545,7 @@
 </div>
 <div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
 </div>
-<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">11</span></div>
+<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">10</span></div>
 <div class="cell" data-domain="SPX" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#f97316" data-impact="24000" data-domain="SPX" data-tooltip="To help better check on driver's productivity using (1) parcels/hr (2) idling time" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM63</div>
@@ -543,11 +555,11 @@
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="parallel-run" style="background:#d1fae5">
-<div class="project" style="border-left-color:#3b82f6" data-impact="8580" data-domain="OPS" data-tooltip="similar with SGLLM162 but for Payment team to gather information from bank-escalated dispute cases" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM201</div>
-                <div class="project-name">Buyer Chargeback Dispute - Payment/SPP</div>
-                <div class="project-pic">Nadhira Hamidun, Jiawen Lai</div>
-                <div class="project-impact">$8,580/yr <span class="project-eta">[ETA:27 Jul 26]</span></div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="124410" data-domain="OPS" data-tooltip="Bot to analyze which seller contributes loss, detect if able to recover loss from on-going orders, check buyer-seller collusion." onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM167</div>
+                <div class="project-name">Review Negative Escrow Bot</div>
+                <div class="project-pic">Gokila P, Tanushri J</div>
+                <div class="project-impact">$124,410/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
             </div>
 <div class="project" style="border-left-color:#3b82f6" data-impact="4118" data-domain="OPS" data-tooltip="To screen chats & identify if sellers are sending empty parcels, and to bucket into two broad intent (false fulfilment to bypass fulfillment policies OR fraudulent behavior)." onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM149</div>
@@ -560,12 +572,6 @@
                 <div class="project-name">Buyer order cancellation abuse</div>
                 <div class="project-pic">Edison Tan</div>
                 <div class="project-impact">$4,055/yr <span class="project-eta">[ETA:30 Jul 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="234" data-domain="OPS" data-tooltip="Bot to generate file for NDD SKU upload. Output will be in CSV format for the 1st attempt & retry failed SKU with full summary, whichever required by user" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM242</div>
-                <div class="project-name">NDD SKU File Generator</div>
-                <div class="project-pic">Kaixin Lim</div>
-                <div class="project-impact">$234/yr <span class="project-eta">[ETA:19 Aug 26]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="parallel-run" style="background:#d1fae5">
@@ -616,7 +622,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">118</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">120</span></div>
 <div class="cell" data-domain="SPX" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#f97316" data-impact="360000" data-domain="SPX" data-tooltip="Problem Statement: Every month around 1300+ parcels are being lost due to damaged/missing labels, miswritten TNs. Manual recovery efforts are time consuming and only yield a 20% to 30% success rate, leading to significant loss. SPX compensates buyers and seller for all these lost parcels.  Solution:" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM117</div>
@@ -679,12 +685,6 @@
             </div>
 </div>
 <div class="cell" data-domain="OPS" data-status="live" style="background:#bbf7d0">
-<div class="project" style="border-left-color:#3b82f6" data-impact="124410" data-domain="OPS" data-tooltip="Bot to analyze which seller contributes loss, detect if able to recover loss from on-going orders, check buyer-seller collusion." onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM167</div>
-                <div class="project-name">Review Negative Escrow Bot</div>
-                <div class="project-pic">Gokila P, Tanushri J</div>
-                <div class="project-impact">$124,410/yr</div>
-            </div>
 <div class="project" style="border-left-color:#3b82f6" data-impact="74484" data-domain="OPS" data-tooltip="Gemini model that reviews product listings to identify counterfeit risks by checking brand consistency, spotting suspicious naming patterns, comparing prices with the market, and then classifying items as Safe to sell, Needs manual review, Potentially counterfeit, or Unbranded / Cannot verify" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM02</div>
                 <div class="project-name">Counterfeit Listing Check (CLC)</div>
@@ -744,6 +744,12 @@
                 <div class="project-name">Chatbot performance analysis</div>
                 <div class="project-pic">Chrishantan P</div>
                 <div class="project-impact">$9,300/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="8580" data-domain="OPS" data-tooltip="similar with SGLLM162 but for Payment team to gather information from bank-escalated dispute cases" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM201</div>
+                <div class="project-name">Buyer Chargeback Dispute - Payment/SPP</div>
+                <div class="project-pic">Nadhira Hamidun, Jiawen Lai</div>
+                <div class="project-impact">$8,580/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6" data-impact="6864" data-domain="OPS" data-tooltip="Chatbot to provide instant policy guidance and verification of QC standards for Shopee videos for frontline agents across all shifts" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM202</div>
@@ -815,6 +821,12 @@
                 <div class="project-id">SGLLM235</div>
                 <div class="project-name">SDD Volume Cap Configuration</div>
                 <div class="project-pic">Farah Hanum</div>
+                <div class="project-impact">$234/yr</div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="234" data-domain="OPS" data-tooltip="Bot to generate file for NDD SKU upload. Output will be in CSV format for the 1st attempt & retry failed SKU with full summary, whichever required by user" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM242</div>
+                <div class="project-name">NDD SKU File Generator</div>
+                <div class="project-pic">Kaixin Lim</div>
                 <div class="project-impact">$234/yr</div>
             </div>
 <div class="project" style="border-left-color:#3b82f6" data-impact="218" data-domain="OPS" data-tooltip="Automating list of unsolved WH Accelerated Refund RRs for further RR WH check" onclick="toggleHighlight(this)">
@@ -1245,6 +1257,12 @@
                 <div class="project-name">Retail-to-Competitor SKU Matching Automation</div>
                 <div class="project-pic">Cheechung Chau</div>
                 <div class="project-impact">$37,584/yr</div>
+            </div>
+<div class="project" style="border-left-color:#6b7280" data-impact="28482" data-domain="SBS" data-tooltip="Developed an Apps Script to automatically flag SBS sellers with penalty points and their corresponding violations, then notify the respective PIC via SeaTalk group chat — prompting timely outreach to sellers so they can submit appeals before accumulating 3 points and losing eligibility to join campa" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM244</div>
+                <div class="project-name">SBS Sellers Penalty Point Alert</div>
+                <div class="project-pic">Yin Zhi Chua</div>
+                <div class="project-impact">$28,482/yr</div>
             </div>
 <div class="project" style="border-left-color:#6b7280" data-impact="17706" data-domain="SBS" data-tooltip="Claude-powered tool to help KAMs to automatically map new skus to RedMart and MP competitors based on brand and item name" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM239</div>
