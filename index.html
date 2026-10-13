@@ -53,15 +53,15 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $2,854,552/yr | Live Projects: $2,040,303/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 13102026 06:39 hrs</p>
+    <p class="subtitle">Total Impact: $2,867,915/yr | Live Projects: $2,040,303/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 14102026 04:53 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
             <option value="SPX">SPX (21 projects, $706,648/yr, Live: $638,488)</option>
-            <option value="OPS">OPS (60 projects, $643,249/yr, Live: $399,953)</option>
+            <option value="OPS">OPS (60 projects, $656,612/yr, Live: $399,953)</option>
             <option value="MKT">MKT (73 projects, $535,917/yr, Live: $381,611)</option>
             <option value="BD">BD (62 projects, $371,166/yr, Live: $205,091)</option>
             <option value="SBS">SBS (11 projects, $326,525/yr, Live: $292,685)</option>
@@ -72,7 +72,7 @@
     </div>
     <div class="legend" id="legend">
 <div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($706,648/yr, Live: $638,488, 21 projects)</div>
-<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($643,249/yr, Live: $399,953, 60 projects)</div>
+<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($656,612/yr, Live: $399,953, 60 projects)</div>
 <div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($535,917/yr, Live: $381,611, 73 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($371,166/yr, Live: $205,091, 62 projects)</div>
 <div class="legend-item" data-domain="SBS"><div class="legend-color" style="background:#6b7280"></div>SBS ($326,525/yr, Live: $292,685, 11 projects)</div>
@@ -84,7 +84,7 @@
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$706,648/yr (Live: $638,488)</div><div class="highlight-impact" id="hi-SPX"></div></div>
-<div class="header-cell" data-domain="OPS">OPS<div class="impact">$643,249/yr (Live: $399,953)</div><div class="highlight-impact" id="hi-OPS"></div></div>
+<div class="header-cell" data-domain="OPS">OPS<div class="impact">$656,612/yr (Live: $399,953)</div><div class="highlight-impact" id="hi-OPS"></div></div>
 <div class="header-cell" data-domain="MKT">MKT<div class="impact">$535,917/yr (Live: $381,611)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$371,166/yr (Live: $205,091)</div><div class="highlight-impact" id="hi-BD"></div></div>
 <div class="header-cell" data-domain="SBS">SBS<div class="impact">$326,525/yr (Live: $292,685)</div><div class="highlight-impact" id="hi-SBS"></div></div>
@@ -341,6 +341,12 @@
                 <div class="project-pic">Alan Leehw, Joel Lee</div>
                 <div class="project-impact">$30,000/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="12870" data-domain="OPS" data-tooltip="Automation bot to help identify, classify and assess all lost orders (forward/ return) to compensate seller or reimbursement buyer & do wallet adjustment" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM253</div>
+                <div class="project-name">Seller Compensation & Buyer Reimbursement Automation</div>
+                <div class="project-pic">Syaeirra Nasruddin, Iryani Ghani</div>
+                <div class="project-impact">$12,870/yr <span class="project-eta">[ETA:31 Oct 26]</span></div>
+            </div>
 <div class="project" style="border-left-color:#3b82f6" data-impact="5928" data-domain="OPS" data-tooltip="AI tool to QC photo proof + dashboard tracking of RR invalid ePOOH due to buyer's fault" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM147</div>
                 <div class="project-name">RR ePOOH Validator</div>
@@ -353,17 +359,11 @@
                 <div class="project-pic">Weilin Ho</div>
                 <div class="project-impact">$3,520/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="2340" data-domain="OPS" data-tooltip="Automation bot to help identify, classify and assess all lost orders (forward/ return) to compensate seller or reimbursement buyer & do wallet adjustment" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM253</div>
-                <div class="project-name">Seller Compensation & Buyer Reimbursement Automation</div>
-                <div class="project-pic">Syaeirra Nasruddin, Iryani Ghani</div>
-                <div class="project-impact">$2,340/yr <span class="project-eta">[ETA:31 Oct 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#3b82f6" data-impact="0" data-domain="OPS" data-tooltip="Flag out convos between buyer and seller who commit potential infractions on the platform (e.g. seller redirecting buyers off-platform, sellers imposing their own RR policies)" onclick="toggleHighlight(this)">
+<div class="project" style="border-left-color:#3b82f6" data-impact="2833" data-domain="OPS" data-tooltip="Flag out convos between buyer and seller who commit potential infractions on the platform (e.g. seller redirecting buyers off-platform, sellers imposing their own RR policies)" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM257</div>
                 <div class="project-name">Chat Screener Bot</div>
                 <div class="project-pic">Edison Tan</div>
-                <div class="project-impact"> <span class="project-eta">[ETA:31 Oct 26]</span></div>
+                <div class="project-impact">$2,833/yr <span class="project-eta">[ETA:31 Oct 26]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
