@@ -14,18 +14,20 @@ html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
 html { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
 body {
   --t: min(7.4vw, 8.6vh);            /* one animal tile */
+  --sky1: #bfe8ff; --sky2: #e6f6ff; --g1: #b9e6a5; --g2: #9fd98a;   /* scenery, changed per trip */
+  --bus: #ffd32a; --bus2: #f39c12; --seat: #fff6c4; --ink: #636e72;
   --a: #ff9f43; --a2: #e67e22;       /* first group colour */
   --b: #54a0ff; --b2: #2e86de;       /* second group colour */
   font-family: ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
   font-weight: 700;
   color: #2d3436;
-  background: linear-gradient(#bfe8ff 0%, #e6f6ff 55%, #b9e6a5 55%, #9fd98a 100%);
+  background: linear-gradient(var(--sky1) 0%, var(--sky2) 55%, var(--g1) 55%, var(--g2) 100%);
   user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
   touch-action: none;
   position: relative;
 }
 button { font: inherit; color: inherit; border: none; cursor: pointer; touch-action: manipulation; }
-.screen { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center;
+.screen { position: absolute; inset: 0; z-index: 0; display: none; flex-direction: column; align-items: center;
   padding-block: 10px; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
 .screen.on { display: flex; }
 
@@ -50,34 +52,53 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 #top { width: 100%; display: flex; align-items: center; justify-content: space-between; height: 7vh; flex: none; }
 .round-btn { width: 7vh; height: 7vh; min-width: 44px; min-height: 44px; border-radius: 50%; background: rgba(255,255,255,.8);
   font-size: 3.6vh; box-shadow: 0 3px 0 rgba(0,0,0,.12); }
-#stars { display: flex; gap: 1.2vh; font-size: 4.6vh; }
-#stars span { opacity: .22; filter: grayscale(1); transition: all .4s; }
-#stars span.got { opacity: 1; filter: none; transform: scale(1.15); }
+#trip { position: relative; flex: 1; margin: 0 3vw; height: 7vh; --p: 0; }
+#trip::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; border-top: .7vh dotted rgba(128,128,128,.55); }
+#trip .dest { position: absolute; right: 0; top: 50%; transform: translateY(-50%); font-size: 6vh; line-height: 1; }
+#trip .veh { position: absolute; left: calc(var(--p) * (100% - 13vh)); top: 50%; transform: translateY(-50%); font-size: 5.4vh; line-height: 1;
+  transition: left .9s cubic-bezier(.4,0,.2,1); }
+#trip .veh span, .flip { display: inline-block; transform: scaleX(-1); }
+.floater { position: absolute; left: -16vw; top: var(--y); font-size: var(--s); opacity: .55; z-index: -1; pointer-events: none;
+  animation: drift var(--d) linear var(--dl) infinite; }
+
+#pick { justify-content: center; gap: 5vh; }
+#pick .row { display: flex; gap: 6vw; }
+.dest-btn { width: min(38vw, 38vh); height: min(38vw, 38vh); border-radius: 28%; background: #fff; box-shadow: 0 10px 0 #b2bec3;
+  font-size: min(22vw, 22vh); line-height: 1; animation: pop .5s backwards; }
+.dest-btn:nth-child(2) { animation-delay: .15s; }
+.dest-btn:active { transform: translateY(6px); box-shadow: 0 4px 0 #b2bec3; }
+#pick .q { font-size: min(12vw, 11vh); line-height: 1; animation: bob 1.6s ease-in-out infinite; }
 
 #eq { display: flex; align-items: center; gap: .35em; font-size: min(11vw, 10.5vh); line-height: 1; height: 12vh; flex: none; }
 #eq .na { color: var(--a2); } #eq .nb { color: var(--b2); }
-#eq .op { color: #636e72; font-size: .8em; }
+#eq .op { color: var(--ink); font-size: .8em; }
 #eq .ans { min-width: 1.2em; text-align: center; color: #27ae60; }
-#eq .ans.q { color: #b2bec3; }
+#eq .ans.q { color: var(--ink); opacity: .55; }
 #eq .ans.pop { animation: pop .5s; }
 
 #road { flex: none; display: flex; gap: calc(var(--t) * .35); align-items: flex-end; justify-content: center; }
-.bus { position: relative; background: #ffd32a; border: calc(var(--t) * .07) solid #f39c12; border-radius: calc(var(--t) * .38);
+.bus { position: relative; background: var(--bus); border: calc(var(--t) * .07) solid var(--bus2); border-radius: calc(var(--t) * .38);
   padding: calc(var(--t) * .16); padding-bottom: calc(var(--t) * .34); margin-bottom: calc(var(--t) * .3); }
 .bus::before, .bus::after { content: ""; position: absolute; bottom: calc(var(--t) * -.34); width: calc(var(--t) * .62); height: calc(var(--t) * .62);
   border-radius: 50%; background: radial-gradient(#dfe6e9 0 30%, #2d3436 32%); }
 .bus::before { left: 12%; } .bus::after { right: 12%; }
+.bus.nowheels::before, .bus.nowheels::after { display: none; }
+.bus .blind { position: absolute; inset: 0; z-index: 6; border-radius: calc(var(--t) * .3); background: #2c3e7a; color: #fff;
+  display: flex; align-items: center; justify-content: center; font-size: calc(var(--t) * 1.1); line-height: 1;
+  transform: scaleY(0); transform-origin: top; transition: transform .35s; pointer-events: none; }
+.bus.night .blind { transform: scaleY(1); pointer-events: auto; }
 .bus.full { animation: honk .5s; box-shadow: 0 0 0 calc(var(--t) * .08) #fff, 0 0 calc(var(--t) * .5) #fff; }
 .seats { display: grid; grid-template-columns: repeat(5, var(--t)); grid-auto-rows: var(--t); gap: calc(var(--t) * .08); }
-.seat { background: #fff6c4; border-radius: 22%; box-shadow: inset 0 3px 0 rgba(0,0,0,.12); position: relative; }
-.bus.away { transition: transform .8s cubic-bezier(.5,0,.9,.4); transform: translateX(130vw); }
+.seat { background: var(--seat); border-radius: 22%; box-shadow: inset 0 3px 0 rgba(0,0,0,.12); position: relative; }
+.bus.away { transition: transform .8s cubic-bezier(.5,0,.9,.4); transform: translateX(130vw) rotate(-2deg); }
 .bus.arrive { animation: arrive .6s cubic-bezier(.2,.8,.3,1); }
 
 #stop { flex: none; width: 100%; min-height: calc(var(--t) * 2.75); display: flex; gap: calc(var(--t) * .9); align-items: center; justify-content: center; }
 .group { position: relative; display: grid; grid-template-columns: repeat(var(--cols), var(--t)); grid-auto-rows: var(--t);
   gap: 0; padding: calc(var(--t) * .12); border-radius: calc(var(--t) * .34); background: rgba(255,255,255,.75);
   box-shadow: 0 5px 0 rgba(0,0,0,.12); touch-action: none; cursor: grab; }
-.group.hint { animation: wiggle 1.2s ease-in-out infinite; }
+.group.hint .tile { animation: jig 1.3s ease-in-out infinite; }
+.group.hint .tile:nth-child(even) { animation-delay: -.65s; }
 .group.drag { animation: none; z-index: 20; box-shadow: 0 16px 24px rgba(0,0,0,.25); transform-origin: center; }
 .group.back { transition: transform .3s; }
 .group.spent { background: none; box-shadow: none; pointer-events: none; }
@@ -111,7 +132,11 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 
 /* ---------- celebrate ---------- */
 #party { justify-content: center; gap: 3vh; text-align: center; background: rgba(255,255,255,.55); }
-#party .sticker { font-size: min(40vw, 34vh); line-height: 1; animation: pop .8s, bob 1.6s ease-in-out .8s infinite; }
+#arrive { display: flex; align-items: flex-end; justify-content: center; gap: 1vw; font-size: min(9vw, 9vh); line-height: 1; flex-wrap: wrap; }
+#arrive .place { font-size: 2em; }
+#arrive span { animation: hop .7s ease-in-out infinite; }
+#arrive span:nth-child(even) { animation-delay: -.35s; }
+#party .sticker { font-size: min(30vw, 26vh); line-height: 1; animation: pop .8s, bob 1.6s ease-in-out .8s infinite; }
 #party .row { display: flex; gap: 5vw; align-items: center; }
 #party .big-btn { width: min(24vw, 20vh); height: min(24vw, 20vh); font-size: min(12vw, 10vh); }
 #party .home-btn { background: #fff; box-shadow: 0 8px 0 #b2bec3; padding: 0; font-size: min(9vw, 8vh); width: min(18vw, 15vh); height: min(18vw, 15vh); }
@@ -134,13 +159,15 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 @keyframes hop { 0%,100% { transform: translateY(0); } 45% { transform: translateY(-38%); } }
 @keyframes bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4%) rotate(4deg); } }
 @keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-9%); } 75% { transform: translateX(9%); } }
+@keyframes jig { 0%,100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(-9%) rotate(-4deg); } 60% { transform: translateY(0) rotate(3deg); } }
+@keyframes drift { to { transform: translateX(135vw); } }
 @keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-2.5deg); } 75% { transform: rotate(2.5deg); } }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 @keyframes rise { from { transform: translateY(60%); opacity: 0; } }
 @keyframes honk { 0%,100% { transform: scale(1); } 40% { transform: scale(1.05) rotate(-1deg); } 70% { transform: scale(1.03) rotate(1deg); } }
 @keyframes arrive { from { transform: translateX(-130vw); } }
 @keyframes fall { to { transform: translateY(115vh) rotate(540deg); } }
-@media (prefers-reduced-motion: reduce) { .group.hint, #party .sticker { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .group.hint .tile, #party .sticker, .floater, #arrive span, #pick .q { animation: none; } }
 </style>
 </head>
 <body>
@@ -157,7 +184,7 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 <div id="game" class="screen">
   <div id="top">
     <button id="homeBtn" class="round-btn" aria-label="Home">🏠</button>
-    <div id="stars"></div>
+    <div id="trip"></div>
     <button id="sayBtn" class="round-btn" aria-label="Say it again">🔊</button>
   </div>
   <div id="eq"></div>
@@ -166,7 +193,13 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
   <div id="answers"></div>
 </div>
 
+<div id="pick" class="screen">
+  <div class="q">🗺️</div>
+  <div class="row" id="pickRow"></div>
+</div>
+
 <div id="party" class="screen">
+  <div id="arrive"></div>
   <div class="sticker" id="newSticker"></div>
   <div class="row">
     <button id="partyHome" class="big-btn home-btn" aria-label="Home">🏠</button>
@@ -197,9 +230,31 @@ let SPEED = 1; // tests can shrink waits via ?fast
 
 const WORDS = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen',
   'fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
-const ANIMALS = [['🐶','dog'],['🐱','cat'],['🐸','frog'],['🐰','rabbit'],['🐼','panda'],['🦊','fox'],['🐻','bear'],['🐷','pig'],
-  ['🐵','monkey'],['🐯','tiger'],['🦁','lion'],['🐮','cow'],['🐨','koala'],['🐔','chicken'],['🐧','penguin'],['🐭','mouse'],
-  ['🐹','hamster'],['🦄','unicorn'],['🐙','octopus'],['🦉','owl'],['🐢','turtle'],['🐘','elephant'],['🦒','giraffe'],['🐳','whale']];
+// emoji, one, many, noise
+const ANIMALS = [['🐶','dog','dogs','Woof woof!'],['🐱','cat','cats','Meow!'],['🐸','frog','frogs','Ribbit!'],['🐰','rabbit','rabbits','Boing boing!'],
+  ['🐼','panda','pandas','Munch munch!'],['🦊','fox','foxes','Yip yip!'],['🐻','bear','bears','Growl!'],['🐷','pig','pigs','Oink oink!'],
+  ['🐵','monkey','monkeys','Ooh ooh, ah ah!'],['🐯','tiger','tigers','Roar!'],['🦁','lion','lions','Roar!'],['🐮','cow','cows','Moo!'],
+  ['🐨','koala','koalas','Snore!'],['🐔','chicken','chickens','Cluck cluck!'],['🐧','penguin','penguins','Waddle waddle!'],['🐭','mouse','mice','Squeak!'],
+  ['🐹','hamster','hamsters','Squeak squeak!'],['🦄','unicorn','unicorns','Neigh!'],['🐙','octopus','octopuses','Blub blub!'],['🦉','owl','owls','Hoo hoo!'],
+  ['🐢','turtle','turtles','Slow and steady!'],['🐘','elephant','elephants','Toot toot!'],['🦒','giraffe','giraffes','Munch munch!'],['🐳','whale','whales','Splash!'],
+  ['🦖','dinosaur','dinosaurs','Rawr!'],['👽','alien','aliens','Bloop bloop!'],['🤖','robot','robots','Beep boop!'],['👻','ghost','ghosts','Boo!']];
+const PRAISE = ['Yes!', 'Woohoo!', 'You got it!', 'Great counting!', 'Wow!', 'Hooray!'];
+
+// Each round is a trip somewhere. Only the scenery and the vehicle change; the ten seats stay the same.
+const BASE = { sky1: '#bfe8ff', sky2: '#e6f6ff', g1: '#b9e6a5', g2: '#9fd98a', bus: '#ffd32a', bus2: '#f39c12', seat: '#fff6c4', ink: '#636e72' };
+const THEMES = [
+  { dest: '🏖️', place: 'the beach', veh: '🚌', word: 'bus', flip: true, float: '☁️', css: { g1: '#f6e3a1', g2: '#ecd27c' } },
+  { dest: '🌙', place: 'the moon', veh: '🚀', word: 'rocket', nowheels: true, float: '⭐',
+    css: { sky1: '#1b2250', sky2: '#3b3f8f', g1: '#9aa0b5', g2: '#7d8399', bus: '#dfe6f5', bus2: '#8e9ac0', seat: '#f6f8ff', ink: '#dfe6f5' } },
+  { dest: '🏝️', place: 'the island', veh: '⛵', word: 'boat', nowheels: true, float: '☁️', css: { g1: '#5cc3ee', g2: '#2e9fd6', bus: '#ff7675', bus2: '#d63031', seat: '#ffe9e8' } },
+  { dest: '🏡', place: 'the farm', veh: '🚜', word: 'tractor', flip: true, float: '☁️', css: { bus: '#7bd66f', bus2: '#3fa535', seat: '#eaffe6' } },
+  { dest: '🎂', place: 'the birthday party', veh: '🚌', word: 'bus', flip: true, float: '🎈', css: { sky1: '#ffd6ec', sky2: '#fff0f8', bus: '#ff9ff3', bus2: '#e056c1', seat: '#fff0fc' } },
+  { dest: '⛄', place: 'the snow', veh: '🚂', word: 'train', flip: true, float: '❄️', css: { sky1: '#cfe3f5', sky2: '#eef6fc', g1: '#ffffff', g2: '#e3edf5', bus: '#5fd0c5', bus2: '#2a9d8f', seat: '#e8fffb' } },
+];
+let theme = THEMES[0];
+function applyTheme(t) {
+  for (const k in BASE) document.body.style.setProperty('--' + k, (t && t.css[k]) || BASE[k]);
+}
 
 // Each step: level (which sums) + whether the game counts aloud while the animals board.
 const STEPS = [
@@ -229,11 +284,12 @@ function unlockAudio() {
     if (actx.state === 'suspended') actx.resume();
   } catch (e) {}
 }
-function tone(freq, dur = .12, type = 'sine', vol = .22, when = 0) {
+function tone(freq, dur = .12, type = 'sine', vol = .22, when = 0, to = 0) {
   if (!actx) return;
   try {
     const o = actx.createOscillator(), g = actx.createGain(), t = actx.currentTime + when;
     o.type = type; o.frequency.setValueAtTime(freq, t);
+    if (to) o.frequency.exponentialRampToValueAtTime(to, t + dur);
     g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
     o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur + .02);
   } catch (e) {}
@@ -243,6 +299,8 @@ const sfx = {
   yes: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .18, 'triangle', .22, i * .09)),
   no: () => tone(196, .22, 'sine', .18),
   honk: () => { tone(294, .16, 'square', .09); tone(370, .16, 'square', .09); },
+  vroom: () => tone(60, .8, 'sawtooth', .07, 0, 190),
+  peek: () => { tone(880, .1, 'triangle'); tone(1320, .14, 'triangle', .22, .1); },
   party: () => [523, 659, 784, 659, 784, 1047].forEach((f, i) => tone(f, .2, 'triangle', .22, i * .12)),
 };
 
@@ -323,18 +381,30 @@ function renderShelf() {
   });
 }
 
-function renderStars() {
-  $('stars').innerHTML = '';
-  for (let i = 0; i < ROUND; i++) {
-    const s = document.createElement('span'); s.textContent = '⭐'; if (i < roundDone) s.className = 'got';
-    $('stars').appendChild(s);
+// the little vehicle at the top drives one stop closer with every sum
+function renderTrip() {
+  const trip = $('trip');
+  if (!trip.querySelector('.veh')) {
+    trip.innerHTML = `<div class="dest">${theme.dest}</div><div class="veh">${theme.flip ? `<span>${theme.veh}</span>` : theme.veh}</div>`;
+  }
+  trip.style.setProperty('--p', roundDone / ROUND);
+}
+function addFloaters() {
+  document.querySelectorAll('.floater').forEach(f => f.remove());
+  for (let i = 0; i < 4; i++) {
+    const f = document.createElement('div'); f.className = 'floater'; f.textContent = theme.float;
+    f.style.setProperty('--y', (3 + i * 9 + rnd(0, 5)) + 'vh'); f.style.setProperty('--s', rnd(5, 9) + 'vh');
+    f.style.setProperty('--d', rnd(22, 40) + 's'); f.style.setProperty('--dl', -rnd(0, 30) + 's');
+    $('game').prepend(f);
   }
 }
 
 function buildBuses(n, arrive) {
   const road = $('road'); road.innerHTML = '';
   for (let i = 0; i < n; i++) {
-    const bus = document.createElement('div'); bus.className = 'bus' + (arrive ? ' arrive' : '');
+    const bus = document.createElement('div'); bus.className = 'bus' + (arrive ? ' arrive' : '') + (theme.nowheels ? ' nowheels' : '');
+    const blind = document.createElement('div'); blind.className = 'blind'; blind.textContent = '😴';
+    blind.addEventListener('pointerdown', peek); bus.appendChild(blind);
     const seats = document.createElement('div'); seats.className = 'seats';
     for (let s = 0; s < 10; s++) { const d = document.createElement('div'); d.className = 'seat'; seats.appendChild(d); }
     bus.appendChild(seats); road.appendChild(bus);
@@ -366,22 +436,25 @@ async function nextQuestion(first) {
   busy = true; phase = 'board'; seated = []; counted = 0; firstTry = true;
   const st = STEPS[state.step];
   q = makeQuestion(st.level);
-  const [ea, eb] = (() => { const x = pick(ANIMALS)[0]; let y; do { y = pick(ANIMALS)[0]; } while (y === x); return [x, y]; })();
+  q.A = pick(ANIMALS); do { q.B = pick(ANIMALS); } while (q.B === q.A);
+  q.night = !st.guided && roundDone > 0 && Math.random() < .4;   // peekaboo: answer while the animals are hidden
+  roundAnimals.push(q.A[0], q.B[0]);
   $('answers').innerHTML = '';
-  renderStars(); renderEq(false);
+  renderTrip(); renderEq(false);
   buildBuses(q.sum > 10 || st.level >= 3 ? 2 : 1, true);
   const stop = $('stop'); stop.innerHTML = '';
-  stop.appendChild(buildGroup(q.a, 'a', ea));
-  stop.appendChild(buildGroup(q.b, 'b', eb));
+  stop.appendChild(buildGroup(q.a, 'a', q.A[0]));
+  stop.appendChild(buildGroup(q.b, 'b', q.B[0]));
   await sleep(first ? 300 : 500);
   if (!alive(id)) return;
   busy = false;
-  await say(`${WORDS[q.a]} and ${WORDS[q.b]}. ${roundDone === 0 ? 'Put them on the bus!' : ''}`);
+  await say(`${cnt(q.a, q.A)} and ${cnt(q.b, q.B)}. ${roundDone === 0 ? `Put them on the ${theme.word}!` : ''}`);
 }
+const cnt = (n, A) => `${WORDS[n]} ${n === 1 ? A[1] : A[2]}`;
 
 function prompt() {
   if (!q || busy) return;
-  if (phase === 'board') say(`${WORDS[q.a]} and ${WORDS[q.b]}. Put them on the bus!`);
+  if (phase === 'board') say(`${cnt(q.a, q.A)} and ${cnt(q.b, q.B)}. Put them on the ${theme.word}!`);
   else if (phase === 'answer') say(`${WORDS[q.a]} and ${WORDS[q.b]}. How many altogether?`);
 }
 
@@ -422,7 +495,8 @@ async function board(g) {
   const guided = STEPS[state.step].guided;
   const n = +g.dataset.n, tiles = [...g.querySelectorAll('.tile')], seats = allSeats();
   const isSecond = seated.length > 0;
-  if (!guided) await say(isSecond ? `and ${WORDS[n]}` : WORDS[n]);
+  const who = g.dataset.which === 'a' ? q.A : q.B;
+  if (!guided) await say((isSecond ? 'and ' : '') + cnt(n, who));
   for (const t of tiles) {
     if (!alive(id)) return;
     const seat = seats[seated.length];
@@ -440,7 +514,7 @@ async function board(g) {
     sfx.pop(seated.length);
     if (guided) { await sleep(120); lit(t); await say(WORDS[seated.length]); }
     else await sleep(230);
-    if (seated.length === 10) { const bus = seat.closest('.bus'); bus.classList.add('full'); sfx.honk(); if (guided && q.sum > 10) await say('The bus is full! Ten!'); }
+    if (seated.length === 10) { const bus = seat.closest('.bus'); bus.classList.add('full'); sfx.honk(); if (guided && q.sum > 10) await say(`The ${theme.word} is full! Ten!`); }
   }
   if (!alive(id)) return;
   g.style.transform = '';
@@ -468,7 +542,18 @@ async function askAnswer(id) {
   });
   seated.forEach(t => t.addEventListener('pointerdown', () => tapCount(t)));
   busy = false;
-  await say('How many altogether?');
+  if (q.night) {
+    document.querySelectorAll('#road .bus').forEach(b => b.classList.add('night'));
+    await say('Shh, they are sleeping! How many altogether?');
+  } else await say('How many altogether?');
+}
+
+/* tap a sleeping bus to wake everyone up and look again */
+function peek() {
+  if (busy || !q || !q.night) return;
+  q.night = false; unlockAudio(); sfx.peek();
+  document.querySelectorAll('#road .bus').forEach(b => b.classList.remove('night'));
+  say('Peekaboo!');
 }
 
 /* the child can tap each animal on the bus to count it */
@@ -491,12 +576,14 @@ async function choose(btn, n) {
   if (n === q.sum) {
     busy = true; phase = 'done';
     btn.classList.remove('pulse'); btn.classList.add('right');
-    sfx.yes(); renderEq(true);
+    sfx.yes(); renderEq(true); confetti(9);
+    document.querySelectorAll('#road .bus').forEach(b => b.classList.remove('night'));
     seated.forEach((t, i) => setTimeout(() => { t.classList.remove('lit'); t.classList.add('hop'); }, i * 45));
     record(firstTry);
-    roundDone++; renderStars();
-    await say(`Yes! ${WORDS[q.a]} and ${WORDS[q.b]} make ${WORDS[q.sum]}!`);
+    roundDone++; renderTrip();
+    await say(`${pick(PRAISE)} ${WORDS[q.a]} and ${WORDS[q.b]} make ${WORDS[q.sum]}! ${pick([q.A, q.B])[3]}`);
     if (!alive(id)) return;
+    sfx.vroom();
     document.querySelectorAll('#road .bus').forEach(b => { b.classList.remove('arrive', 'full'); b.classList.add('away'); });
     $('stop').innerHTML = ''; $('answers').innerHTML = '';
     await sleep(750);
@@ -505,7 +592,10 @@ async function choose(btn, n) {
   } else {
     busy = true; firstTry = false;
     btn.classList.add('wrong'); sfx.no();
-    await say("Let's count together.");
+    const wasNight = q.night; q.night = false;
+    document.querySelectorAll('#road .bus').forEach(b => b.classList.remove('night'));
+    if (wasNight) sfx.peek();
+    await say(wasNight ? "Peekaboo! Let's count together." : "Let's count together.");
     // count every animal on the bus, in order
     for (let i = 0; i < seated.length; i++) {
       if (!alive(id)) return;
@@ -543,30 +633,51 @@ async function party() {
   if (!state.stickers.includes(got)) state.stickers.push(got);
   save();
   $('newSticker').textContent = ANIMALS[got][0];
+  $('arrive').innerHTML = `<span class="place">${theme.dest}</span>` + [...new Set(roundAnimals)].slice(0, 8).map(e => `<span>${e}</span>`).join('');
   show('party'); sfx.party(); confetti();
   const up = stepMsg === 'up'; stepMsg = '';
-  await say(`You did it! You got the ${ANIMALS[got][1]}!${up ? ' You are ready for bigger numbers!' : ''}`);
+  await say(`We made it to ${theme.place}! You got the ${ANIMALS[got][1]} sticker!${up ? ' You are ready for bigger numbers!' : ''}`);
 }
 
-function confetti() {
+function confetti(n = 26) {
   const bits = ['🎉', '⭐', '🎈', '✨', '💛', '💙'];
-  for (let i = 0; i < 26; i++) {
+  for (let i = 0; i < n; i++) {
     const c = document.createElement('div'); c.className = 'confetti'; c.textContent = pick(bits);
     c.style.left = rnd(0, 96) + 'vw'; c.style.animationDuration = (1.6 + Math.random() * 1.8) + 's'; c.style.animationDelay = (Math.random() * .7) + 's';
     document.body.appendChild(c); setTimeout(() => c.remove(), 4500);
   }
 }
 
+/* the child chooses where to go; then the round starts */
 function startRound() {
-  unlockAudio(); hush();
+  unlockAudio(); hush(); run++;
   document.querySelectorAll('.confetti').forEach(c => c.remove());
-  roundDone = 0; stepMsg = '';
-  show('game'); nextQuestion(true);
+  applyTheme(null);
+  const opts = [...THEMES].sort(() => Math.random() - .5).filter(t => t !== theme).slice(0, 2);
+  const row = $('pickRow'); row.innerHTML = '';
+  opts.forEach(t => {
+    const b = document.createElement('button'); b.className = 'dest-btn'; b.textContent = t.dest; b.setAttribute('aria-label', t.place);
+    b.addEventListener('click', () => beginTrip(t));
+    row.appendChild(b);
+  });
+  show('pick');
+  say('Where shall we go?');
+}
+let roundAnimals = [];
+function beginTrip(t) {
+  unlockAudio();
+  theme = t; applyTheme(t);
+  roundDone = 0; stepMsg = ''; roundAnimals = [];
+  $('trip').innerHTML = ''; addFloaters();
+  show('game');
+  say(`Let's go to ${t.place}!`).then(() => { if (phase === 'trip') nextQuestion(true); });
+  phase = 'trip'; q = null; $('eq').innerHTML = ''; $('road').innerHTML = ''; $('stop').innerHTML = ''; $('answers').innerHTML = '';
+  renderTrip();
 }
 function goHome() {
   run++; hush(); busy = false; phase = 'idle'; q = null;
   document.querySelectorAll('.confetti').forEach(c => c.remove());
-  renderShelf(); show('home');
+  applyTheme(null); renderShelf(); show('home');
 }
 
 /* ---------- wiring ---------- */
@@ -614,7 +725,7 @@ document.addEventListener('contextmenu', e => { if (!e.target.closest('#panel'))
 document.addEventListener('dblclick', e => e.preventDefault());
 
 if (/[?&]fast\b/.test(location.search)) { SPEED = .05; state.voice = false; }
-window.__game = { state, STEPS, get q() { return q; }, get phase() { return phase; }, get busy() { return busy; } };
+window.__game = { state, STEPS, get theme() { return theme; }, get q() { return q; }, get phase() { return phase; }, get busy() { return busy; } };
 renderShelf();
 })();
 </script>
