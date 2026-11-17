@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Animal Bus">
+<meta name="theme-color" content="#bfe8ff">
+<title>Animal Bus Math</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+body {
+  --t: min(7.4vw, 8.6vh);            /* one animal tile */
+  --a: #ff9f43; --a2: #e67e22;       /* first group colour */
+  --b: #54a0ff; --b2: #2e86de;       /* second group colour */
+  font-family: ui-rounded, "SF Pro Rounded", "Arial Rounded MT Bold", "Trebuchet MS", system-ui, sans-serif;
+  font-weight: 700;
+  color: #2d3436;
+  background: linear-gradient(#bfe8ff 0%, #e6f6ff 55%, #b9e6a5 55%, #9fd98a 100%);
+  user-select: none; -webkit-user-select: none; -webkit-touch-callout: none;
+  touch-action: none;
+  position: fixed; inset: 0;
+}
+button { font: inherit; color: inherit; border: none; cursor: pointer; touch-action: manipulation; }
+.screen { position: absolute; inset: 0; display: none; flex-direction: column; align-items: center;
+  padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right)) max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); }
+.screen.on { display: flex; }
+
+/* ---------- home ---------- */
+#home { justify-content: center; gap: 3vh; text-align: center; }
+#home h1 { font-size: min(11vw, 10vh); color: #e67e22; text-shadow: 0 4px 0 #fff; line-height: 1; }
+#home .hero { font-size: min(13vw, 12vh); line-height: 1; }
+.big-btn { width: min(34vw, 30vh); height: min(34vw, 30vh); border-radius: 50%; background: #2ecc71;
+  box-shadow: 0 10px 0 #1e9e55; color: #fff; font-size: min(17vw, 15vh); line-height: 1;
+  display: flex; align-items: center; justify-content: center; padding-left: 2%; }
+.big-btn:active { transform: translateY(6px); box-shadow: 0 4px 0 #1e9e55; }
+#shelf { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 92vw; min-height: 7vh;
+  background: rgba(255,255,255,.6); border-radius: 22px; padding: 10px 16px; font-size: min(6vw, 5.4vh); }
+#shelf .empty { opacity: .25; filter: grayscale(1); }
+#gear { position: absolute; top: max(10px, env(safe-area-inset-top)); right: 14px; width: 48px; height: 48px;
+  border-radius: 50%; background: rgba(255,255,255,.55); font-size: 24px; opacity: .6; }
+#gearhint { position: absolute; top: 64px; right: 14px; font-size: 13px; font-weight: 400; opacity: 0;
+  transition: opacity .3s; background: #fff; padding: 4px 10px; border-radius: 10px; }
+
+/* ---------- game ---------- */
+#game { justify-content: space-between; }
+#top { width: 100%; display: flex; align-items: center; justify-content: space-between; height: 7vh; flex: none; }
+.round-btn { width: 7vh; height: 7vh; min-width: 44px; min-height: 44px; border-radius: 50%; background: rgba(255,255,255,.8);
+  font-size: 3.6vh; box-shadow: 0 3px 0 rgba(0,0,0,.12); }
+#stars { display: flex; gap: 1.2vh; font-size: 4.6vh; }
+#stars span { opacity: .22; filter: grayscale(1); transition: all .4s; }
+#stars span.got { opacity: 1; filter: none; transform: scale(1.15); }
+
+#eq { display: flex; align-items: center; gap: .35em; font-size: min(11vw, 10.5vh); line-height: 1; height: 12vh; flex: none; }
+#eq .na { color: var(--a2); } #eq .nb { color: var(--b2); }
+#eq .op { color: #636e72; font-size: .8em; }
+#eq .ans { min-width: 1.2em; text-align: center; color: #27ae60; }
+#eq .ans.q { color: #b2bec3; }
+#eq .ans.pop { animation: pop .5s; }
+
+#road { flex: none; display: flex; gap: calc(var(--t) * .35); align-items: flex-end; justify-content: center; }
+.bus { position: relative; background: #ffd32a; border: calc(var(--t) * .07) solid #f39c12; border-radius: calc(var(--t) * .38);
+  padding: calc(var(--t) * .16); padding-bottom: calc(var(--t) * .34); margin-bottom: calc(var(--t) * .3); }
+.bus::before, .bus::after { content: ""; position: absolute; bottom: calc(var(--t) * -.34); width: calc(var(--t) * .62); height: calc(var(--t) * .62);
+  border-radius: 50%; background: radial-gradient(#dfe6e9 0 30%, #2d3436 32%); }
+.bus::before { left: 12%; } .bus::after { right: 12%; }
+.bus.full { animation: honk .5s; box-shadow: 0 0 0 calc(var(--t) * .08) #fff, 0 0 calc(var(--t) * .5) #fff; }
+.seats { display: grid; grid-template-columns: repeat(5, var(--t)); grid-auto-rows: var(--t); gap: calc(var(--t) * .08); }
+.seat { background: #fff6c4; border-radius: 22%; box-shadow: inset 0 3px 0 rgba(0,0,0,.12); position: relative; }
+.bus.away { transition: transform .8s cubic-bezier(.5,0,.9,.4); transform: translateX(130vw); }
+.bus.arrive { animation: arrive .6s cubic-bezier(.2,.8,.3,1); }
+
+#stop { flex: none; width: 100%; min-height: calc(var(--t) * 2.75); display: flex; gap: calc(var(--t) * .9); align-items: center; justify-content: center; }
+.group { position: relative; display: grid; grid-template-columns: repeat(var(--cols), var(--t)); grid-auto-rows: var(--t);
+  gap: 0; padding: calc(var(--t) * .12); border-radius: calc(var(--t) * .34); background: rgba(255,255,255,.75);
+  box-shadow: 0 5px 0 rgba(0,0,0,.12); touch-action: none; cursor: grab; }
+.group.hint { animation: wiggle 1.2s ease-in-out infinite; }
+.group.drag { animation: none; z-index: 20; box-shadow: 0 16px 24px rgba(0,0,0,.25); transform-origin: center; }
+.group.back { transition: transform .3s; }
+.group.spent { background: none; box-shadow: none; pointer-events: none; }
+.group .lbl { position: absolute; top: calc(var(--t) * -.66); left: 50%; transform: translateX(-50%); font-size: calc(var(--t) * .62);
+  line-height: 1; background: #fff; border-radius: 999px; padding: .08em .42em; box-shadow: 0 3px 0 rgba(0,0,0,.12); }
+.group.ga .lbl { color: var(--a2); } .group.gb .lbl { color: var(--b2); }
+.group.spent .lbl { display: none; }
+
+.tile { width: var(--t); height: var(--t); border-radius: 22%; display: flex; align-items: center; justify-content: center;
+  font-size: calc(var(--t) * .62); line-height: 1; position: relative; border: calc(var(--t) * .05) solid; }
+.tile.ta { background: var(--a); border-color: var(--a2); }
+.tile.tb { background: var(--b); border-color: var(--b2); }
+.seat .tile { position: absolute; inset: 0; z-index: 2; }
+.tile.lit { animation: pop .45s; box-shadow: 0 0 0 calc(var(--t) * .08) #fff; z-index: 3; }
+.tile.hop { animation: hop .5s; }
+.tile .badge { position: absolute; top: -18%; right: -18%; min-width: 1.5em; height: 1.5em; padding: 0 .25em; border-radius: 999px; background: #fff; color: #2d3436;
+  font-size: calc(var(--t) * .3); display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 0 rgba(0,0,0,.2); z-index: 4; }
+
+#answers { flex: none; height: calc(var(--t) * 1.75); display: flex; gap: calc(var(--t) * .5); align-items: center; justify-content: center; }
+.choice { width: calc(var(--t) * 2.3); height: calc(var(--t) * 1.6); border-radius: calc(var(--t) * .36); background: #fff;
+  box-shadow: 0 6px 0 #b2bec3; font-size: calc(var(--t) * .95); line-height: 1; display: flex; align-items: center; justify-content: center; gap: .22em;
+  animation: rise .35s backwards; }
+.choice:active { transform: translateY(4px); box-shadow: 0 2px 0 #b2bec3; }
+.choice.wrong { opacity: .25; pointer-events: none; animation: shake .4s; }
+.choice.right { background: #2ecc71; color: #fff; box-shadow: 0 6px 0 #1e9e55; animation: pop .5s; }
+.choice.pulse { animation: pulse .9s infinite; }
+.dots { display: grid; grid-template-columns: repeat(5, 1fr); gap: calc(var(--t) * .028); align-content: center; }
+.dots i { width: calc(var(--t) * .085); height: calc(var(--t) * .085); border-radius: 50%; background: #636e72; }
+.dots i.gap { margin-top: calc(var(--t) * .05); }
+.choice.right .dots i { background: #fff; }
+
+/* ---------- celebrate ---------- */
+#party { justify-content: center; gap: 3vh; text-align: center; background: rgba(255,255,255,.55); }
+#party .sticker { font-size: min(40vw, 34vh); line-height: 1; animation: pop .8s, bob 1.6s ease-in-out .8s infinite; }
+#party .row { display: flex; gap: 5vw; align-items: center; }
+#party .big-btn { width: min(24vw, 20vh); height: min(24vw, 20vh); font-size: min(12vw, 10vh); }
+#party .home-btn { background: #fff; box-shadow: 0 8px 0 #b2bec3; padding: 0; font-size: min(9vw, 8vh); width: min(18vw, 15vh); height: min(18vw, 15vh); }
+.confetti { position: fixed; top: -8vh; font-size: 5vh; animation: fall linear forwards; pointer-events: none; z-index: 50; }
+
+/* ---------- parent panel ---------- */
+#panel { position: absolute; inset: 0; background: rgba(0,0,0,.45); display: none; align-items: center; justify-content: center; z-index: 100; touch-action: auto; }
+#panel.on { display: flex; }
+#panel .card { background: #fff; border-radius: 20px; padding: 22px; width: min(92vw, 520px); max-height: 92vh; overflow: auto; font-weight: 400; font-size: 16px; }
+#panel h2 { font-size: 20px; margin-bottom: 4px; }
+#panel p { color: #636e72; font-size: 14px; margin-bottom: 12px; }
+#panel label { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid #eee; }
+#panel select { font: inherit; padding: 6px; flex: 1; min-width: 0; }
+#panel input[type=checkbox] { width: 22px; height: 22px; }
+#panel .btns { display: flex; gap: 10px; justify-content: space-between; margin-top: 14px; }
+#panel .btns button { padding: 10px 16px; border-radius: 12px; background: #eee; font-weight: 700; }
+#panel .btns .ok { background: #2ecc71; color: #fff; }
+
+@keyframes pop { 0% { transform: scale(.6); } 60% { transform: scale(1.25); } 100% { transform: scale(1); } }
+@keyframes hop { 0%,100% { transform: translateY(0); } 45% { transform: translateY(-38%); } }
+@keyframes bob { 0%,100% { transform: translateY(0) rotate(-4deg); } 50% { transform: translateY(-4%) rotate(4deg); } }
+@keyframes shake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-9%); } 75% { transform: translateX(9%); } }
+@keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-2.5deg); } 75% { transform: rotate(2.5deg); } }
+@keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
+@keyframes rise { from { transform: translateY(60%); opacity: 0; } }
+@keyframes honk { 0%,100% { transform: scale(1); } 40% { transform: scale(1.05) rotate(-1deg); } 70% { transform: scale(1.03) rotate(1deg); } }
+@keyframes arrive { from { transform: translateX(-130vw); } }
+@keyframes fall { to { transform: translateY(115vh) rotate(540deg); } }
+@media (prefers-reduced-motion: reduce) { .group.hint, #party .sticker { animation: none; } }
+</style>
+</head>
+<body>
+
+<div id="home" class="screen on">
+  <button id="gear" aria-label="Grown-ups: press and hold">⚙️</button>
+  <div id="gearhint">Grown-ups: press and hold</div>
+  <div class="hero">🚌</div>
+  <h1>Animal Bus</h1>
+  <button id="play" class="big-btn" aria-label="Play">▶</button>
+  <div id="shelf" aria-label="Sticker collection"></div>
+</div>
+
+<div id="game" class="screen">
+  <div id="top">
+    <button id="homeBtn" class="round-btn" aria-label="Home">🏠</button>
+    <div id="stars"></div>
+    <button id="sayBtn" class="round-btn" aria-label="Say it again">🔊</button>
+  </div>
+  <div id="eq"></div>
+  <div id="road"></div>
+  <div id="stop"></div>
+  <div id="answers"></div>
+</div>
+
+<div id="party" class="screen">
+  <div class="sticker" id="newSticker"></div>
+  <div class="row">
+    <button id="partyHome" class="big-btn home-btn" aria-label="Home">🏠</button>
+    <button id="again" class="big-btn" aria-label="Play again">▶</button>
+  </div>
+</div>
+
+<div id="panel">
+  <div class="card">
+    <h2>Grown-ups</h2>
+    <p>The game moves up a step after 4 of the last 5 sums are right first try, and back down if they are mostly missed. You can also set the step here.</p>
+    <label>Step <select id="pStep"></select></label>
+    <label><input type="checkbox" id="pDots"> Show dots next to the numbers on answer buttons</label>
+    <label><input type="checkbox" id="pVoice"> Voice</label>
+    <div class="btns">
+      <button id="pReset">Reset stickers</button>
+      <button id="pClose" class="ok">Done</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = id => document.getElementById(id);
+const sleep = ms => new Promise(r => setTimeout(r, ms * SPEED));
+let SPEED = 1; // tests can shrink waits via ?fast
+
+const WORDS = ['zero','one','two','three','four','five','six','seven','eight','nine','ten','eleven','twelve','thirteen',
+  'fourteen','fifteen','sixteen','seventeen','eighteen','nineteen','twenty'];
+const ANIMALS = [['🐶','dog'],['🐱','cat'],['🐸','frog'],['🐰','rabbit'],['🐼','panda'],['🦊','fox'],['🐻','bear'],['🐷','pig'],
+  ['🐵','monkey'],['🐯','tiger'],['🦁','lion'],['🐮','cow'],['🐨','koala'],['🐔','chicken'],['🐧','penguin'],['🐭','mouse'],
+  ['🐹','hamster'],['🦄','unicorn'],['🐙','octopus'],['🦉','owl'],['🐢','turtle'],['🐘','elephant'],['🦒','giraffe'],['🐳','whale']];
+
+// Each step: level (which sums) + whether the game counts aloud while the animals board.
+const STEPS = [
+  { level: 1, guided: true,  name: 'Add to 5 — counting together' },
+  { level: 1, guided: false, name: 'Add to 5 — on their own' },
+  { level: 2, guided: true,  name: 'Add to 10 — counting together' },
+  { level: 2, guided: false, name: 'Add to 10 — on their own' },
+  { level: 3, guided: true,  name: 'Make 10 and 10 + more — counting together' },
+  { level: 3, guided: false, name: 'Make 10 and 10 + more — on their own' },
+  { level: 4, guided: true,  name: 'Add to 20 — counting together' },
+  { level: 4, guided: false, name: 'Add to 20 — on their own' },
+];
+const ROUND = 5;
+
+/* ---------- saved state ---------- */
+const KEY = 'animalBusMath.v1';
+const state = { step: 0, hist: [], stickers: [], dots: true, voice: true };
+try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
+state.step = Math.max(0, Math.min(STEPS.length - 1, state.step | 0));
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
+
+/* ---------- sound ---------- */
+let actx = null;
+function unlockAudio() {
+  try {
+    actx = actx || new (window.AudioContext || window.webkitAudioContext)();
+    if (actx.state === 'suspended') actx.resume();
+  } catch (e) {}
+}
+function tone(freq, dur = .12, type = 'sine', vol = .22, when = 0) {
+  if (!actx) return;
+  try {
+    const o = actx.createOscillator(), g = actx.createGain(), t = actx.currentTime + when;
+    o.type = type; o.frequency.setValueAtTime(freq, t);
+    g.gain.setValueAtTime(vol, t); g.gain.exponentialRampToValueAtTime(.001, t + dur);
+    o.connect(g).connect(actx.destination); o.start(t); o.stop(t + dur + .02);
+  } catch (e) {}
+}
+const sfx = {
+  pop: n => tone(330 + n * 28, .12, 'triangle'),
+  yes: () => [523, 659, 784, 1047].forEach((f, i) => tone(f, .18, 'triangle', .22, i * .09)),
+  no: () => tone(196, .22, 'sine', .18),
+  honk: () => { tone(294, .16, 'square', .09); tone(370, .16, 'square', .09); },
+  party: () => [523, 659, 784, 659, 784, 1047].forEach((f, i) => tone(f, .2, 'triangle', .22, i * .12)),
+};
+
+/* ---------- voice ---------- */
+const synth = window.speechSynthesis;
+let voice = null, sayToken = 0, keep = null;
+function pickVoice() {
+  if (!synth) return;
+  const vs = synth.getVoices().filter(v => /^en/i.test(v.lang));
+  voice = vs.find(v => /Samantha|Karen|Moira|Google US English/i.test(v.name)) || vs.find(v => v.localService) || vs[0] || null;
+}
+if (synth) { pickVoice(); try { synth.addEventListener('voiceschanged', pickVoice); } catch (e) {} }
+
+// Speaks text and resolves when finished. Always resolves (iOS sometimes drops the end event).
+function say(text) {
+  const my = ++sayToken;
+  const fallback = (state.voice && synth ? 700 + text.length * 85 : 250 + text.length * 12) * SPEED;
+  return new Promise(resolve => {
+    let done = false;
+    const fin = () => { if (!done) { done = true; resolve(); } };
+    setTimeout(fin, fallback);
+    if (!state.voice || !synth) return;
+    try {
+      synth.cancel();
+      const u = new SpeechSynthesisUtterance(text);
+      if (voice) u.voice = voice;
+      u.lang = (voice && voice.lang) || 'en-US';
+      u.rate = .9; u.pitch = 1.15;
+      u.onend = () => { if (my === sayToken) setTimeout(fin, 60); };
+      u.onerror = fin;
+      keep = u; // hold a reference so it is not garbage-collected mid-speech
+      synth.speak(u);
+    } catch (e) { fin(); }
+  });
+}
+const hush = () => { sayToken++; try { synth && synth.cancel(); } catch (e) {} };
+
+/* ---------- questions ---------- */
+const rnd = (lo, hi) => lo + Math.floor(Math.random() * (hi - lo + 1));
+const pick = arr => arr[rnd(0, arr.length - 1)];
+let lastQ = '';
+function makeQuestion(level) {
+  let a, b, tries = 0;
+  do {
+    let lv = level;
+    if (lv > 1 && Math.random() < .2) lv = rnd(1, lv - 1);        // a little review of earlier levels
+    if (lv === 1) { const s = rnd(2, 5); a = rnd(1, s - 1); b = s - a; }
+    else if (lv === 2) { const s = rnd(6, 10); a = rnd(1, s - 1); b = s - a; }
+    else if (lv === 3) {
+      if (Math.random() < .5) { a = rnd(1, 9); b = 10 - a; }       // pairs that make 10
+      else { a = 10; b = rnd(1, 10); if (Math.random() < .3) [a, b] = [b, a]; }
+    } else { const s = rnd(11, 20); a = rnd(Math.max(2, s - 10), Math.min(10, s - 2)); b = s - a; }
+  } while (`${a}+${b}` === lastQ && ++tries < 8);
+  lastQ = `${a}+${b}`;
+  return { a, b, sum: a + b };
+}
+function makeChoices(sum) {
+  const set = new Set([sum]);
+  const near = [sum - 1, sum + 1, sum - 2, sum + 2].filter(n => n >= 1 && n <= 20);
+  while (set.size < 3) set.add(near.splice(rnd(0, Math.min(1, near.length - 1)), 1)[0]);
+  return [...set].sort(() => Math.random() - .5);
+}
+
+/* ---------- game ---------- */
+let q = null, run = 0, busy = false, seated = [], counted = 0, firstTry = true, roundDone = 0, phase = 'idle';
+const alive = id => id === run;
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('on', s.id === id));
+}
+
+function renderShelf() {
+  const shelf = $('shelf'); shelf.innerHTML = '';
+  ANIMALS.forEach(([e], i) => {
+    const s = document.createElement('span');
+    s.textContent = e; if (!state.stickers.includes(i)) s.className = 'empty';
+    shelf.appendChild(s);
+  });
+}
+
+function renderStars() {
+  $('stars').innerHTML = '';
+  for (let i = 0; i < ROUND; i++) {
+    const s = document.createElement('span'); s.textContent = '⭐'; if (i < roundDone) s.className = 'got';
+    $('stars').appendChild(s);
+  }
+}
+
+function buildBuses(n, arrive) {
+  const road = $('road'); road.innerHTML = '';
+  for (let i = 0; i < n; i++) {
+    const bus = document.createElement('div'); bus.className = 'bus' + (arrive ? ' arrive' : '');
+    const seats = document.createElement('div'); seats.className = 'seats';
+    for (let s = 0; s < 10; s++) { const d = document.createElement('div'); d.className = 'seat'; seats.appendChild(d); }
+    bus.appendChild(seats); road.appendChild(bus);
+  }
+}
+const allSeats = () => [...document.querySelectorAll('#road .seat')];
+
+function buildGroup(n, which, emoji) {
+  const g = document.createElement('div');
+  g.className = 'group hint ' + (which === 'a' ? 'ga' : 'gb');
+  g.style.setProperty('--cols', Math.min(5, n));
+  g.dataset.n = n; g.dataset.which = which;
+  const lbl = document.createElement('div'); lbl.className = 'lbl'; lbl.textContent = n; g.appendChild(lbl);
+  for (let i = 0; i < n; i++) {
+    const t = document.createElement('div'); t.className = 'tile ' + (which === 'a' ? 'ta' : 'tb'); t.textContent = emoji;
+    g.appendChild(t);
+  }
+  enableDrag(g);
+  return g;
+}
+
+function renderEq(showAnswer) {
+  $('eq').innerHTML = `<span class="na">${q.a}</span><span class="op">+</span><span class="nb">${q.b}</span><span class="op">=</span>` +
+    `<span class="ans ${showAnswer ? 'pop' : 'q'}">${showAnswer ? q.sum : '?'}</span>`;
+}
+
+async function nextQuestion(first) {
+  const id = ++run;
+  busy = true; phase = 'board'; seated = []; counted = 0; firstTry = true;
+  const st = STEPS[state.step];
+  q = makeQuestion(st.level);
+  const [ea, eb] = (() => { const x = pick(ANIMALS)[0]; let y; do { y = pick(ANIMALS)[0]; } while (y === x); return [x, y]; })();
+  $('answers').innerHTML = '';
+  renderStars(); renderEq(false);
+  buildBuses(q.sum > 10 || st.level >= 3 ? 2 : 1, true);
+  const stop = $('stop'); stop.innerHTML = '';
+  stop.appendChild(buildGroup(q.a, 'a', ea));
+  stop.appendChild(buildGroup(q.b, 'b', eb));
+  await sleep(first ? 300 : 500);
+  if (!alive(id)) return;
+  busy = false;
+  await say(`${WORDS[q.a]} and ${WORDS[q.b]}. ${roundDone === 0 ? 'Put them on the bus!' : ''}`);
+}
+
+function prompt() {
+  if (!q || busy) return;
+  if (phase === 'board') say(`${WORDS[q.a]} and ${WORDS[q.b]}. Put them on the bus!`);
+  else if (phase === 'answer') say(`${WORDS[q.a]} and ${WORDS[q.b]}. How many altogether?`);
+}
+
+/* drag (or just tap) a group of animals onto the bus */
+function enableDrag(g) {
+  let sx = 0, sy = 0, dx = 0, dy = 0, pid = null;
+  g.addEventListener('pointerdown', e => {
+    if (busy || pid !== null || g.classList.contains('spent')) return;
+    unlockAudio();
+    pid = e.pointerId; sx = e.clientX; sy = e.clientY; dx = dy = 0;
+    try { g.setPointerCapture(pid); } catch (err) {}
+    g.classList.remove('back'); g.classList.add('drag');
+    e.preventDefault();
+  });
+  g.addEventListener('pointermove', e => {
+    if (e.pointerId !== pid) return;
+    dx = e.clientX - sx; dy = e.clientY - sy;
+    g.style.transform = `translate(${dx}px, ${dy}px) scale(1.06)`;
+  });
+  const end = e => {
+    if (e.pointerId !== pid) return;
+    pid = null;
+    const tap = Math.hypot(dx, dy) < 12;
+    const r = g.getBoundingClientRect(), road = $('road').getBoundingClientRect(); // measure before the wiggle resumes
+    g.classList.remove('drag');
+    const onBus = r.top + r.height / 2 < road.bottom + r.height * .35;
+    if (e.type !== 'pointercancel' && !busy && (tap || onBus)) board(g);
+    else { g.classList.add('back'); g.style.transform = ''; }
+  };
+  g.addEventListener('pointerup', end);
+  g.addEventListener('pointercancel', end);
+}
+
+async function board(g) {
+  const id = run;
+  busy = true; hush();
+  g.classList.remove('hint'); g.classList.add('spent');
+  const guided = STEPS[state.step].guided;
+  const n = +g.dataset.n, tiles = [...g.querySelectorAll('.tile')], seats = allSeats();
+  const isSecond = seated.length > 0;
+  if (!guided) await say(isSecond ? `and ${WORDS[n]}` : WORDS[n]);
+  for (const t of tiles) {
+    if (!alive(id)) return;
+    const seat = seats[seated.length];
+    const from = t.getBoundingClientRect();
+    // keep the group's shape while its tiles leave one by one
+    const hole = document.createElement('div'); hole.style.width = hole.style.height = 'var(--t)';
+    g.replaceChild(hole, t);
+    seat.appendChild(t);
+    const to = t.getBoundingClientRect();
+    seated.push(t);
+    try {
+      t.animate([{ transform: `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(1.1)`, zIndex: 30 }, { transform: 'none', zIndex: 30 }],
+        { duration: 300 * SPEED, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+    } catch (e) {}
+    sfx.pop(seated.length);
+    if (guided) { await sleep(120); lit(t); await say(WORDS[seated.length]); }
+    else await sleep(230);
+    if (seated.length === 10) { const bus = seat.closest('.bus'); bus.classList.add('full'); sfx.honk(); if (guided && q.sum > 10) await say('The bus is full! Ten!'); }
+  }
+  if (!alive(id)) return;
+  g.style.transform = '';
+  if (seated.length === q.sum) await askAnswer(id);
+  else busy = false;
+}
+
+function lit(t) { t.classList.remove('lit'); void t.offsetWidth; t.classList.add('lit'); }
+
+function dotsFor(n) {
+  const d = document.createElement('span'); d.className = 'dots';
+  for (let i = 0; i < n; i++) { const dot = document.createElement('i'); if (i >= 10) dot.className = 'gap'; d.appendChild(dot); }
+  return d;
+}
+
+async function askAnswer(id) {
+  phase = 'answer';
+  const box = $('answers'); box.innerHTML = '';
+  makeChoices(q.sum).forEach((n, i) => {
+    const b = document.createElement('button'); b.className = 'choice'; b.dataset.n = n; b.style.animationDelay = (i * 70) + 'ms';
+    const num = document.createElement('span'); num.textContent = n; b.appendChild(num);
+    if (state.dots) b.appendChild(dotsFor(n));
+    b.addEventListener('click', () => choose(b, n));
+    box.appendChild(b);
+  });
+  seated.forEach(t => t.addEventListener('pointerdown', () => tapCount(t)));
+  busy = false;
+  await say('How many altogether?');
+}
+
+/* the child can tap each animal on the bus to count it */
+function tapCount(t) {
+  if (busy || phase !== 'answer' || t.dataset.counted) return;
+  unlockAudio();
+  t.dataset.counted = 1; counted++;
+  badge(t, counted); lit(t); sfx.pop(counted); say(WORDS[counted]);
+}
+function badge(t, n) {
+  let b = t.querySelector('.badge');
+  if (!b) { b = document.createElement('span'); b.className = 'badge'; t.appendChild(b); }
+  b.textContent = n;
+}
+
+async function choose(btn, n) {
+  if (busy || phase !== 'answer') return;
+  unlockAudio();
+  const id = run;
+  if (n === q.sum) {
+    busy = true; phase = 'done';
+    btn.classList.remove('pulse'); btn.classList.add('right');
+    sfx.yes(); renderEq(true);
+    seated.forEach((t, i) => setTimeout(() => { t.classList.remove('lit'); t.classList.add('hop'); }, i * 45));
+    record(firstTry);
+    roundDone++; renderStars();
+    await say(`Yes! ${WORDS[q.a]} and ${WORDS[q.b]} make ${WORDS[q.sum]}!`);
+    if (!alive(id)) return;
+    document.querySelectorAll('#road .bus').forEach(b => { b.classList.remove('arrive', 'full'); b.classList.add('away'); });
+    $('stop').innerHTML = ''; $('answers').innerHTML = '';
+    await sleep(750);
+    if (!alive(id)) return;
+    if (roundDone >= ROUND) party(); else nextQuestion(false);
+  } else {
+    busy = true; firstTry = false;
+    btn.classList.add('wrong'); sfx.no();
+    await say("Let's count together.");
+    // count every animal on the bus, in order
+    for (let i = 0; i < seated.length; i++) {
+      if (!alive(id)) return;
+      const t = seated[i]; t.dataset.counted = 1; badge(t, i + 1); lit(t); sfx.pop(i + 1);
+      await say(WORDS[i + 1]);
+    }
+    counted = seated.length;
+    if (!alive(id)) return;
+    const right = [...document.querySelectorAll('.choice')].find(c => +c.dataset.n === q.sum);
+    if (right) right.classList.add('pulse');
+    busy = false;
+    await say(`${WORDS[q.sum]}! Tap ${WORDS[q.sum]}.`);
+  }
+}
+
+/* move up or down a step based on recent first-try answers */
+let stepMsg = '';
+function record(ok) {
+  state.hist.push(ok ? 1 : 0);
+  if (state.hist.length > 5) state.hist.shift();
+  const h = state.hist, right = h.reduce((s, v) => s + v, 0), wrong = h.length - right;
+  if (h.length >= 4 && right >= 4 && h[h.length - 1] && state.step < STEPS.length - 1) {
+    state.step++; state.hist = []; stepMsg = 'up';
+  } else if (wrong >= 3 && state.step > 0) {
+    state.step--; state.hist = []; stepMsg = 'down';
+  }
+  save();
+}
+
+async function party() {
+  const id = ++run;
+  phase = 'party'; busy = false;
+  const missing = ANIMALS.map((_, i) => i).filter(i => !state.stickers.includes(i));
+  const got = missing.length ? pick(missing) : rnd(0, ANIMALS.length - 1);
+  if (!state.stickers.includes(got)) state.stickers.push(got);
+  save();
+  $('newSticker').textContent = ANIMALS[got][0];
+  show('party'); sfx.party(); confetti();
+  const up = stepMsg === 'up'; stepMsg = '';
+  await say(`You did it! You got the ${ANIMALS[got][1]}!${up ? ' You are ready for bigger numbers!' : ''}`);
+}
+
+function confetti() {
+  const bits = ['🎉', '⭐', '🎈', '✨', '💛', '💙'];
+  for (let i = 0; i < 26; i++) {
+    const c = document.createElement('div'); c.className = 'confetti'; c.textContent = pick(bits);
+    c.style.left = rnd(0, 96) + 'vw'; c.style.animationDuration = (1.6 + Math.random() * 1.8) + 's'; c.style.animationDelay = (Math.random() * .7) + 's';
+    document.body.appendChild(c); setTimeout(() => c.remove(), 4500);
+  }
+}
+
+function startRound() {
+  unlockAudio(); hush();
+  document.querySelectorAll('.confetti').forEach(c => c.remove());
+  roundDone = 0; stepMsg = '';
+  show('game'); nextQuestion(true);
+}
+function goHome() {
+  run++; hush(); busy = false; phase = 'idle'; q = null;
+  document.querySelectorAll('.confetti').forEach(c => c.remove());
+  renderShelf(); show('home');
+}
+
+/* ---------- wiring ---------- */
+$('play').addEventListener('click', startRound);
+$('again').addEventListener('click', startRound);
+$('homeBtn').addEventListener('click', goHome);
+$('partyHome').addEventListener('click', goHome);
+$('sayBtn').addEventListener('click', () => { unlockAudio(); prompt(); });
+
+// grown-up panel: press and hold the gear
+let holdTimer = null;
+const gear = $('gear');
+gear.addEventListener('pointerdown', () => {
+  $('gearhint').style.opacity = 1;
+  holdTimer = setTimeout(openPanel, 900);
+});
+['pointerup', 'pointerleave', 'pointercancel'].forEach(ev => gear.addEventListener(ev, () => {
+  clearTimeout(holdTimer); setTimeout(() => { $('gearhint').style.opacity = 0; }, 1500);
+}));
+gear.addEventListener('contextmenu', e => e.preventDefault());
+function openPanel() {
+  const sel = $('pStep'); sel.innerHTML = '';
+  STEPS.forEach((s, i) => { const o = document.createElement('option'); o.value = i; o.textContent = `${i + 1}. ${s.name}`; sel.appendChild(o); });
+  sel.value = state.step; $('pDots').checked = state.dots; $('pVoice').checked = state.voice;
+  $('panel').classList.add('on');
+}
+$('pClose').addEventListener('click', () => {
+  const s = +$('pStep').value;
+  if (s !== state.step) { state.step = s; state.hist = []; }
+  state.dots = $('pDots').checked; state.voice = $('pVoice').checked;
+  save(); $('panel').classList.remove('on');
+});
+$('pReset').addEventListener('click', () => {
+  if (confirm('Remove all collected stickers?')) { state.stickers = []; save(); renderShelf(); }
+});
+
+// stop the page itself from scrolling, zooming or showing menus on iPad
+document.addEventListener('touchmove', e => { if (!e.target.closest('#panel')) e.preventDefault(); }, { passive: false });
+document.addEventListener('gesturestart', e => e.preventDefault());
+document.addEventListener('contextmenu', e => { if (!e.target.closest('#panel')) e.preventDefault(); });
+document.addEventListener('dblclick', e => e.preventDefault());
+
+if (/[?&]fast\b/.test(location.search)) { SPEED = .05; state.voice = false; }
+window.__game = { state, STEPS, get q() { return q; }, get phase() { return phase; }, get busy() { return busy; } };
+renderShelf();
+})();
+</script>
+</body>
+</html>
