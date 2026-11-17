@@ -10,10 +10,13 @@
 <title>Animal Bus Math</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+/* clip, not just hidden: a hidden box can still be scrolled by the browser (tapping a button that is sliding in from below
+   the edge scrolls it into view), and with touch scrolling blocked the child could not scroll back */
+html, body, .screen { overflow: hidden; overflow: clip; }
+html, body { height: 100%; overscroll-behavior: none; }
 html { padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px); }
 body {
-  --t: min(7.4vw, 8.6vh);            /* one animal tile */
+  --t0: min(7.4vw, 8.6vh); --t: var(--t0);   /* one animal tile; --t is rescaled inside some groups */
   --sky1: #bfe8ff; --sky2: #e6f6ff; --g1: #b9e6a5; --g2: #9fd98a;   /* scenery, changed per trip */
   --bus: #ffd32a; --bus2: #f39c12; --seat: #fff6c4; --ink: #636e72;
   --a: #ff9f43; --a2: #e67e22;       /* first group colour */
@@ -73,8 +76,8 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 #eq .na { color: var(--a2); } #eq .nb { color: var(--b2); }
 #eq .op { color: var(--ink); font-size: .8em; }
 #eq .ans { min-width: 1.2em; text-align: center; color: #27ae60; }
-#eq .ans.q { color: var(--ink); opacity: .55; }
-#eq .ans.pop { animation: pop .5s; }
+#eq .q { color: var(--ink); opacity: .55; }
+#eq .pop { animation: pop .5s; }
 
 #road { flex: none; display: flex; gap: calc(var(--t) * .35); align-items: flex-end; justify-content: center; }
 .bus { position: relative; background: var(--bus); border: calc(var(--t) * .07) solid var(--bus2); border-radius: calc(var(--t) * .38);
@@ -90,6 +93,8 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 .bus.full { animation: honk .5s; box-shadow: 0 0 0 calc(var(--t) * .08) #fff, 0 0 calc(var(--t) * .5) #fff; }
 .seats { display: grid; grid-template-columns: repeat(5, var(--t)); grid-auto-rows: var(--t); gap: calc(var(--t) * .08); }
 .seat { background: var(--seat); border-radius: 22%; box-shadow: inset 0 3px 0 rgba(0,0,0,.12); position: relative; }
+.seat.shut { opacity: .22; box-shadow: none; }                      /* not used in this sum */
+.seat.want { box-shadow: inset 0 0 0 calc(var(--t) * .07) var(--b2); animation: want 1.2s ease-in-out infinite; }   /* waiting for an animal */
 .bus.away { transition: transform .8s cubic-bezier(.5,0,.9,.4); transform: translateX(130vw) rotate(-2deg); }
 .bus.arrive { animation: arrive .6s cubic-bezier(.2,.8,.3,1); }
 
@@ -99,6 +104,11 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
   box-shadow: 0 5px 0 rgba(0,0,0,.12); touch-action: none; cursor: grab; }
 .group.hint .tile { animation: jig 1.3s ease-in-out infinite; }
 .group.hint .tile:nth-child(even) { animation-delay: -.65s; }
+.group.pulse { animation: pulse .9s infinite; }
+.group.tried { opacity: .35; pointer-events: none; }
+.group.feeder { --t: calc(var(--t0) * 1.3); cursor: pointer; }
+.group.feeder .lbl { animation: bob 1.2s ease-in-out infinite; background: none; box-shadow: none; }
+.tile.nope { animation: shake .4s 2; }
 .group.drag { animation: none; z-index: 20; box-shadow: 0 16px 24px rgba(0,0,0,.25); transform-origin: center; }
 .group.back { transition: transform .3s; }
 .group.spent { background: none; box-shadow: none; pointer-events: none; }
@@ -162,12 +172,13 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 @keyframes jig { 0%,100% { transform: translateY(0) rotate(0); } 30% { transform: translateY(-9%) rotate(-4deg); } 60% { transform: translateY(0) rotate(3deg); } }
 @keyframes drift { to { transform: translateX(135vw); } }
 @keyframes wiggle { 0%,100% { transform: rotate(0); } 25% { transform: rotate(-2.5deg); } 75% { transform: rotate(2.5deg); } }
+@keyframes want { 0%,100% { background: var(--seat); } 50% { background: #fff; } }
 @keyframes pulse { 0%,100% { transform: scale(1); } 50% { transform: scale(1.12); } }
 @keyframes rise { from { transform: translateY(60%); opacity: 0; } }
 @keyframes honk { 0%,100% { transform: scale(1); } 40% { transform: scale(1.05) rotate(-1deg); } 70% { transform: scale(1.03) rotate(1deg); } }
 @keyframes arrive { from { transform: translateX(-130vw); } }
 @keyframes fall { to { transform: translateY(115vh) rotate(540deg); } }
-@media (prefers-reduced-motion: reduce) { .group.hint .tile, #party .sticker, .floater, #arrive span, #pick .q { animation: none; } }
+@media (prefers-reduced-motion: reduce) { .group.hint .tile, .seat.want, .group.feeder .lbl, #party .sticker, .floater, #arrive span, #pick .q { animation: none; } }
 </style>
 </head>
 <body>
@@ -210,8 +221,9 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 <div id="panel">
   <div class="card">
     <h2>Grown-ups</h2>
-    <p>The game moves up a step after 4 of the last 5 sums are right first try, and back down if they are mostly missed. You can also set the step here.</p>
+    <p>The game moves up a step after 4 of the last 5 sums are right first try, and back down if they are mostly missed. You can also set the step here. Each trip plays one of the ticked games, taking turns.</p>
     <label>Step <select id="pStep"></select></label>
+    <div id="pGames"></div>
     <label><input type="checkbox" id="pDots"> Show dots next to the numbers on answer buttons</label>
     <label><input type="checkbox" id="pVoice"> Voice</label>
     <div class="btns">
@@ -268,10 +280,20 @@ const STEPS = [
   { level: 4, guided: false, name: 'Add to 20 — on their own' },
 ];
 const ROUND = 5;
+// Three games on the same sums. One game per trip, taking turns.
+//   join: two groups get on, how many altogether?        3 + 2 = ?
+//   fill: tap animals on one at a time until it is full  3 + ? = 5
+//   fit:  pick the group that fills the seats exactly    3 + ? = 5
+const GAMES = [
+  { id: 'join', name: 'All aboard: put two groups together' },
+  { id: 'fill', name: 'Fill the seats: one at a time, how many got on?' },
+  { id: 'fit',  name: 'Who fits? Pick the group that fills the seats' },
+];
+let mode = 'join';
 
 /* ---------- saved state ---------- */
 const KEY = 'animalBusMath.v1';
-const state = { step: 0, hist: [], stickers: [], dots: true, voice: true };
+const state = { step: 0, hist: [], stickers: [], dots: true, voice: true, games: { join: true, fill: true, fit: true }, last: '' };
 try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
 state.step = Math.max(0, Math.min(STEPS.length - 1, state.step | 0));
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
@@ -365,7 +387,7 @@ function makeChoices(sum) {
 }
 
 /* ---------- game ---------- */
-let q = null, run = 0, busy = false, seated = [], counted = 0, firstTry = true, roundDone = 0, phase = 'idle';
+let q = null, run = 0, busy = false, seated = [], counted = 0, firstTry = true, roundDone = 0, phase = 'idle', qn = 0;
 const alive = id => id === run;
 
 function show(id) {
@@ -419,43 +441,105 @@ function buildGroup(n, which, emoji) {
   g.dataset.n = n; g.dataset.which = which;
   const lbl = document.createElement('div'); lbl.className = 'lbl'; lbl.textContent = n; g.appendChild(lbl);
   for (let i = 0; i < n; i++) {
-    const t = document.createElement('div'); t.className = 'tile ' + (which === 'a' ? 'ta' : 'tb'); t.textContent = emoji;
-    g.appendChild(t);
+    g.appendChild(newTile(which, emoji));
   }
   enableDrag(g);
   return g;
 }
-
-function renderEq(showAnswer) {
-  $('eq').innerHTML = `<span class="na">${q.a}</span><span class="op">+</span><span class="nb">${q.b}</span><span class="op">=</span>` +
-    `<span class="ans ${showAnswer ? 'pop' : 'q'}">${showAnswer ? q.sum : '?'}</span>`;
+// fill: one animal that sends a copy of itself to the next seat on every tap
+function buildFeeder(emoji) {
+  const g = document.createElement('div');
+  g.className = 'group hint gb feeder'; g.style.setProperty('--cols', 1);
+  const lbl = document.createElement('div'); lbl.className = 'lbl'; lbl.textContent = '👆'; g.appendChild(lbl);
+  g.appendChild(newTile('b', emoji));
+  g.addEventListener('pointerdown', e => { e.preventDefault(); if (!busy && phase === 'board') { unlockAudio(); feed(g); } });
+  return g;
 }
+// fit: three groups, one of which is exactly the missing number; shrunk so they always fit side by side
+function buildFitGroups(stop) {
+  const sizes = makeChoices(q.b);
+  sizes.forEach(n => stop.appendChild(buildGroup(n, 'b', q.B[0])));
+  const need = sizes.reduce((s, n) => s + Math.min(5, n), 0) + 2 * .9 + 3 * .3;      // width in tiles, with gaps
+  const tpx = allSeats()[0].getBoundingClientRect().width || 60;
+  const k = Math.min(1, innerWidth * .92 / (need * tpx));
+  stop.style.setProperty('--t', `calc(var(--t0) * ${k.toFixed(3)})`);
+}
+
+// join hides the total; fill and fit hide the second number
+function renderEq(done) {
+  const miss = mode !== 'join', mark = done ? ' pop' : ' q';
+  $('eq').innerHTML = `<span class="na">${q.a}</span><span class="op">+</span>` +
+    `<span class="nb${miss ? mark : ''}">${miss && !done ? '?' : q.b}</span><span class="op">=</span>` +
+    `<span class="ans${miss ? '' : mark}">${miss || done ? q.sum : '?'}</span>`;
+}
+
+function newTile(which, emoji) {
+  const t = document.createElement('div'); t.className = 'tile ' + (which === 'a' ? 'ta' : 'tb'); t.textContent = emoji;
+  return t;
+}
+// animate a tile from where it was to where it now sits
+function fly(t, from, ms = 300) {
+  const to = t.getBoundingClientRect();
+  try {
+    t.animate([{ transform: `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(1.1)`, zIndex: 30 }, { transform: 'none', zIndex: 30 }],
+      { duration: ms * SPEED, easing: 'cubic-bezier(.3,1.3,.5,1)' });
+  } catch (e) {}
+}
+// fill and fit: the first group is already seated; the seats still needed are marked, the rest are closed
+function presetSeats() {
+  allSeats().forEach((s, i) => {
+    if (i < q.a) { const t = newTile('a', q.A[0]); s.appendChild(t); seated.push(t); }
+    else s.classList.add(i < q.sum ? 'want' : 'shut');
+  });
+}
+function busFull() {
+  document.querySelectorAll('#road .bus').forEach(b => { if (b.querySelector('.tile')) b.classList.add('full'); });
+  sfx.honk();
+}
+// the tiles the child counts to find the answer
+const countable = () => mode === 'join' ? seated : seated.slice(q.a);
 
 async function nextQuestion(first) {
   const id = ++run;
   busy = true; phase = 'board'; seated = []; counted = 0; firstTry = true;
   const st = STEPS[state.step];
-  q = makeQuestion(st.level);
+  q = makeQuestion(st.level); qn++;
   q.A = pick(ANIMALS); do { q.B = pick(ANIMALS); } while (q.B === q.A);
-  q.night = !st.guided && roundDone > 0 && Math.random() < .4;   // peekaboo: answer while the animals are hidden
+  q.ask = mode === 'join' ? q.sum : q.b;                           // the number the child has to find
+  q.night = mode === 'join' && !st.guided && roundDone > 0 && Math.random() < .4;   // peekaboo: answer while the animals are hidden
   roundAnimals.push(q.A[0], q.B[0]);
   $('answers').innerHTML = '';
   renderTrip(); renderEq(false);
   buildBuses(q.sum > 10 || st.level >= 3 ? 2 : 1, true);
-  const stop = $('stop'); stop.innerHTML = '';
-  stop.appendChild(buildGroup(q.a, 'a', q.A[0]));
-  stop.appendChild(buildGroup(q.b, 'b', q.B[0]));
+  const stop = $('stop'); stop.innerHTML = ''; stop.style.removeProperty('--t');
+  if (mode === 'join') {
+    stop.appendChild(buildGroup(q.a, 'a', q.A[0]));
+    stop.appendChild(buildGroup(q.b, 'b', q.B[0]));
+  } else {
+    presetSeats();
+    if (mode === 'fill') stop.appendChild(buildFeeder(q.B[0])); else buildFitGroups(stop);
+  }
   await sleep(first ? 300 : 500);
   if (!alive(id)) return;
   busy = false;
-  await say(`${cnt(q.a, q.A)} and ${cnt(q.b, q.B)}. ${roundDone === 0 ? `Put them on the ${theme.word}!` : ''}`);
+  await say(intro(roundDone === 0));
 }
 const cnt = (n, A) => `${WORDS[n]} ${n === 1 ? A[1] : A[2]}`;
+// what the game says at the start of a sum; the long form explains what to do
+function intro(long) {
+  if (mode === 'join') return `${cnt(q.a, q.A)} and ${cnt(q.b, q.B)}. ${long ? `Put them on the ${theme.word}!` : ''}`;
+  const on = `${cnt(q.a, q.A)} on the ${theme.word}.`;
+  if (mode === 'fill') return `${on} ${long ? `Tap the ${q.B[1]} to fill the seats!` : 'Fill the seats!'}`;
+  return `${on} ${long ? `Which ${q.B[2]} fill the seats?` : 'Who fits?'}`;
+}
+function askText() {
+  return mode === 'fill' ? `How many ${q.B[2]} got on?` : 'How many altogether?';
+}
 
 function prompt() {
   if (!q || busy) return;
-  if (phase === 'board') say(`${cnt(q.a, q.A)} and ${cnt(q.b, q.B)}. Put them on the ${theme.word}!`);
-  else if (phase === 'answer') say(`${WORDS[q.a]} and ${WORDS[q.b]}. How many altogether?`);
+  if (phase === 'board') say(intro(true));
+  else if (phase === 'answer') say(mode === 'fill' ? askText() : `${WORDS[q.a]} and ${WORDS[q.b]}. How many altogether?`);
 }
 
 /* drag (or just tap) a group of animals onto the bus */
@@ -481,7 +565,7 @@ function enableDrag(g) {
     const r = g.getBoundingClientRect(), road = $('road').getBoundingClientRect(); // measure before the wiggle resumes
     g.classList.remove('drag');
     const onBus = r.top + r.height / 2 < road.bottom + r.height * .35;
-    if (e.type !== 'pointercancel' && !busy && (tap || onBus)) board(g);
+    if (e.type !== 'pointercancel' && !busy && (tap || onBus)) (mode === 'fit' ? tryFit : board)(g);
     else { g.classList.add('back'); g.style.transform = ''; }
   };
   g.addEventListener('pointerup', end);
@@ -505,12 +589,8 @@ async function board(g) {
     const hole = document.createElement('div'); hole.style.width = hole.style.height = 'var(--t)';
     g.replaceChild(hole, t);
     seat.appendChild(t);
-    const to = t.getBoundingClientRect();
     seated.push(t);
-    try {
-      t.animate([{ transform: `translate(${from.left - to.left}px, ${from.top - to.top}px) scale(1.1)`, zIndex: 30 }, { transform: 'none', zIndex: 30 }],
-        { duration: 300 * SPEED, easing: 'cubic-bezier(.3,1.3,.5,1)' });
-    } catch (e) {}
+    fly(t, from);
     sfx.pop(seated.length);
     if (guided) { await sleep(120); lit(t); await say(WORDS[seated.length]); }
     else await sleep(230);
@@ -520,6 +600,75 @@ async function board(g) {
   g.style.transform = '';
   if (seated.length === q.sum) await askAnswer(id);
   else busy = false;
+}
+
+/* fill: every tap sends one more animal to the next marked seat */
+async function feed(g) {
+  const id = run;
+  busy = true; hush();
+  g.classList.remove('hint');
+  const guided = STEPS[state.step].guided;
+  const seat = allSeats()[seated.length], from = g.querySelector('.tile').getBoundingClientRect();
+  const t = newTile('b', q.B[0]);
+  seat.classList.remove('want'); seat.appendChild(t); seated.push(t);
+  fly(t, from);
+  const k = seated.length - q.a;
+  sfx.pop(k);
+  if (guided) { t.dataset.counted = 1; counted = k; badge(t, k); await sleep(120); lit(t); await say(WORDS[k]); }
+  else await sleep(200);
+  if (!alive(id)) return;
+  if (seated.length < q.sum) { busy = false; return; }
+  g.style.visibility = 'hidden';
+  busFull();
+  await askAnswer(id);
+}
+
+/* fit: the dropped group gets on; it is right only if it fills the marked seats exactly */
+async function tryFit(g) {
+  const id = run;
+  busy = true; hush();
+  document.querySelectorAll('#stop .group').forEach(x => x.classList.remove('hint', 'pulse'));
+  const guided = STEPS[state.step].guided;
+  const n = +g.dataset.n, tiles = [...g.querySelectorAll('.tile')], seats = allSeats(), moved = [];
+  for (const t of tiles) {
+    if (seated.length >= q.sum) break;
+    if (!alive(id)) return;
+    const seat = seats[seated.length], from = t.getBoundingClientRect();
+    const hole = document.createElement('div'); hole.style.width = hole.style.height = 'var(--t)';
+    g.replaceChild(hole, t);
+    seat.classList.remove('want'); seat.appendChild(t); seated.push(t); moved.push([t, hole]);
+    fly(t, from);
+    sfx.pop(moved.length);
+    if (guided) { await sleep(120); lit(t); await say(WORDS[moved.length]); }
+    else await sleep(200);
+  }
+  if (!alive(id)) return;
+  if (n === q.b) {
+    g.classList.add('spent'); g.style.transform = '';
+    busFull();
+    return win(id);
+  }
+  // too many or too few: say what is left over, then everyone hops back off
+  firstTry = false; sfx.no();
+  if (n > q.b) {
+    tiles.slice(moved.length).forEach(t => t.classList.add('nope'));
+    await say(`Too many! No seat for ${cnt(n - q.b, q.B)}.`);
+  } else await say(`Not full yet! ${WORDS[q.b - n]} empty ${q.b - n === 1 ? 'seat' : 'seats'}.`);
+  if (!alive(id)) return;
+  moved.reverse().forEach(([t, hole]) => {
+    const from = t.getBoundingClientRect();
+    t.classList.remove('lit'); g.replaceChild(t, hole); fly(t, from, 250);
+  });
+  seated.length = q.a;
+  seats.forEach((s, i) => { if (i >= q.a && i < q.sum) s.classList.add('want'); });
+  tiles.forEach(t => t.classList.remove('nope'));
+  g.classList.add('back', 'tried'); g.style.transform = '';
+  await sleep(350);
+  if (!alive(id)) return;
+  const right = [...document.querySelectorAll('#stop .group')].find(x => +x.dataset.n === q.b);
+  if (right) right.classList.add('pulse');
+  busy = false;
+  await say('Try another group.');
 }
 
 function lit(t) { t.classList.remove('lit'); void t.offsetWidth; t.classList.add('lit'); }
@@ -533,19 +682,19 @@ function dotsFor(n) {
 async function askAnswer(id) {
   phase = 'answer';
   const box = $('answers'); box.innerHTML = '';
-  makeChoices(q.sum).forEach((n, i) => {
+  makeChoices(q.ask).forEach((n, i) => {
     const b = document.createElement('button'); b.className = 'choice'; b.dataset.n = n; b.style.animationDelay = (i * 70) + 'ms';
     const num = document.createElement('span'); num.textContent = n; b.appendChild(num);
     if (state.dots) b.appendChild(dotsFor(n));
     b.addEventListener('click', () => choose(b, n));
     box.appendChild(b);
   });
-  seated.forEach(t => t.addEventListener('pointerdown', () => tapCount(t)));
+  countable().forEach(t => t.addEventListener('pointerdown', () => tapCount(t)));
   busy = false;
   if (q.night) {
     document.querySelectorAll('#road .bus').forEach(b => b.classList.add('night'));
     await say('Shh, they are sleeping! How many altogether?');
-  } else await say('How many altogether?');
+  } else await say(askText());
 }
 
 /* tap a sleeping bus to wake everyone up and look again */
@@ -573,22 +722,9 @@ async function choose(btn, n) {
   if (busy || phase !== 'answer') return;
   unlockAudio();
   const id = run;
-  if (n === q.sum) {
-    busy = true; phase = 'done';
+  if (n === q.ask) {
     btn.classList.remove('pulse'); btn.classList.add('right');
-    sfx.yes(); renderEq(true); confetti(9);
-    document.querySelectorAll('#road .bus').forEach(b => b.classList.remove('night'));
-    seated.forEach((t, i) => setTimeout(() => { t.classList.remove('lit'); t.classList.add('hop'); }, i * 45));
-    record(firstTry);
-    roundDone++; renderTrip();
-    await say(`${pick(PRAISE)} ${WORDS[q.a]} and ${WORDS[q.b]} make ${WORDS[q.sum]}! ${pick([q.A, q.B])[3]}`);
-    if (!alive(id)) return;
-    sfx.vroom();
-    document.querySelectorAll('#road .bus').forEach(b => { b.classList.remove('arrive', 'full'); b.classList.add('away'); });
-    $('stop').innerHTML = ''; $('answers').innerHTML = '';
-    await sleep(750);
-    if (!alive(id)) return;
-    if (roundDone >= ROUND) party(); else nextQuestion(false);
+    await win(id);
   } else {
     busy = true; firstTry = false;
     btn.classList.add('wrong'); sfx.no();
@@ -596,19 +732,38 @@ async function choose(btn, n) {
     document.querySelectorAll('#road .bus').forEach(b => b.classList.remove('night'));
     if (wasNight) sfx.peek();
     await say(wasNight ? "Peekaboo! Let's count together." : "Let's count together.");
-    // count every animal on the bus, in order
-    for (let i = 0; i < seated.length; i++) {
+    // count the animals in order: all of them, or in "fill" only the ones that just got on
+    const list = countable();
+    for (let i = 0; i < list.length; i++) {
       if (!alive(id)) return;
-      const t = seated[i]; t.dataset.counted = 1; badge(t, i + 1); lit(t); sfx.pop(i + 1);
+      const t = list[i]; t.dataset.counted = 1; badge(t, i + 1); lit(t); sfx.pop(i + 1);
       await say(WORDS[i + 1]);
     }
-    counted = seated.length;
+    counted = list.length;
     if (!alive(id)) return;
-    const right = [...document.querySelectorAll('.choice')].find(c => +c.dataset.n === q.sum);
+    const right = [...document.querySelectorAll('.choice')].find(c => +c.dataset.n === q.ask);
     if (right) right.classList.add('pulse');
     busy = false;
-    await say(`${WORDS[q.sum]}! Tap ${WORDS[q.sum]}.`);
+    await say(`${WORDS[q.ask]}! Tap ${WORDS[q.ask]}.`);
   }
+}
+
+/* the sum is solved: celebrate, drive off, next sum */
+async function win(id) {
+  busy = true; phase = 'done';
+  sfx.yes(); renderEq(true); confetti(9);
+  document.querySelectorAll('#road .bus').forEach(b => b.classList.remove('night'));
+  seated.forEach((t, i) => setTimeout(() => { t.classList.remove('lit'); t.classList.add('hop'); }, i * 45));
+  record(firstTry);
+  roundDone++; renderTrip();
+  await say(`${pick(PRAISE)} ${WORDS[q.a]} and ${WORDS[q.b]} make ${WORDS[q.sum]}! ${pick([q.A, q.B])[3]}`);
+  if (!alive(id)) return;
+  sfx.vroom();
+  document.querySelectorAll('#road .bus').forEach(b => { b.classList.remove('arrive', 'full'); b.classList.add('away'); });
+  $('stop').innerHTML = ''; $('answers').innerHTML = '';
+  await sleep(750);
+  if (!alive(id)) return;
+  if (roundDone >= ROUND) party(); else nextQuestion(false);
 }
 
 /* move up or down a step based on recent first-try answers */
@@ -667,6 +822,10 @@ let roundAnimals = [];
 function beginTrip(t) {
   unlockAudio();
   theme = t; applyTheme(t);
+  // the next ticked game after the one played last, so trips take turns (also across sessions)
+  const on = GAMES.filter(g => state.games[g.id] !== false), list = on.length ? on : GAMES;
+  mode = list[(list.findIndex(g => g.id === state.last) + 1) % list.length].id;
+  state.last = mode; save();
   roundDone = 0; stepMsg = ''; roundAnimals = [];
   $('trip').innerHTML = ''; addFloaters();
   show('game');
@@ -702,12 +861,21 @@ function openPanel() {
   const sel = $('pStep'); sel.innerHTML = '';
   STEPS.forEach((s, i) => { const o = document.createElement('option'); o.value = i; o.textContent = `${i + 1}. ${s.name}`; sel.appendChild(o); });
   sel.value = state.step; $('pDots').checked = state.dots; $('pVoice').checked = state.voice;
+  const box = $('pGames'); box.innerHTML = '';
+  GAMES.forEach(g => {
+    const l = document.createElement('label'), c = document.createElement('input');
+    c.type = 'checkbox'; c.dataset.game = g.id; c.checked = state.games[g.id] !== false;
+    l.append(c, ' Game: ' + g.name); box.appendChild(l);
+  });
   $('panel').classList.add('on');
 }
 $('pClose').addEventListener('click', () => {
   const s = +$('pStep').value;
   if (s !== state.step) { state.step = s; state.hist = []; }
   state.dots = $('pDots').checked; state.voice = $('pVoice').checked;
+  const ticks = [...document.querySelectorAll('#pGames input')];
+  const none = !ticks.some(c => c.checked);                      // unticking everything means all games
+  ticks.forEach(c => { state.games[c.dataset.game] = none || c.checked; });
   save(); $('panel').classList.remove('on');
 });
 // two taps to confirm (browser confirm dialogs are not available everywhere)
@@ -725,7 +893,7 @@ document.addEventListener('contextmenu', e => { if (!e.target.closest('#panel'))
 document.addEventListener('dblclick', e => e.preventDefault());
 
 if (/[?&]fast\b/.test(location.search)) { SPEED = .05; state.voice = false; }
-window.__game = { state, STEPS, get theme() { return theme; }, get q() { return q; }, get phase() { return phase; }, get busy() { return busy; } };
+window.__game = { state, STEPS, get theme() { return theme; }, get q() { return q; }, get mode() { return mode; }, get qn() { return qn; }, get phase() { return phase; }, get busy() { return busy; } };
 renderShelf();
 })();
 </script>
