@@ -30,9 +30,9 @@ const GAMES = ['join', 'fill', 'fit'];
         const tag = `${name}-${game}-s${step}`;
         await p.evaluate(([s, g]) => {
           __game.state.step = s; __game.state.hist = []; __game.state.last = '';
-          for (const k in __game.state.games) __game.state.games[k] = k === g;
         }, [step, game]);
-        await p.click('#play'); await p.locator('.dest-btn').first().click({ force: true });
+        await p.click(`.game-btn[data-game="${game}"]`, { force: true });   // force: the button whose turn it is never stops wiggling
+        if (game === 'join') await p.locator('.dest-btn').first().click({ force: true });   // only the bus game picks a destination
         for (let i = 0; i < 5; i++) {
           await p.waitForFunction(() => __game.phase === 'board' && !__game.busy);
           const { q, mode, qn } = await p.evaluate(() => ({ q: __game.q, mode: __game.mode, qn: __game.qn }));
@@ -91,15 +91,22 @@ const GAMES = ['join', 'fill', 'fit'];
       }
     }
 
-    // with every game ticked, trips take turns
-    await p.evaluate(() => { __game.state.last = ''; for (const k in __game.state.games) __game.state.games[k] = true; });
+    // the home screen shows all three games and highlights whose turn it is; playing one moves the highlight on
+    await p.evaluate(() => { __game.state.last = ''; __game.renderHome(); });
+    if (await p.locator('.game-btn').count() !== 3) errs.push(`${name}: home screen does not show three games`);
     const order = [];
     for (let i = 0; i < 4; i++) {
-      await p.click('#play'); await p.locator('.dest-btn').first().click({ force: true });
-      order.push(await p.evaluate(() => __game.mode));
+      const next = p.locator('.game-btn.next');
+      order.push(await next.getAttribute('data-game'));
+      await next.click({ force: true });
+      if (order[i] === 'join') await p.locator('.dest-btn').first().click({ force: true });
       await p.click('#homeBtn');
     }
     if (order.join() !== 'join,fill,fit,join') errs.push(`${name}: games did not take turns: ${order}`);
+    // a game unticked in the grown-up panel disappears from the home screen
+    await p.evaluate(() => { __game.state.games.fit = false; __game.renderHome(); });
+    if (await p.locator('.game-btn').count() !== 2) errs.push(`${name}: unticked game still shown`);
+    await p.evaluate(() => { __game.state.games.fit = true; __game.renderHome(); });
     await p.close();
   }
   console.log('errors:', errs);

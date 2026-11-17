@@ -42,6 +42,11 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
   box-shadow: 0 10px 0 #1e9e55; color: #fff; font-size: min(17vw, 15vh); line-height: 1;
   display: flex; align-items: center; justify-content: center; padding-left: 2%; }
 .big-btn:active { transform: translateY(6px); box-shadow: 0 4px 0 #1e9e55; }
+#games { display: flex; gap: 4vw; }
+.game-btn { width: min(27vw, 27vh); height: min(27vw, 27vh); border-radius: 28%; background: #fff; box-shadow: 0 10px 0 #b2bec3;
+  font-size: min(15vw, 15vh); line-height: 1; padding: 0; animation: pop .5s backwards; }
+.game-btn:active { box-shadow: 0 4px 0 #b2bec3; }
+.game-btn.next { background: #dff8ea; box-shadow: 0 10px 0 #2ecc71; animation: pop .5s backwards, bob 1.6s ease-in-out .5s infinite; }   /* whose turn it is */
 #shelf { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 92vw; min-height: 7vh;
   background: rgba(255,255,255,.6); border-radius: 22px; padding: 10px 16px; font-size: min(6vw, 5.4vh); }
 #shelf .empty { opacity: .25; filter: grayscale(1); }
@@ -91,6 +96,12 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
   transform: scaleY(0); transform-origin: top; transition: transform .35s; pointer-events: none; }
 .bus.night .blind { transform: scaleY(1); pointer-events: auto; }
 .bus.full { animation: honk .5s; box-shadow: 0 0 0 calc(var(--t) * .08) #fff, 0 0 calc(var(--t) * .5) #fff; }
+.bus .face { text-align: center; font-size: calc(var(--t) * .95); line-height: 1.15; }
+.bus.monster { border-radius: calc(var(--t) * 1.1) calc(var(--t) * 1.1) calc(var(--t) * .5) calc(var(--t) * .5); padding-bottom: calc(var(--t) * .2); margin-bottom: 0; }
+.bus.house { border-radius: 0 0 calc(var(--t) * .2) calc(var(--t) * .2); padding-bottom: calc(var(--t) * .16); margin: calc(var(--t) * .95) 0 0; }
+.bus.house::after { display: none; }
+.bus.house::before { left: -6%; width: 112%; bottom: 100%; height: calc(var(--t) * .95); border-radius: 0; background: var(--bus2);
+  clip-path: polygon(50% 0, 0 100%, 100% 100%); }                         /* the roof */
 .seats { display: grid; grid-template-columns: repeat(5, var(--t)); grid-auto-rows: var(--t); gap: calc(var(--t) * .08); }
 .seat { background: var(--seat); border-radius: 22%; box-shadow: inset 0 3px 0 rgba(0,0,0,.12); position: relative; }
 .seat.shut { opacity: .22; box-shadow: none; }                      /* not used in this sum */
@@ -186,9 +197,8 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 <div id="home" class="screen on">
   <button id="gear" aria-label="Grown-ups: press and hold">⚙️</button>
   <div id="gearhint">Grown-ups: press and hold</div>
-  <div class="hero">🚌</div>
-  <h1>Animal Bus</h1>
-  <button id="play" class="big-btn" aria-label="Play">▶</button>
+  <h1>Animal Math</h1>
+  <div id="games"></div>
   <div id="shelf" aria-label="Sticker collection"></div>
 </div>
 
@@ -221,11 +231,13 @@ button { font: inherit; color: inherit; border: none; cursor: pointer; touch-act
 <div id="panel">
   <div class="card">
     <h2>Grown-ups</h2>
-    <p>The game moves up a step after 4 of the last 5 sums are right first try, and back down if they are mostly missed. You can also set the step here. Each trip plays one of the ticked games, taking turns.</p>
+    <p>The game moves up a step after 4 of the last 5 sums are right first try, and back down if they are mostly missed. You can also set the step here. Ticked games appear as buttons on the home screen.</p>
     <label>Step <select id="pStep"></select></label>
     <div id="pGames"></div>
     <label><input type="checkbox" id="pDots"> Show dots next to the numbers on answer buttons</label>
     <label><input type="checkbox" id="pVoice"> Voice</label>
+    <label>Which voice <select id="pVoiceName"></select></label>
+    <p style="margin:6px 0 0">Choosing a voice plays a sample. For a nicer one, download a Premium or Enhanced English voice in the iPad's Settings (Accessibility, Spoken Content or Read &amp; Speak, Voices); it should then appear in this list.</p>
     <div class="btns">
       <button id="pReset">Reset stickers</button>
       <button id="pClose" class="ok">Done</button>
@@ -284,16 +296,25 @@ const ROUND = 5;
 //   join: two groups get on, how many altogether?        3 + 2 = ?
 //   fill: tap animals on one at a time until it is full  3 + ? = 5
 //   fit:  pick the group that fills the seats exactly    3 + ? = 5
+// join is a trip on a vehicle (THEMES); the other two have one fixed scene each.
 const GAMES = [
-  { id: 'join', name: 'All aboard: put two groups together' },
-  { id: 'fill', name: 'Fill the seats: one at a time, how many got on?' },
-  { id: 'fit',  name: 'Who fits? Pick the group that fills the seats' },
+  { id: 'join', icon: '🚌', name: 'Animal Bus: put two groups on, how many altogether?' },
+  { id: 'fill', icon: '👾', name: 'Hungry Monster: feed it one at a time, how many did it eat?',
+    theme: { dest: '🍰', veh: '👾', float: '✨', hello: 'The monster is hungry!', done: 'The monster is full!',
+      css: { sky1: '#e9dcff', sky2: '#f7f1ff', g1: '#bfead9', g2: '#9fdcc5', bus: '#a55eea', bus2: '#7d3fc8', seat: '#f3e8ff' } } },
+  { id: 'fit', icon: '🏠', name: 'Bedtime House: pick the group that fills the beds',
+    theme: { dest: '🌙', veh: '🧸', float: '⭐', hello: 'Bedtime! Fill the beds.', done: 'Everyone is in bed! Night night!',
+      css: { sky1: '#1b2250', sky2: '#3b3f8f', g1: '#4f8a63', g2: '#3d7350', bus: '#ffd9a8', bus2: '#d35400', seat: '#fff6e0', ink: '#dfe6f5' } } },
 ];
+// what the monster eats: emoji, one, many, noise
+const FOODS = [['🍎','apple','apples','Yum yum!'],['🍌','banana','bananas','Yum yum!'],['🍪','cookie','cookies','Crunch crunch!'],
+  ['🍓','strawberry','strawberries','Yum yum!'],['🥕','carrot','carrots','Crunch crunch!'],['🍩','donut','donuts','Yum yum!'],
+  ['🍐','pear','pears','Yum yum!'],['🍊','orange','oranges','Yum yum!'],['🧁','cupcake','cupcakes','Yum yum!'],['🥚','egg','eggs','Gulp!']];
 let mode = 'join';
 
 /* ---------- saved state ---------- */
 const KEY = 'animalBusMath.v1';
-const state = { step: 0, hist: [], stickers: [], dots: true, voice: true, games: { join: true, fill: true, fit: true }, last: '' };
+const state = { step: 0, hist: [], stickers: [], dots: true, voice: true, voiceName: '', games: { join: true, fill: true, fit: true }, last: '' };
 try { Object.assign(state, JSON.parse(localStorage.getItem(KEY) || '{}')); } catch (e) {}
 state.step = Math.max(0, Math.min(STEPS.length - 1, state.step | 0));
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {} };
@@ -301,9 +322,27 @@ const save = () => { try { localStorage.setItem(KEY, JSON.stringify(state)); } c
 /* ---------- sound ---------- */
 let actx = null;
 function unlockAudio() {
+  unmute();
   try {
     actx = actx || new (window.AudioContext || window.webkitAudioContext)();
     if (actx.state === 'suspended') actx.resume();
+  } catch (e) {}
+}
+// On an iPad in silent mode, page sounds play through earphones but not the speaker. Declaring the page as media playback,
+// and keeping a silent <audio> element running, makes iOS treat it like a video or music app, which ignores silent mode.
+let quiet = null;
+function unmute() {
+  if (quiet) return;
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+  try {
+    const n = 4000, b = new Uint8Array(44 + n), v = new DataView(b.buffer);                 // half a second of silence as a WAV file
+    const w = (o, t) => [...t].forEach((c, i) => { b[o + i] = c.charCodeAt(0); });
+    w(0, 'RIFF'); v.setUint32(4, 36 + n, true); w(8, 'WAVEfmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true);
+    v.setUint32(24, 8000, true); v.setUint32(28, 8000, true); v.setUint16(32, 1, true); v.setUint16(34, 8, true); w(36, 'data'); v.setUint32(40, n, true);
+    b.fill(128, 44);
+    quiet = new Audio(URL.createObjectURL(new Blob([b], { type: 'audio/wav' })));
+    quiet.loop = true; quiet.setAttribute('playsinline', '');
+    const pr = quiet.play(); if (pr && pr.catch) pr.catch(() => { quiet = null; });         // try again on the next touch
   } catch (e) {}
 }
 function tone(freq, dur = .12, type = 'sine', vol = .22, when = 0, to = 0) {
@@ -329,10 +368,12 @@ const sfx = {
 /* ---------- voice ---------- */
 const synth = window.speechSynthesis;
 let voice = null, sayToken = 0, keep = null;
+const enVoices = () => synth ? synth.getVoices().filter(v => /^en/i.test(v.lang)) : [];
+// the voice chosen in the grown-up panel, else the best-sounding one installed (downloaded Premium and Enhanced voices first)
 function pickVoice() {
-  if (!synth) return;
-  const vs = synth.getVoices().filter(v => /^en/i.test(v.lang));
-  voice = vs.find(v => /Samantha|Karen|Moira|Google US English/i.test(v.name)) || vs.find(v => v.localService) || vs[0] || null;
+  const vs = enVoices();
+  voice = vs.find(v => v.name === state.voiceName) || vs.find(v => /premium/i.test(v.name)) || vs.find(v => /enhanced/i.test(v.name)) ||
+    vs.find(v => /Samantha|Karen|Moira|Google US English/i.test(v.name)) || vs.find(v => v.localService) || vs[0] || null;
 }
 if (synth) { pickVoice(); try { synth.addEventListener('voiceschanged', pickVoice); } catch (e) {} }
 
@@ -350,7 +391,7 @@ function say(text) {
       const u = new SpeechSynthesisUtterance(text);
       if (voice) u.voice = voice;
       u.lang = (voice && voice.lang) || 'en-US';
-      u.rate = .9; u.pitch = 1.15;
+      u.rate = .95; u.pitch = /!/.test(text) ? 1.35 : 1.15;     // excited lines go up
       u.onend = () => { if (my === sayToken) setTimeout(fin, 60); };
       u.onerror = fin;
       keep = u; // hold a reference so it is not garbage-collected mid-speech
@@ -424,7 +465,9 @@ function addFloaters() {
 function buildBuses(n, arrive) {
   const road = $('road'); road.innerHTML = '';
   for (let i = 0; i < n; i++) {
-    const bus = document.createElement('div'); bus.className = 'bus' + (arrive ? ' arrive' : '') + (theme.nowheels ? ' nowheels' : '');
+    const bus = document.createElement('div');
+    bus.className = 'bus' + (arrive ? ' arrive' : '') + (mode === 'fill' ? ' monster nowheels' : mode === 'fit' ? ' house' : theme.nowheels ? ' nowheels' : '');
+    if (mode === 'fill') { const face = document.createElement('div'); face.className = 'face'; face.textContent = '👀'; bus.appendChild(face); }
     const blind = document.createElement('div'); blind.className = 'blind'; blind.textContent = '😴';
     blind.addEventListener('pointerdown', peek); bus.appendChild(blind);
     const seats = document.createElement('div'); seats.className = 'seats';
@@ -504,12 +547,14 @@ async function nextQuestion(first) {
   busy = true; phase = 'board'; seated = []; counted = 0; firstTry = true;
   const st = STEPS[state.step];
   q = makeQuestion(st.level); qn++;
-  q.A = pick(ANIMALS); do { q.B = pick(ANIMALS); } while (q.B === q.A);
+  const things = mode === 'fill' ? FOODS : ANIMALS;
+  q.A = pick(things); do { q.B = pick(things); } while (q.B === q.A);
   q.ask = mode === 'join' ? q.sum : q.b;                           // the number the child has to find
   q.night = mode === 'join' && !st.guided && roundDone > 0 && Math.random() < .4;   // peekaboo: answer while the animals are hidden
   roundAnimals.push(q.A[0], q.B[0]);
   $('answers').innerHTML = '';
   renderTrip(); renderEq(false);
+  $('answers').style.display = mode === 'fit' ? 'none' : '';      // the house game has no number buttons; the room goes to the groups
   buildBuses(q.sum > 10 || st.level >= 3 ? 2 : 1, true);
   const stop = $('stop'); stop.innerHTML = ''; stop.style.removeProperty('--t');
   if (mode === 'join') {
@@ -528,12 +573,11 @@ const cnt = (n, A) => `${WORDS[n]} ${n === 1 ? A[1] : A[2]}`;
 // what the game says at the start of a sum; the long form explains what to do
 function intro(long) {
   if (mode === 'join') return `${cnt(q.a, q.A)} and ${cnt(q.b, q.B)}. ${long ? `Put them on the ${theme.word}!` : ''}`;
-  const on = `${cnt(q.a, q.A)} on the ${theme.word}.`;
-  if (mode === 'fill') return `${on} ${long ? `Tap the ${q.B[1]} to fill the seats!` : 'Fill the seats!'}`;
-  return `${on} ${long ? `Which ${q.B[2]} fill the seats?` : 'Who fits?'}`;
+  if (mode === 'fill') return `The monster ate ${cnt(q.a, q.A)}. ${long ? `Tap the ${q.B[1]} to fill its tummy!` : 'Fill its tummy!'}`;
+  return `${cnt(q.a, q.A)} ${q.a === 1 ? 'is' : 'are'} in bed. ${long ? `Which ${q.B[2]} fill the beds?` : 'Who fits?'}`;
 }
 function askText() {
-  return mode === 'fill' ? `How many ${q.B[2]} got on?` : 'How many altogether?';
+  return mode === 'fill' ? `How many ${q.B[2]} did it eat?` : 'How many altogether?';
 }
 
 function prompt() {
@@ -652,8 +696,8 @@ async function tryFit(g) {
   firstTry = false; sfx.no();
   if (n > q.b) {
     tiles.slice(moved.length).forEach(t => t.classList.add('nope'));
-    await say(`Too many! No seat for ${cnt(n - q.b, q.B)}.`);
-  } else await say(`Not full yet! ${WORDS[q.b - n]} empty ${q.b - n === 1 ? 'seat' : 'seats'}.`);
+    await say(`Too many! No bed for ${cnt(n - q.b, q.B)}.`);
+  } else await say(`Not full yet! ${WORDS[q.b - n]} empty ${q.b - n === 1 ? 'bed' : 'beds'}.`);
   if (!alive(id)) return;
   moved.reverse().forEach(([t, hole]) => {
     const from = t.getBoundingClientRect();
@@ -758,7 +802,7 @@ async function win(id) {
   roundDone++; renderTrip();
   await say(`${pick(PRAISE)} ${WORDS[q.a]} and ${WORDS[q.b]} make ${WORDS[q.sum]}! ${pick([q.A, q.B])[3]}`);
   if (!alive(id)) return;
-  sfx.vroom();
+  if (mode === 'join') sfx.vroom();
   document.querySelectorAll('#road .bus').forEach(b => { b.classList.remove('arrive', 'full'); b.classList.add('away'); });
   $('stop').innerHTML = ''; $('answers').innerHTML = '';
   await sleep(750);
@@ -791,7 +835,7 @@ async function party() {
   $('arrive').innerHTML = `<span class="place">${theme.dest}</span>` + [...new Set(roundAnimals)].slice(0, 8).map(e => `<span>${e}</span>`).join('');
   show('party'); sfx.party(); confetti();
   const up = stepMsg === 'up'; stepMsg = '';
-  await say(`We made it to ${theme.place}! You got the ${ANIMALS[got][1]} sticker!${up ? ' You are ready for bigger numbers!' : ''}`);
+  await say(`${theme.done || `We made it to ${theme.place}!`} You got the ${ANIMALS[got][1]} sticker!${up ? ' You are ready for bigger numbers!' : ''}`);
 }
 
 function confetti(n = 26) {
@@ -801,6 +845,27 @@ function confetti(n = 26) {
     c.style.left = rnd(0, 96) + 'vw'; c.style.animationDuration = (1.6 + Math.random() * 1.8) + 's'; c.style.animationDelay = (Math.random() * .7) + 's';
     document.body.appendChild(c); setTimeout(() => c.remove(), 4500);
   }
+}
+
+/* the home screen has one button per ticked game; the one whose turn it is wiggles */
+const ticked = () => { const on = GAMES.filter(g => state.games[g.id] !== false); return on.length ? on : GAMES; };
+const nextGame = () => { const l = ticked(); return l[(l.findIndex(g => g.id === state.last) + 1) % l.length].id; };
+function renderHome() {
+  const box = $('games'), nx = nextGame(); box.innerHTML = '';
+  ticked().forEach((g, i) => {
+    const b = document.createElement('button'); b.className = 'game-btn' + (g.id === nx && ticked().length > 1 ? ' next' : '');
+    b.dataset.game = g.id; b.textContent = g.icon; b.setAttribute('aria-label', g.name); b.style.animationDelay = (i * 100) + 'ms';
+    b.addEventListener('click', () => play(g.id));
+    box.appendChild(b);
+  });
+  renderShelf();
+}
+function play(id) {
+  unlockAudio(); hush(); run++;
+  document.querySelectorAll('.confetti').forEach(c => c.remove());
+  mode = id; state.last = id; save();
+  const g = GAMES.find(x => x.id === id);
+  if (g.theme) beginTrip(g.theme); else startRound();
 }
 
 /* the child chooses where to go; then the round starts */
@@ -822,26 +887,21 @@ let roundAnimals = [];
 function beginTrip(t) {
   unlockAudio();
   theme = t; applyTheme(t);
-  // the next ticked game after the one played last, so trips take turns (also across sessions)
-  const on = GAMES.filter(g => state.games[g.id] !== false), list = on.length ? on : GAMES;
-  mode = list[(list.findIndex(g => g.id === state.last) + 1) % list.length].id;
-  state.last = mode; save();
   roundDone = 0; stepMsg = ''; roundAnimals = [];
   $('trip').innerHTML = ''; addFloaters();
   show('game');
-  say(`Let's go to ${t.place}!`).then(() => { if (phase === 'trip') nextQuestion(true); });
+  say(t.hello || `Let's go to ${t.place}!`).then(() => { if (phase === 'trip') nextQuestion(true); });
   phase = 'trip'; q = null; $('eq').innerHTML = ''; $('road').innerHTML = ''; $('stop').innerHTML = ''; $('answers').innerHTML = '';
   renderTrip();
 }
 function goHome() {
   run++; hush(); busy = false; phase = 'idle'; q = null;
   document.querySelectorAll('.confetti').forEach(c => c.remove());
-  applyTheme(null); renderShelf(); show('home');
+  applyTheme(null); renderHome(); show('home');
 }
 
 /* ---------- wiring ---------- */
-$('play').addEventListener('click', startRound);
-$('again').addEventListener('click', startRound);
+$('again').addEventListener('click', () => play(nextGame()));      // "again" moves on to the next game, so they take turns
 $('homeBtn').addEventListener('click', goHome);
 $('partyHome').addEventListener('click', goHome);
 $('sayBtn').addEventListener('click', () => { unlockAudio(); prompt(); });
@@ -861,6 +921,11 @@ function openPanel() {
   const sel = $('pStep'); sel.innerHTML = '';
   STEPS.forEach((s, i) => { const o = document.createElement('option'); o.value = i; o.textContent = `${i + 1}. ${s.name}`; sel.appendChild(o); });
   sel.value = state.step; $('pDots').checked = state.dots; $('pVoice').checked = state.voice;
+  const vsel = $('pVoiceName'); vsel.innerHTML = '';
+  [['', 'Best available'], ...enVoices().map(v => [v.name, `${v.name} (${v.lang})`])].forEach(([val, txt]) => {
+    const o = document.createElement('option'); o.value = val; o.textContent = txt; vsel.appendChild(o);
+  });
+  vsel.value = state.voiceName; if (vsel.value !== state.voiceName) vsel.value = '';
   const box = $('pGames'); box.innerHTML = '';
   GAMES.forEach(g => {
     const l = document.createElement('label'), c = document.createElement('input');
@@ -876,7 +941,11 @@ $('pClose').addEventListener('click', () => {
   const ticks = [...document.querySelectorAll('#pGames input')];
   const none = !ticks.some(c => c.checked);                      // unticking everything means all games
   ticks.forEach(c => { state.games[c.dataset.game] = none || c.checked; });
-  save(); $('panel').classList.remove('on');
+  save(); renderHome(); $('panel').classList.remove('on');
+});
+$('pVoiceName').addEventListener('change', e => {
+  state.voiceName = e.target.value; save(); pickVoice(); unlockAudio();
+  if ($('pVoice').checked) { const was = state.voice; state.voice = true; say('Three dogs and two frogs. How many altogether? Woohoo!').then(() => { state.voice = was && $('pVoice').checked; }); }
 });
 // two taps to confirm (browser confirm dialogs are not available everywhere)
 let resetArmed = false;
@@ -893,8 +962,8 @@ document.addEventListener('contextmenu', e => { if (!e.target.closest('#panel'))
 document.addEventListener('dblclick', e => e.preventDefault());
 
 if (/[?&]fast\b/.test(location.search)) { SPEED = .05; state.voice = false; }
-window.__game = { state, STEPS, get theme() { return theme; }, get q() { return q; }, get mode() { return mode; }, get qn() { return qn; }, get phase() { return phase; }, get busy() { return busy; } };
-renderShelf();
+window.__game = { state, STEPS, renderHome, get theme() { return theme; }, get q() { return q; }, get mode() { return mode; }, get qn() { return qn; }, get phase() { return phase; }, get busy() { return busy; } };
+renderHome();
 })();
 </script>
 </body>

@@ -2,23 +2,40 @@
 
 A touch game that teaches addition (sums up to 20) to a 3½-year-old, played on an iPad in Safari.
 
-- **Game:** `math.html` at the repo root. One self-contained file: no build step, no dependencies, no network calls.
-- **Served at:** `/math` (route in `app.py`).
-- **Branch:** `claude/confident-keller-ndlq9v` (not yet merged; no pull request opened).
-- **Preview copy:** published as a private Claude artifact, https://claude.ai/artifact/SqPek6AeaqHZYMGp2CNki7. It is a copy of `math.html` without the `<html>/<head>/<body>` wrapper and does not update itself when `math.html` changes.
+## Where things are
+
+Everything is in this folder, `~/Documents/animal-bus-math`:
+
+| File | What it is |
+|---|---|
+| `math.html` | The game. One self-contained file: no build step, no dependencies, no network calls. |
+| `README.md` | This document: design rules, the three games, difficulty, code map, history. |
+| `playthrough.js` | Automated test that plays every game at every level. |
+| `app.py`, `requirements.txt`, `Procfile` | The small server Railway uses to put the game online. |
+
+Other copies:
+
+- **GitHub:** `kxs7733/sg-ai-backlog`, branch `claude/confident-keller-ndlq9v` (`math.html` at the root, the other two files under `docs/animal-bus/`). The first sessions were pushed there; it is not merged and has no pull request. This folder was copied from that branch on 17 Nov 2026 and is not a git repository, so changes made here are not backed up until they are copied back or the folder gets its own repository.
+- **Old preview:** a private Claude artifact, https://claude.ai/artifact/SqPek6AeaqHZYMGp2CNki7. It still shows the first, single-game version and does not update itself.
 
 ## Run it
 
 ```bash
-# simplest: open the file directly
-open math.html                     # macOS
-
-# or through the Flask app
-pip install -r requirements.txt
-python app.py                      # then http://localhost:5000/math
+open ~/Documents/animal-bus-math/math.html
 ```
 
-On the iPad, open the `/math` URL in Safari and use "Add to Home Screen" for full screen.
+On the iPad, open **https://web-production-0c746394.up.railway.app** in Safari and use "Add to Home Screen" for full screen. The address is public: anyone who has it can play, but it is not listed anywhere. Progress and stickers are saved on the device, not on the server.
+
+## Hosting (Railway)
+
+- Railway project `animal-bus-math`, service `web`, in the workspace "kxs7733's Projects". First deployed 17 Nov 2026.
+- `app.py` (Flask) serves `math.html` at `/`; `requirements.txt` and `Procfile` tell Railway how to run it. Nothing else in this folder is served.
+- There is no GitHub repository behind it. The folder is uploaded straight from this Mac, so a change goes live only when you redeploy:
+
+```bash
+cd ~/Documents/animal-bus-math
+railway up --service web
+```
 
 ## Design rules
 
@@ -32,19 +49,25 @@ These came from the original brief and the research; keep them when changing the
 
 ## Three games, same sums
 
-Each trip (round of five sums) plays one game. The games take turns, also across sessions (`state.last`), so two trips in a row are never the same game. All three use the same sums, difficulty steps, ten-seat layout, colours and "count together" help; only the action changes.
+The home screen shows one button per game. The child picks; the button whose turn it is wiggles (the game after the one played last, `state.last`), and the play-again button after a round moves on to the next game. A round is five sums. All three use the same sums, difficulty steps, ten-frame layout, orange and blue groups and "count together" help. Each has its own look and story so they do not feel like one game.
 
-| Game (`mode`) | What the child does | Equation shown |
-|---|---|---|
-| All aboard (`join`) | Puts two groups on the vehicle, then says how many altogether. | `3 + 2 = ?` |
-| Fill the seats (`fill`) | The first group is already seated and the seats still needed are outlined in blue. The child taps one animal on at a time until it is full, then says how many got on. | `3 + ? = 5` |
-| Who fits? (`fit`) | Same outlined seats, but three groups wait at the stop. The child drags the one that fills the seats exactly. | `3 + ? = 5` |
+| Game (`mode`) | Looks like | What the child does | Equation shown |
+|---|---|---|---|
+| Animal Bus (`join`) 🚌 | A vehicle on a trip to a place the child picks | Puts two groups of animals on, then says how many altogether. | `3 + 2 = ?` |
+| Hungry Monster (`fill`) 👾 | A purple monster whose tummy is the ten-frame | The monster has already eaten some food and the spaces still needed are outlined in blue. The child taps food in one piece at a time until it is full, then says how many it ate. | `3 + ? = 5` |
+| Bedtime House (`fit`) 🏠 | A house at night whose beds are the ten-frame | Some animals are in bed and the empty beds are outlined. Three groups wait outside; the child drags the one that fills the beds exactly. | `3 + ? = 5` |
 
-In "Who fits?" a wrong group is not marked wrong: it gets on, the game says what is left over ("Too many! No seat for two frogs." or "Not full yet! One empty seat."), everyone hops back off, that group fades and the right one pulses. In "Fill the seats" a wrong number is handled like the first game, counting only the animals that just got on.
+In Bedtime House a wrong group is not marked wrong: it goes in, the game says what is left over ("Too many! No bed for two frogs." or "Not full yet! One empty bed."), everyone hops back out, that group fades and the right one pulses. In Hungry Monster a wrong number is handled like Animal Bus, counting only the food just eaten.
 
-The grown-up panel can switch any game off.
+Hungry Monster and Bedtime House ask for a missing number, which is harder than plain adding. The grown-up panel can switch any game off; an unticked game disappears from the home screen.
 
-## How a sum plays (All aboard)
+## Sound and voice
+
+- **iPad speaker.** In silent mode an iPad plays web-page sound through earphones but not the speaker. On the first touch the game declares itself as media playback (`unmute()`: `navigator.audioSession.type = 'playback'` plus a looping silent `<audio>` element), which should make it ignore silent mode. Written on 17 Nov 2026 after the game was silent on the speaker; not yet confirmed on the iPad. If it is still silent, turn off Silent Mode in Control Centre (the bell).
+- **Voice.** The game speaks with the device's built-in voices (Web Speech). `pickVoice()` prefers the voice chosen in the grown-up panel, then any downloaded Premium or Enhanced English voice, then the default. Lines ending in "!" are spoken at a higher pitch. For a better voice, download one in the iPad's Settings (Accessibility, then Spoken Content or Read & Speak, then Voices, English) and pick it in the grown-up panel; choosing a voice plays a sample. Whether Safari offers every downloaded voice to web pages is not confirmed.
+- A recorded or AI-generated natural voice would sound much better than any built-in one. Not built: it needs a text-to-speech service and a set of audio clips.
+
+## How a sum plays (Animal Bus)
 
 1. Two groups of animal tiles appear with the equation `3 + 2 = ?`. Voice: "three dogs and two frogs".
 2. The child drags or taps each group onto the vehicle. Animals hop into seats one at a time.
@@ -69,12 +92,12 @@ Five sums make a round. A round is a trip to a place the child picks; a small ve
 - Levels above 1 mix in about 20% review from earlier levels (`makeQuestion`).
 - **Up a step:** at least 4 of the last 5 sums right first try, including the latest (`record`).
 - **Down a step:** 3 misses in the last 5.
-- **Peekaboo:** in "All aboard" only, in "on their own" steps, about 40% of sums (never the first of a round) hide the animals behind a blind. Tapping the vehicle reveals them.
+- **Peekaboo:** in Animal Bus only, in "on their own" steps, about 40% of sums (never the first of a round) hide the animals behind a blind. Tapping the vehicle reveals them.
 - The game starts at step 0 because the child counts to 10 reliably but has not started adding.
 
 ## Grown-up panel
 
-Press and hold the gear on the home screen for about a second. It sets the step, chooses which of the three games are played, toggles answer-button dots and the voice, and resets stickers (two taps).
+Press and hold the gear on the home screen for about a second. It sets the step, chooses which of the three games appear, toggles answer-button dots and the voice, picks which voice speaks, and resets stickers (two taps).
 
 ## Code map (`math.html`)
 
@@ -87,7 +110,8 @@ Everything is in one IIFE at the bottom of the file.
 | Sound | `tone()`, `sfx` (Web Audio beeps, no audio files) |
 | Voice | `say(text)` returns a promise; uses the Web Speech API with a timeout fallback because iOS sometimes drops the end event |
 | Questions | `makeQuestion(level)`, `makeChoices(sum)` |
-| Round flow | `startRound()` (destination choice) → `beginTrip(theme)` (also picks `mode`) → `nextQuestion()` → the game's own action → `win()` → `party()` |
+| Home | `renderHome()` (game buttons), `play(id)` sets `mode`, `nextGame()` is whose turn it is; each entry in `GAMES` has an `icon` and, except the bus, its own `theme` |
+| Round flow | Bus: `startRound()` (destination choice) → `beginTrip(theme)`. Monster and house: `beginTrip(game.theme)` directly. Then `nextQuestion()` → the game's own action → `win()` → `party()` |
 | Game actions | `join`: `board(group)` → `askAnswer()` → `choose()`. `fill`: `presetSeats()`, `buildFeeder()`, `feed()` per tap → `askAnswer()` → `choose()`. `fit`: `presetSeats()`, `buildFitGroups()`, `tryFit(group)` |
 | Interaction | `enableDrag()` (pointer events; a tap also boards), `tapCount()`, `peek()` |
 | Adaptation | `record(firstTryCorrect)` |
@@ -107,11 +131,12 @@ To add a destination, append to `THEMES` (`dest`, `place`, `veh`, `word`, option
 
 ## Testing
 
-`docs/animal-bus/playthrough.js` plays full rounds of each of the three games at steps 1, 4, 6 and 8 in landscape and portrait iPad sizes (24 rounds), with one deliberate wrong try per round. It reports page errors, anything that does not fit on the screen, and whether the games take turns, and exits with code 1 if it finds a problem. It needs Playwright.
+`playthrough.js` plays full rounds of each of the three games at steps 1, 4, 6 and 8 in landscape and portrait iPad sizes (24 rounds), with one deliberate wrong try per round. It reports page errors, anything that does not fit on the screen, and whether the games take turns, and exits with code 1 if it finds a problem. It needs Playwright.
 
 ```bash
 npm i -D playwright && npx playwright install chromium
-node docs/animal-bus/playthrough.js     # screenshots go to /tmp/animal-bus-*.png
+cd ~/Documents/animal-bus-math
+node playthrough.js                     # screenshots go to /tmp/animal-bus-*.png
 # optional: OUT=<screenshot folder>  CHROME=<path to a Chromium binary>
 ```
 
@@ -131,7 +156,8 @@ Adding `?fast` to the URL shortens all waits and turns the voice off; the test u
 1. Researched popular apps and proposed four designs; chose block groups plus a ten-seat bus, animal theme.
 2. First version: board, count, answer, 8 adaptive steps, sticker reward.
 3. Feedback "works, but boring": added chosen trips with themed scenery, named animals with noises, peekaboo sums, a journey track, and more sound and movement.
-4. Feedback "is it just one game?": added "Fill the seats" and "Who fits?", which practise the same sums as a missing number, and made trips take turns between the three games.
+4. Feedback "is it just one game?": added two games that practise the same sums as a missing number. The first attempt put them on the same bus and rotated them automatically, so it still looked like one game. Reworked into three home-screen buttons with their own look: Animal Bus, Hungry Monster, Bedtime House.
+5. Feedback "no sound on the speaker, voice is dull": added the silent-mode workaround, a livelier delivery and a voice picker.
 
 ## Ideas not built
 
