@@ -1,112 +1,102 @@
-// Plays full rounds of all three games at steps 1, 4, 6 and 8, in landscape and portrait iPad sizes,
-// with one deliberate wrong try per round, and reports page errors.
+// Plays full rounds of every mini-game at every level, in landscape and portrait iPad sizes, with one deliberate
+// wrong answer per round, and reports page errors and anything that does not fit on the screen.
 //   node docs/animal-bus/playthrough.js
 // Optional: OUT=<folder for screenshots, default /tmp>  CHROME=<path to a Chromium binary>
 const { chromium } = require('playwright');
 const path = require('path');
 const OUT = process.env.OUT || '/tmp';
-const GAMES = ['join', 'fill', 'fit'];
+const GAMES = ['bus', 'bush', 'frog', 'dice', 'pop'];
+const ROUND = 8;
 
 (async () => {
   const b = await chromium.launch(process.env.CHROME ? { executablePath: process.env.CHROME } : {});
   const errs = [];
-  const shot = (p, name) => p.screenshot({ path: path.join(OUT, `animal-bus-${name}.png`) });
-  const tap = async loc => {
-    await loc.dispatchEvent('pointerdown', { pointerId: 5, clientX: 1, clientY: 1 });
-    await loc.dispatchEvent('pointerup', { pointerId: 5, clientX: 1, clientY: 1 });
-  };
-  const idle = p => p.waitForFunction(() => !__game.busy);
-  const seatedCount = p => p.locator('.seat .tile').count();
+  const shot = (p, name) => p.screenshot({ path: path.join(OUT, `animal-math-${name}.png`) });
+  const down = loc => loc.dispatchEvent('pointerdown', { pointerId: 5, clientX: 1, clientY: 1 });
+  const asking = (p, n) => p.waitForFunction(n => __game.phase === 'ask' && !__game.busy && __game.qn > n, n);
+  const info = p => p.evaluate(() => ({ q: __game.q, game: __game.game, qn: __game.qn }));
+  const only = (p, games, level) => p.evaluate(([g, lv]) => {
+    __game.state.level = lv; __game.state.hist = []; __game.state.last = '';
+    for (const k in __game.state.games) __game.state.games[k] = g.includes(k);
+  }, [games, level]);
 
   for (const [name, vp] of [['land', { width: 1024, height: 700 }], ['port', { width: 768, height: 950 }]]) {
     const p = await b.newPage({ viewport: vp, hasTouch: true });
     p.on('pageerror', e => errs.push(String(e)));
     p.on('console', m => m.type() === 'error' && errs.push(m.text()));
     await p.goto('file://' + path.resolve(__dirname, '../../math.html') + '?fast');
-    await shot(p, `${name}-home`);
+    await shot(p, `${name}-home-empty`);
 
-    for (const game of GAMES) {
-      for (const step of [0, 3, 5, 7]) {
-        const tag = `${name}-${game}-s${step}`;
-        await p.evaluate(([s, g]) => {
-          __game.state.step = s; __game.state.hist = []; __game.state.last = '';
-        }, [step, game]);
-        await p.click(`.game-btn[data-game="${game}"]`, { force: true });   // force: the button whose turn it is never stops wiggling
-        if (game === 'join') await p.locator('.dest-btn').first().click({ force: true });   // only the bus game picks a destination
-        for (let i = 0; i < 5; i++) {
-          await p.waitForFunction(() => __game.phase === 'board' && !__game.busy);
-          const { q, mode, qn } = await p.evaluate(() => ({ q: __game.q, mode: __game.mode, qn: __game.qn }));
-          if (mode !== game) errs.push(`${tag}: playing ${mode}, expected ${game}`);
-          if (i === 0) { await p.waitForTimeout(700); await shot(p, `${tag}-board`); }
-          // nothing may stick out of the screen
-          // (layout position, so the slide-in and wiggle animations do not count)
-          const wide = await p.evaluate(() => [...document.querySelectorAll('#stop .group, #road .bus')].some(e => {
+    for (const want of GAMES) {
+      for (const level of [0, 1, 2, 3]) {
+        const tag = `${name}-${want}-L${level + 1}`;
+        await only(p, [want], level);
+        const before = await p.evaluate(() => __game.state.caught.length);
+        let qn = (await info(p)).qn;
+        await p.click('#play', { force: true });
+        const played = new Set();
+        for (let i = 0; i < ROUND; i++) {
+          await asking(p, qn);
+          const cur = await info(p); qn = cur.qn; const { q } = cur; played.add(cur.game);
+          if (await p.locator(`.opt[data-n="${q.sum}"]`).count() !== 1) errs.push(`${tag}: ${q.a}+${q.b} has no single right answer on screen`);
+          if (i === 0) { await p.waitForTimeout(600); if (cur.game === want) await shot(p, `${tag}`); }
+          // nothing may stick out of the screen (layout position, so animations do not count)
+          const wide = await p.evaluate(() => [...document.querySelectorAll('#stage > *, .opt')].some(e => {
             let x = 0, y = 0;
             for (let n = e; n; n = n.offsetParent) { x += n.offsetLeft; y += n.offsetTop; }
-            return x < 0 || x + e.offsetWidth > innerWidth || y + e.offsetHeight > innerHeight;
+            return x < 0 || x + e.offsetWidth > innerWidth || y < 0 || y + e.offsetHeight > innerHeight;
           }));
-          if (wide) errs.push(`${tag}: ${q.a}+${q.b} does not fit the screen`);
-
-          if (game === 'join') {
-            // drag the first group, tap the second
-            const bb = await p.locator('.group').first().boundingBox(), rb = await p.locator('#road').boundingBox();
-            await p.mouse.move(bb.x + bb.width / 2, bb.y + bb.height / 2); await p.mouse.down();
-            await p.mouse.move(rb.x + rb.width / 2, rb.y + rb.height / 2, { steps: 5 }); await p.mouse.up();
-            await idle(p);
-            await tap(p.locator('.group.gb'));
-          } else if (game === 'fill') {
-            if (await seatedCount(p) !== q.a) errs.push(`${tag}: first group not seated`);
-            for (let k = 0; k < q.b; k++) {
-              await p.locator('.feeder').dispatchEvent('pointerdown', { pointerId: 5, clientX: 1, clientY: 1 });
-              await p.waitForFunction(() => !__game.busy || __game.phase === 'answer');
-            }
-          } else {
-            if (i === 0) { // a group that does not fit: everyone must hop back off
-              const wrong = p.locator(`#stop .group:not([data-n="${q.b}"])`).first();
-              await tap(wrong); await idle(p);
-              if (await seatedCount(p) !== q.a) errs.push(`${tag}: wrong group stayed on`);
-              if (!(await wrong.evaluate(e => e.classList.contains('tried')))) errs.push(`${tag}: wrong group not marked`);
-              await shot(p, `${tag}-wrong`);
-            }
-            await tap(p.locator(`#stop .group[data-n="${q.b}"]`));
+          if (wide) errs.push(`${tag}: ${q.a}+${q.b} in ${cur.game} does not fit the screen`);
+          if (i === 0) { // wrong answer first: the game counts together, then he can still answer
+            await down(p.locator(`.opt:not([data-n="${q.sum}"])`).first());
+            await p.waitForFunction(() => __game.phase === 'ask' && !__game.busy);
+            // the miss must be visible: the wrong answer is marked and the count-together help has run
+            const helped = await p.evaluate(() => !!document.querySelector('.opt.wrong') && (document.querySelectorAll('.badge').length > 0 || !!document.querySelector('.pad.pulse')));
+            if (!helped) errs.push(`${tag}: wrong answer in ${cur.game} did not show the help`);
+            if (cur.game === want) await shot(p, `${tag}-wrong`);
           }
-
-          if (game !== 'fit') {
-            await p.waitForFunction(() => __game.phase === 'answer' && !__game.busy);
-            const n = await seatedCount(p);
-            if (n !== q.sum) errs.push(`${tag}: seated ${n} != ${q.sum}`);
-            if (i === 0) { // wrong answer first: the game counts together
-              await p.locator(`.choice:not([data-n="${q.ask}"])`).first().click({ force: true });
-              await idle(p);
-              await shot(p, `${tag}-wrong`);
-            }
-            await p.click(`.choice[data-n="${q.ask}"]`, { force: true });
-          }
+          await down(p.locator(`.opt[data-n="${q.sum}"]`));
           await p.waitForFunction(n => __game.qn > n || __game.phase === 'party', qn);
         }
         await p.waitForFunction(() => __game.phase === 'party');
-        console.log(name, game, 'step', step, '-> now', await p.evaluate(() => __game.state.step), 'stickers', await p.evaluate(() => __game.state.stickers.length));
-        if (step === 0 && game === 'join') await shot(p, `${name}-party`);
-        await p.click('#partyHome');
+        const got = await p.evaluate(() => __game.state.caught.length) - before;
+        if (got !== ROUND) errs.push(`${tag}: caught ${got} creatures, expected ${ROUND}`);
+        console.log(name, want, 'level', level + 1, 'played', [...played].join('+'), '-> level now', await p.evaluate(() => __game.state.level + 1));
+        if (want === 'bus' && level === 0) await shot(p, `${name}-party`);
+        await p.click('#partyHome', { force: true });
       }
     }
+    await shot(p, `${name}-home-full`);
 
-    // the home screen shows all three games and highlights whose turn it is; playing one moves the highlight on
-    await p.evaluate(() => { __game.state.last = ''; __game.renderHome(); });
-    if (await p.locator('.game-btn').count() !== 3) errs.push(`${name}: home screen does not show three games`);
-    const order = [];
-    for (let i = 0; i < 4; i++) {
-      const next = p.locator('.game-btn.next');
-      order.push(await next.getAttribute('data-game'));
-      await next.click({ force: true });
-      if (order[i] === 'join') await p.locator('.dest-btn').first().click({ force: true });
-      await p.click('#homeBtn');
+    // with every game on: several different games in one round, and never the same one twice in a row
+    await only(p, GAMES, 0);
+    let qn = (await info(p)).qn; const seq = [];
+    await p.click('#play', { force: true });
+    for (let i = 0; i < ROUND; i++) {
+      await asking(p, qn);
+      const cur = await info(p); qn = cur.qn; seq.push(cur.game);
+      if (i === 1) { // tap one thing to count it, then answer: recorded as "counted himself"
+        await p.evaluate(() => { const t = document.querySelector('#stage .tile, #stage .pip.on'); if (t) t.dispatchEvent(new PointerEvent('pointerdown', { bubbles: true })); });
+      }
+      if (i === 2) await p.waitForFunction(() => __game.shy);   // answer while the golden creature is out
+      await down(p.locator(`.opt[data-n="${cur.q.sum}"]`));
+      await p.waitForFunction(n => __game.qn > n || __game.phase === 'party', qn);
     }
-    if (order.join() !== 'join,fill,fit,join') errs.push(`${name}: games did not take turns: ${order}`);
-    // a game unticked in the grown-up panel disappears from the home screen
-    await p.evaluate(() => { __game.state.games.fit = false; __game.renderHome(); });
-    if (await p.locator('.game-btn').count() !== 2) errs.push(`${name}: unticked game still shown`);
-    await p.evaluate(() => { __game.state.games.fit = true; __game.renderHome(); });
+    await p.waitForFunction(() => __game.phase === 'party');
+    if (new Set(seq).size < 3) errs.push(`${name}: only ${new Set(seq).size} different games in a round: ${seq}`);
+    if (seq.some((g, i) => i && g === seq[i - 1])) errs.push(`${name}: same game twice in a row: ${seq}`);
+    const st = await p.evaluate(() => ({ log: __game.state.log.slice(-8), caught: __game.state.caught.slice(-8), egg: __game.state.egg }));
+    if (!st.caught.some(c => c.g)) errs.push(`${name}: quick answer did not catch a golden creature`);
+    if (!st.log.some(x => x.r === 'c') && seq[1] !== 'frog') errs.push(`${name}: counting by himself was not recorded`);
+    if (!st.log.some(x => x.r === 's')) errs.push(`${name}: no straight-away answers recorded`);
+    if (!st.egg) errs.push(`${name}: no egg after a round`);
+    console.log(name, 'mixed round:', seq.join(' '));
+    await p.click('#partyHome', { force: true });
+
+    // an egg from an earlier day hatches into a creature
+    const n0 = await p.evaluate(() => { __game.state.egg = 'Mon Jan 01 2024'; __game.renderHome(); return __game.state.caught.length; });
+    await down(p.locator('#egg'));
+    if (await p.evaluate(() => __game.state.caught.length) !== n0 + 1) errs.push(`${name}: egg did not hatch`);
     await p.close();
   }
   console.log('errors:', errs);
