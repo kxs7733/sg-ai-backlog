@@ -53,16 +53,16 @@
 </head>
 <body>
     <h1>SG AI Projects Backlog</h1>
-    <p class="subtitle">Total Impact: $2,968,216/yr | Live Projects: $2,209,538/yr <span class="highlight-total" id="highlight-total"></span></p>
-    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 19112026 06:46 hrs</p>
+    <p class="subtitle">Total Impact: $2,971,024/yr | Live Projects: $2,222,018/yr <span class="highlight-total" id="highlight-total"></span></p>
+    <p style="text-align:center;color:#9ca3af;font-size:11px;margin-bottom:10px;">last updated 20112026 06:49 hrs</p>
 
     <div class="filter-bar">
         <label for="domain-filter">Filter by Domain:</label>
         <select id="domain-filter" onchange="filterDomain(this.value)">
             <option value="all">All Domains</option>
             <option value="SPX">SPX (23 projects, $706,648/yr, Live: $638,488)</option>
-            <option value="OPS">OPS (61 projects, $694,586/yr, Live: $524,422)</option>
-            <option value="MKT">MKT (78 projects, $555,833/yr, Live: $385,303)</option>
+            <option value="OPS">OPS (62 projects, $697,394/yr, Live: $524,422)</option>
+            <option value="MKT">MKT (78 projects, $555,833/yr, Live: $397,783)</option>
             <option value="BD">BD (69 projects, $373,577/yr, Live: $206,165)</option>
             <option value="SBS">SBS (11 projects, $326,525/yr, Live: $292,685)</option>
             <option value="WH">WH (19 projects, $310,687/yr, Live: $162,115)</option>
@@ -72,8 +72,8 @@
     </div>
     <div class="legend" id="legend">
 <div class="legend-item" data-domain="SPX"><div class="legend-color" style="background:#f97316"></div>SPX ($706,648/yr, Live: $638,488, 23 projects)</div>
-<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($694,586/yr, Live: $524,422, 61 projects)</div>
-<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($555,833/yr, Live: $385,303, 78 projects)</div>
+<div class="legend-item" data-domain="OPS"><div class="legend-color" style="background:#3b82f6"></div>OPS ($697,394/yr, Live: $524,422, 62 projects)</div>
+<div class="legend-item" data-domain="MKT"><div class="legend-color" style="background:#8b5cf6"></div>MKT ($555,833/yr, Live: $397,783, 78 projects)</div>
 <div class="legend-item" data-domain="BD"><div class="legend-color" style="background:#10b981"></div>BD ($373,577/yr, Live: $206,165, 69 projects)</div>
 <div class="legend-item" data-domain="SBS"><div class="legend-color" style="background:#6b7280"></div>SBS ($326,525/yr, Live: $292,685, 11 projects)</div>
 <div class="legend-item" data-domain="WH"><div class="legend-color" style="background:#6366f1"></div>WH ($310,687/yr, Live: $162,115, 19 projects)</div>
@@ -84,8 +84,8 @@
 <div class="header-row">
 <div class="header-cell" data-domain="status">Status</div>
 <div class="header-cell" data-domain="SPX">SPX<div class="impact">$706,648/yr (Live: $638,488)</div><div class="highlight-impact" id="hi-SPX"></div></div>
-<div class="header-cell" data-domain="OPS">OPS<div class="impact">$694,586/yr (Live: $524,422)</div><div class="highlight-impact" id="hi-OPS"></div></div>
-<div class="header-cell" data-domain="MKT">MKT<div class="impact">$555,833/yr (Live: $385,303)</div><div class="highlight-impact" id="hi-MKT"></div></div>
+<div class="header-cell" data-domain="OPS">OPS<div class="impact">$697,394/yr (Live: $524,422)</div><div class="highlight-impact" id="hi-OPS"></div></div>
+<div class="header-cell" data-domain="MKT">MKT<div class="impact">$555,833/yr (Live: $397,783)</div><div class="highlight-impact" id="hi-MKT"></div></div>
 <div class="header-cell" data-domain="BD">BD<div class="impact">$373,577/yr (Live: $206,165)</div><div class="highlight-impact" id="hi-BD"></div></div>
 <div class="header-cell" data-domain="SBS">SBS<div class="impact">$326,525/yr (Live: $292,685)</div><div class="highlight-impact" id="hi-SBS"></div></div>
 <div class="header-cell" data-domain="WH">WH<div class="impact">$310,687/yr (Live: $162,115)</div><div class="highlight-impact" id="hi-WH"></div></div>
@@ -319,7 +319,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">7</span></div>
+<div class="status-label" data-status="poc">POC <span class="count-badge" style="margin-left:5px">8</span></div>
 <div class="cell" data-domain="SPX" data-status="poc" style="background:#fef3c7">
 <div class="project" style="border-left-color:#f97316" data-impact="5760" data-domain="SPX" data-tooltip="To suggest fleet supervisors on driver replacement when driver absent to minimize human judgement and error" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM08</div>
@@ -358,6 +358,12 @@
                 <div class="project-name">Off Platform Redirection</div>
                 <div class="project-pic">Weilin Ho</div>
                 <div class="project-impact">$3,520/yr <span class="project-eta">[ETA tbc]</span></div>
+            </div>
+<div class="project" style="border-left-color:#3b82f6" data-impact="2808" data-domain="OPS" data-tooltip="Bot dashboard to run simulation for Campaign Planning which includes NDD Cap, Late Rate target, CDT Extension based on agreed model & actual historical data" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM277</div>
+                <div class="project-name">Logs Campaign Planning Simulator</div>
+                <div class="project-pic">Cheryl Chin</div>
+                <div class="project-impact">$2,808/yr <span class="project-eta">[ETA tbc]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="MKT" data-status="poc" style="background:#fef3c7">
@@ -557,7 +563,7 @@
 </div>
 <div class="cell" data-domain="BI" data-status="design-and-build" style="background:#dbeafe">
 </div>
-<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">9</span></div>
+<div class="status-label" data-status="parallel-run">Parallel Run <span class="count-badge" style="margin-left:5px">8</span></div>
 <div class="cell" data-domain="SPX" data-status="parallel-run" style="background:#d1fae5">
 <div class="project" style="border-left-color:#f97316" data-impact="24000" data-domain="SPX" data-tooltip="To help better check on driver's productivity using (1) parcels/hr (2) idling time" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM63</div>
@@ -586,12 +592,6 @@
                 <div class="project-name">SG Affiliates Payment Automation</div>
                 <div class="project-pic">Iylia Tanmx</div>
                 <div class="project-impact">$22,378/yr <span class="project-eta">[ETA:1 Oct 26]</span></div>
-            </div>
-<div class="project" style="border-left-color:#8b5cf6" data-impact="12480" data-domain="MKT" data-tooltip="Alert users that vouchers are fully used / close to fully used to  (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly" onclick="toggleHighlight(this)">
-                <div class="project-id">SGLLM37</div>
-                <div class="project-name">Voucher Usage Monitoring Agent</div>
-                <div class="project-pic">Ruixuan Chea</div>
-                <div class="project-impact">$12,480/yr <span class="project-eta">[ETA:30 Nov 25]</span></div>
             </div>
 </div>
 <div class="cell" data-domain="BD" data-status="parallel-run" style="background:#d1fae5">
@@ -628,7 +628,7 @@
                 <div class="project-impact"> <span class="project-eta">[ETA:1 Oct 25]</span></div>
             </div>
 </div>
-<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">147</span></div>
+<div class="status-label" data-status="live">Live <span class="count-badge" style="margin-left:5px">148</span></div>
 <div class="cell" data-domain="SPX" data-status="live" style="background:#bbf7d0">
 <div class="project" style="border-left-color:#f97316" data-impact="360000" data-domain="SPX" data-tooltip="Problem Statement: Every month around 1300+ parcels are being lost due to damaged/missing labels, miswritten TNs. Manual recovery efforts are time consuming and only yield a 20% to 30% success rate, leading to significant loss. SPX compensates buyers and seller for all these lost parcels.  Solution:" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM117</div>
@@ -974,6 +974,12 @@
                 <div class="project-name">Deals Curation</div>
                 <div class="project-pic">Julian Chan, Yingyi Swee</div>
                 <div class="project-impact">$13,824/yr</div>
+            </div>
+<div class="project" style="border-left-color:#8b5cf6" data-impact="12480" data-domain="MKT" data-tooltip="Alert users that vouchers are fully used / close to fully used to  (i) manage risk if there was qty input error or (ii) users can top up and adjust accordingly" onclick="toggleHighlight(this)">
+                <div class="project-id">SGLLM37</div>
+                <div class="project-name">Voucher Usage Monitoring Agent</div>
+                <div class="project-pic">Ruixuan Chea</div>
+                <div class="project-impact">$12,480/yr</div>
             </div>
 <div class="project" style="border-left-color:#8b5cf6" data-impact="12480" data-domain="MKT" data-tooltip="1. Help CS agents to answer basic L1 question for affiliates - example: account status, payment timeline, payment approval  2. Update bot to answer  3. Shorten SLA + improves manpower efficiency" onclick="toggleHighlight(this)">
                 <div class="project-id">SGLLM68</div>
